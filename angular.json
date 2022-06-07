@@ -106,6 +106,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "clinica:build:production",
+            "firebaseProject": "clinica-61d99",
+            "firebaseHostingSite": "clinica-61d99"
+          }
         }
       }
     }

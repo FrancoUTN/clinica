@@ -8,8 +8,8 @@ import { RegistroComponent } from './bienvenida/registro/registro.component';
 const routes: Routes = [
   { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
   { path: 'bienvenida', component: BienvenidaComponent },
-  { path: 'login', component: RegistroComponent },
-  { path: 'registro', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'registro', component: RegistroComponent },
 ];
 
 @NgModule({
