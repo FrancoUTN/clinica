@@ -26,28 +26,25 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit() {
     this.encuestaForm = new FormGroup({
-      'userData': new FormGroup({
-        'nombre': new FormControl(null, [Validators.required, this.emptyValidator]),
-        'apellido': new FormControl(null, [Validators.required, this.emptyValidator]),
-        'edad': new FormControl(null, [Validators.required, Validators.min(18), Validators.max(99)]),
-        'dni': new FormControl(null, [Validators.required, Validators.max(99999999)])
-      }),
-      'gameData': new FormGroup({
-        'juego': new FormControl(null, [Validators.required]),
-        'meGusta': new FormControl(false), // Igual guarda null
-        'comentario': new FormControl(null, [Validators.required, this.emptyValidator])
-      })
+      'nombre': new FormControl(null, [Validators.required, this.emptyValidator]),
+      'apellido': new FormControl(null, [Validators.required, this.emptyValidator]),
+      'edad': new FormControl(null, [Validators.required, Validators.min(18), Validators.max(99)]),
+      'dni': new FormControl(null, [Validators.required, Validators.max(99999999)]),
+
+      'juego': new FormControl(null, [Validators.required]),
+      'meGusta': new FormControl(false), // Igual guarda null
+      'comentario': new FormControl(null, [Validators.required, this.emptyValidator])
     });
   }
 
-  get nombre() { return this.encuestaForm.get('userData.nombre'); }
-  get apellido() { return this.encuestaForm.get('userData.apellido'); }
-  get edad() { return this.encuestaForm.get('userData.edad'); }
-  get dni() { return this.encuestaForm.get('userData.dni'); }
+  get nombre() { return this.encuestaForm.get('nombre'); }
+  get apellido() { return this.encuestaForm.get('apellido'); }
+  get edad() { return this.encuestaForm.get('edad'); }
+  get dni() { return this.encuestaForm.get('dni'); }
 
-  get juego() { return this.encuestaForm.get('gameData.juego'); }
-  get meGusta() { return this.encuestaForm.get('gameData.meGusta'); }
-  get comentario() { return this.encuestaForm.get('gameData.comentario'); }
+  get juego() { return this.encuestaForm.get('juego'); }
+  get meGusta() { return this.encuestaForm.get('meGusta'); }
+  get comentario() { return this.encuestaForm.get('comentario'); }
   
   emptyValidator(control: AbstractControl): object | null {
     const valor = control.value;
