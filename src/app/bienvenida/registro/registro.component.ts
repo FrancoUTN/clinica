@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,6 +9,13 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./registro.component.scss']
 })
 export class RegistroComponent implements OnInit {
+  juegos = [
+    'Ahorcado',
+    'Mayor o Menor',
+    'Preguntados',
+    'Alcoholímetro'
+  ];
+  encuestaForm: FormGroup | any;
   esPaciente:boolean = false;
   error:string = '';
 
@@ -16,7 +24,46 @@ export class RegistroComponent implements OnInit {
     private authService:AuthService) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.encuestaForm = new FormGroup({
+      'userData': new FormGroup({
+        'nombre': new FormControl(null, [Validators.required, this.emptyValidator]),
+        'apellido': new FormControl(null, [Validators.required, this.emptyValidator]),
+        'edad': new FormControl(null, [Validators.required, Validators.min(18), Validators.max(99)]),
+        'dni': new FormControl(null, [Validators.required, Validators.max(99999999)])
+      }),
+      'gameData': new FormGroup({
+        'juego': new FormControl(null, [Validators.required]),
+        'meGusta': new FormControl(false), // Igual guarda null
+        'comentario': new FormControl(null, [Validators.required, this.emptyValidator])
+      })
+    });
+  }
+
+  get nombre() { return this.encuestaForm.get('userData.nombre'); }
+  get apellido() { return this.encuestaForm.get('userData.apellido'); }
+  get edad() { return this.encuestaForm.get('userData.edad'); }
+  get dni() { return this.encuestaForm.get('userData.dni'); }
+
+  get juego() { return this.encuestaForm.get('gameData.juego'); }
+  get meGusta() { return this.encuestaForm.get('gameData.meGusta'); }
+  get comentario() { return this.encuestaForm.get('gameData.comentario'); }
+  
+  emptyValidator(control: AbstractControl): object | null {
+    const valor = control.value;
+
+    if (valor) {
+      if (valor.trim().length === 0) {
+        return { emptyField: true};
+      };
+    };
+
+    return null;
+  }
+
+  onSubmit() {
+    console.log("Submit");
+    // this.signUp();
   }
   
   signUp(value:any) {
