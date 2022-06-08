@@ -12,13 +12,17 @@ import { AppComponent } from './app.component';
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 import { LoginComponent } from './bienvenida/login/login.component';
 import { RegistroComponent } from './bienvenida/registro/registro.component';
+import { RegistroEspecialistaComponent } from './bienvenida/registro/registro-especialista/registro-especialista.component';
+import { RegistroPacienteComponent } from './bienvenida/registro/registro-paciente/registro-paciente.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BienvenidaComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    RegistroEspecialistaComponent,
+    RegistroPacienteComponent
   ],
   imports: [
     BrowserModule,

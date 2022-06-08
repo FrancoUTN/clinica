@@ -1,0 +1,122 @@
+
+<div class="d-flex justify-content-center mb-4">
+    <h2>Registro de especialistas</h2>
+</div>
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div class="d-flex">
+        <div style="margin-right: 2rem;">
+            <label for="nombre">
+            Nombre
+            </label>
+            <input
+            type="text"
+            id="nombre"
+            formControlName="nombre"
+            class="form-control"
+            required
+            >
+            <div style="height: 2rem;">
+            <span
+                *ngIf="!nombre?.valid && nombre?.touched"
+                class="help-block text-danger"
+            >
+                Nombre requerido
+            </span>
+            </div>
+        </div>
+        <div>
+            <label for="apellido">
+            Apellido
+            </label>
+            <input
+            type="text"
+            id="apellido"
+            formControlName="apellido"
+            class="form-control"
+            required
+            >
+            <div style="height: 2rem;">
+                <span
+                    *ngIf="!apellido?.valid && apellido?.touched"
+                    class="help-block text-danger"
+                >
+                    Apellido requerido
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex">
+        <div style="margin-right: 2rem;">
+            <label for="edad">
+            Edad
+            </label>
+            <input
+            type="number"
+            id="edad"
+            formControlName="edad"
+            class="form-control w-75"
+            required
+            >
+            <div style="height: 2rem;">
+            <span
+                *ngIf="!edad?.valid && edad?.touched"
+                class="help-block text-danger">
+                Edad inválida
+            </span>
+            </div>
+        </div>
+        <div>
+            <label for="dni">
+            DNI
+            </label>
+            <input
+            type="number"
+            id="dni"
+            formControlName="dni"
+            class="form-control"
+            required
+            >
+            <div style="height: 2rem;">
+            <span
+                *ngIf="!dni?.valid && dni?.touched"
+                class="help-block text-danger">
+                DNI inválido
+            </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-check" *ngFor="let especialidad of especialidades">
+        <input
+            class="form-check-input"
+            type="checkbox"
+            [value]="especialidad"
+            (change)="onChangeEspecialidad($event)"
+        >
+        <label class="form-check-label">
+            {{ especialidad }}
+        </label>
+    </div>
+    <div formArrayName="especialidades">
+        <h4>Especialidades</h4>
+        <div
+        class="form-group"
+        *ngFor="let hobbyControl of signupForm.get('especialidades').controls; let i = index">
+        <input type="text" class="form-control" [formControlName]="i">
+        </div>
+        <button
+        class="btn btn-success fs-2 fw-bold mx-2 px-3 py-1 m-3"
+        type="button"
+        (click)="onAddEspecialidad()">+</button>
+    </div>
+
+
+    <div class="d-flex justify-content-center">
+        <button
+        class="btn btn-primary"
+        [ngClass]="{'disabled': !signupForm.valid}"
+        >
+        Enviar
+        </button>
+    </div>
+</form>
