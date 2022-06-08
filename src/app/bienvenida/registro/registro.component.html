@@ -1,1 +1,55 @@
-<p>registro works!</p>
+<div
+    id="bienvenida-contenedor" 
+    class="d-flex justify-content-center align-items-center"
+>
+    <div
+        class="text-white text-center"
+        style="background: rgba(0, 0, 0, .7); border-radius: .6rem;"
+    >
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-3">
+            <div class="container-fluid navbar-nav">
+                <a
+                    class="nav-link m-auto"
+                    (click)="clickPacienteHandler()"
+                    [ngClass]="{'active': this.esPaciente}"
+                >Paciente</a>
+                <a
+                    class="nav-link m-auto"
+                    (click)="clickEspecialistaHandler()"
+                    [ngClass]="{'active': !this.esPaciente}"
+                >Especialista</a>
+            </div>
+        </nav>
+        <div class="p-5">
+            <form #f="ngForm" (ngSubmit)="signUp(f.value)" novalidate>
+                <h2 class="fw-bold mb-4 text-uppercase">Registro</h2>
+
+                <div class="form-outline form-white mb-4">                  
+                <input name="email" ngModel required type="email" class="form-control form-control-lg">
+                <label class="form-label">Email</label>
+                </div>
+
+                <div class="form-outline form-white mb-4">                  
+                <input name="password" ngModel required type="password" class="form-control form-control-lg">
+                <label class="form-label">Contraseña</label>
+                </div>
+
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">Enviar</button>
+            </form>
+            <div style="height: 2rem; margin-top: 1rem;">
+                <span
+                *ngIf="error"
+                class="help-block text-danger">
+                    {{error}}
+                </span>
+            </div>
+            <div>
+                <p class="mb-0">
+                    ¿Ya estás registrado?
+                </p>
+                <a href="login" class="text-white-50 fw-bold">Inicia sesión</a>
+            </div>
+        </div>
+    </div>
+</div>
+        
