@@ -12,7 +12,8 @@ export class RegistroEspecialistaComponent implements OnInit {
   especialidades = [
     'General',
     'Nutrición',
-    'Dermatología'
+    'Dermatología',
+    'Traumatología'    
   ];
   signupForm: FormGroup | any;
   error:string = '';
@@ -21,6 +22,8 @@ export class RegistroEspecialistaComponent implements OnInit {
   get apellido() { return this.signupForm.get('apellido'); }
   get edad() { return this.signupForm.get('edad'); }
   get dni() { return this.signupForm.get('dni'); }
+  get email() { return this.signupForm.get('email'); }
+  get clave() { return this.signupForm.get('clave'); }
 
   constructor(
     private router: Router,
@@ -33,11 +36,13 @@ export class RegistroEspecialistaComponent implements OnInit {
       'apellido': new FormControl(null, [Validators.required, this.emptyValidator]),
       'edad': new FormControl(null, [Validators.required, Validators.min(18), Validators.max(99)]),
       'dni': new FormControl(null, [Validators.required, Validators.max(99999999)]),
-      'especialidades': new FormArray([])
+      'especialidades': new FormArray([]),
+      'email': new FormControl(null, [Validators.required, Validators.max(99999999)]),
+      'clave': new FormControl(null, [Validators.required, Validators.max(99999999)]),
     });
   }
   onAddEspecialidad() {
-    const control = new FormControl(null, Validators.required);
+    const control = new FormControl(null);
     (<FormArray>this.signupForm.get('especialidades')).push(control);
   }
 
@@ -45,15 +50,14 @@ export class RegistroEspecialistaComponent implements OnInit {
     const chequeado = $event.target.checked;
     const especialidad = $event.target.value;
 
-    console.log(chequeado);
-    console.log(especialidad);
-
     if (chequeado) {
       const control = new FormControl(especialidad, Validators.required);
       (<FormArray>this.signupForm.get('especialidades')).push(control);
     }
     else {
-      const indice = (<FormArray>this.signupForm.get('especialidades')).value.findIndex( (a:string) => a === especialidad);
+      const indice = (<FormArray>this.signupForm.get('especialidades')).value.findIndex(
+        (item:string) => item === especialidad
+      );
       (<FormArray>this.signupForm.get('especialidades')).removeAt(indice);
     }
   }
