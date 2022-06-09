@@ -58,7 +58,8 @@ export class RegistroPacienteComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.signupForm.value);
-    this.registroService.registrarPaciente(this.signupForm.value)
+    const obj = this.signupForm.value;
+    obj.fotos = this.fotos;
+    this.registroService.registrarPaciente(obj)
   }  
 }

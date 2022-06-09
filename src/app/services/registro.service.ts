@@ -13,6 +13,8 @@ export class RegistroService {
 
   email:string = '';
   uid:string = '';
+  utsArray:any;
+  // urlArray: string[] | any;
   
   constructor(
     firestore: AngularFirestore,
@@ -54,11 +56,62 @@ export class RegistroService {
       );
   }
 
+  // registrarPaciente(datos:any) {
+  //   const urlArray: string[] = [];
+
+  //   this.fotosService.subir('1' + 'adsdgfdsagf', datos.fotos[0])
+  //     .then(
+  //       uts => uts.ref.getDownloadURL()
+  //     )
+  //     .then(
+  //       url => urlArray.push(url)
+  //     )
+  //     .then(
+  //       () => console.log(urlArray)
+  //     )
+  //     .catch(
+  //       err => console.log(err.message)
+  //     );
+
+  //   console.log(urlArray)
+  // }
+
   registrarPaciente(datos:any) {
+    const utsArray: any[] = [];
+    const urlArray: string[] = [];
+
     this.authService.SignUp(datos.email, datos.clave)
-      .then(uc => uc.user?.uid)
+      .then(uc => {
+        if (uc.user) {
+          this.uid = uc.user.uid;
+
+          return this.fotosService.subir(this.uid + '1', datos.fotos[0]);
+        }
+        throw "Sin uid";
+      })
       .then(
-        uid => {
+        uts => utsArray.push(uts)
+      )
+      .then(
+        () => this.fotosService.subir(this.uid + '2', datos.fotos[1])
+      )
+      .then(
+        uts => utsArray.push(uts)
+      )
+      .then(
+        () => utsArray[0].ref.getDownloadURL()
+      )
+      .then(
+        url => urlArray.push(url)
+      )
+      .then(
+        () => utsArray[1].ref.getDownloadURL()
+      )
+      .then(
+        url => urlArray.push(url)
+      )
+      .then(
+        () => {
           const documento = {
             rol: 'paciente',
             email: datos.email,
@@ -66,9 +119,10 @@ export class RegistroService {
             apellido: datos.apellido,
             edad: datos.edad,
             dni: datos.dni,
-            obraSocial: datos.obraSocial
+            obraSocial: datos.obraSocial,
+            fotos: urlArray
           }
-          this.coleccion.doc(uid).set(documento);
+          this.coleccion.doc(this.uid).set(documento);
         }
       )
       .catch(
