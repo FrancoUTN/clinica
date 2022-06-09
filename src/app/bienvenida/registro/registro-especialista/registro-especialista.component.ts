@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
+import { FotosService } from 'src/app/services/fotos.service';
 import { RegistroService } from 'src/app/services/registro.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class RegistroEspecialistaComponent implements OnInit {
   ];
   signupForm: FormGroup | any;
   error:string = '';
+  foto:File|any;
 
   get nombre() { return this.signupForm.get('nombre'); }
   get apellido() { return this.signupForm.get('apellido'); }
@@ -27,18 +29,19 @@ export class RegistroEspecialistaComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private registroService: RegistroService) {
+    private registroService: RegistroService,
+    private fotosService: FotosService) {
   }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      'nombre': new FormControl(null, [Validators.required, this.emptyValidator]),
-      'apellido': new FormControl(null, [Validators.required, this.emptyValidator]),
-      'edad': new FormControl(null, [Validators.required, Validators.min(18), Validators.max(99)]),
-      'dni': new FormControl(null, [Validators.required, Validators.max(99999999)]),
-      'especialidades': new FormArray([]),
-      'email': new FormControl(null, [Validators.required, Validators.max(99999999)]),
-      'clave': new FormControl(null, [Validators.required, Validators.max(99999999)])
+      // 'nombre': new FormControl(null, [Validators.required, this.emptyValidator]),
+      // 'apellido': new FormControl(null, [Validators.required, this.emptyValidator]),
+      // 'edad': new FormControl(null, [Validators.required, Validators.min(18), Validators.max(99)]),
+      // 'dni': new FormControl(null, [Validators.required, Validators.max(99999999)]),
+      // 'especialidades': new FormArray([]),
+      // 'email': new FormControl(null, [Validators.required, Validators.max(99999999)]),
+      // 'clave': new FormControl(null, [Validators.required, Validators.max(99999999)])
     });
   }
   onAddEspecialidad() {
@@ -62,7 +65,12 @@ export class RegistroEspecialistaComponent implements OnInit {
     }
   }
   
-  // Validators
+  uploadFile(event:any) {
+    if (event.target.files.length > 0) {
+      this.foto = event.target.files[0];
+    }
+  }
+
   emptyValidator(control: AbstractControl): object | null {
     const valor = control.value;
 
@@ -75,14 +83,17 @@ export class RegistroEspecialistaComponent implements OnInit {
     return null;
   }
 
-  // signUp(value:any) {
-  //   this.authService.SignUp(value.email, value.password)
-  //     .then(() => this.router.navigateByUrl('page/home'))
-  //     .catch(razon => this.error = razon.message);
-  // }
-
   onSubmit() {
-    console.log(this.signupForm.value);
-    this.registroService.registrarEspecialista(this.signupForm.value)
-  }  
+    // let obj = this.signupForm.value;
+    // obj.foto = this.foto;
+    // console.log(obj);
+    this.fotosService.subir('asdvb', this.foto).then(
+      a => a.ref.getDownloadURL().then(
+        url => console.log(url)
+      )
+    ).catch(
+      err => console.log(err.message)
+    )
+    // this.registroService.registrarEspecialista(obj);
+  }
 }

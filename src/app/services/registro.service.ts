@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { AuthService } from './auth.service';
+import { FotosService } from './fotos.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class RegistroService {
   
   constructor(
     private firestore: AngularFirestore,
-    private authService:AuthService) {
+    private authService:AuthService,
+    private fotosService: FotosService) {
       this.coleccion = firestore.collection('usuarios');
 
       // this.authService.getAuthState().subscribe(
@@ -33,6 +35,14 @@ export class RegistroService {
       .then(uc => uc.user?.uid)
       .then(
         uid => {
+          if (uid) {
+            this.fotosService.subir(uid, datos.foto);
+          }
+          return uid;
+        }
+      )
+      .then(
+        uid => {
           const documento = {
             rol: 'especialista',
             email: datos.email,
@@ -40,7 +50,8 @@ export class RegistroService {
             apellido: datos.apellido,
             edad: datos.edad,
             dni: datos.dni,
-            especialidades: datos.especialidades
+            especialidades: datos.especialidades,
+            
           }
           this.firestore.collection('usuarios').doc(uid).set(documento);
         }
