@@ -18,7 +18,7 @@ export class RegistroService {
   }
 
   registrarEspecialista(datos:any) {
-    this.authService.SignUp(datos.email, datos.clave)
+    return this.authService.SignUp(datos.email, datos.clave)
       .then(uc => {
         if (uc.user) {
           this.uid = uc.user.uid;
@@ -48,15 +48,12 @@ export class RegistroService {
       .then(
         () => this.authService.SendVerificationMail()
       )
-      .catch(
-        err => console.log(err.message)
-      );
   }
 
   registrarPaciente(datos:any) {
     const urlArray: string[] = [];
 
-    this.authService.SignUp(datos.email, datos.clave)
+    return this.authService.SignUp(datos.email, datos.clave)
       .then(uc => {
         if (uc.user) {
           this.uid = uc.user.uid;
@@ -98,8 +95,5 @@ export class RegistroService {
       .then(
         () => this.authService.SendVerificationMail()
       )
-      .catch(
-        err => console.log(err.message)
-      );
   }
 }

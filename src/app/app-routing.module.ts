@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 import { LoginComponent } from './bienvenida/login/login.component';
 import { RegistroComponent } from './bienvenida/registro/registro.component';
+import { VerificarComponent } from './bienvenida/registro/verificar/verificar.component';
 
 import { VerifiedGuard } from './auth/verified.guard';
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'bienvenida', component: BienvenidaComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
+  { path: 'verificar', component: VerificarComponent },
   {
     path: 'paciente',
     canActivate: [VerifiedGuard],

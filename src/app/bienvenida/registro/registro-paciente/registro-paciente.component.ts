@@ -60,6 +60,11 @@ export class RegistroPacienteComponent implements OnInit {
   onSubmit() {
     const obj = this.signupForm.value;
     obj.fotos = this.fotos;
-    this.registroService.registrarPaciente(obj)
-  }  
+    this.registroService.registrarPaciente(obj).then(
+      () => this.router.navigateByUrl('verificar')
+    )
+    .catch(
+      err => this.error = err.message
+    );
+  }
 }

@@ -85,6 +85,11 @@ export class RegistroEspecialistaComponent implements OnInit {
   onSubmit() {
     const obj = this.signupForm.value;
     obj.foto = this.foto;
-    this.registroService.registrarEspecialista(obj);
+    this.registroService.registrarEspecialista(obj).then(
+      () => this.router.navigateByUrl('verificar')
+    )
+    .catch(
+      err => this.error = err.message
+    );
   }
 }

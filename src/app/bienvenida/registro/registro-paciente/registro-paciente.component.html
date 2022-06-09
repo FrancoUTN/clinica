@@ -150,6 +150,13 @@
         <label class="form-label">Seleccione 2 fotos</label>
         <input type="file" class="form-control" (change)="uploadFiles($event)" multiple/>
     </div>
+    <div style="height: 3rem; margin-top: 1rem;">
+        <span
+        *ngIf="error"
+        class="help-block text-danger">
+            {{error}}
+        </span>
+    </div>
 
     <div class="d-flex justify-content-center mt-5">
         <button
