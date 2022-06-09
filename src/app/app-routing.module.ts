@@ -17,6 +17,11 @@ const routes: Routes = [
     canActivate: [VerifiedGuard],
     loadChildren: () => import('./paciente/paciente.module').then(m => m.PacienteModule)
   },
+  {
+    path: 'especialista',
+    canActivate: [VerifiedGuard],
+    loadChildren: () => import('./especialista/especialista.module').then(m => m.EspecialistaModule)
+  },
 ];
 
 @NgModule({
