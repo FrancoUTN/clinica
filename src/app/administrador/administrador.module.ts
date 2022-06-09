@@ -9,6 +9,7 @@ import { MenuAdministradorComponent } from './menu-administrador/menu-administra
 
 const routes: Routes = [
   { path: '', component: AdministradorComponent, children: [
+    { path: '', redirectTo: 'usuarios', pathMatch: 'full' },
     { path: 'usuarios', component: UsuariosComponent },
     ]
   }
