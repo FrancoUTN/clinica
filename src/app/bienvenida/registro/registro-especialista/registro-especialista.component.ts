@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
-import { AuthService } from 'src/app/services/auth.service';
+import { RegistroService } from 'src/app/services/registro.service';
 
 @Component({
   selector: 'app-registro-especialista',
@@ -27,7 +27,7 @@ export class RegistroEspecialistaComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService:AuthService) {
+    private registroService: RegistroService) {
   }
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class RegistroEspecialistaComponent implements OnInit {
       'dni': new FormControl(null, [Validators.required, Validators.max(99999999)]),
       'especialidades': new FormArray([]),
       'email': new FormControl(null, [Validators.required, Validators.max(99999999)]),
-      'clave': new FormControl(null, [Validators.required, Validators.max(99999999)]),
+      'clave': new FormControl(null, [Validators.required, Validators.max(99999999)])
     });
   }
   onAddEspecialidad() {
@@ -83,6 +83,6 @@ export class RegistroEspecialistaComponent implements OnInit {
 
   onSubmit() {
     console.log(this.signupForm.value);
-    // this.signUp();
+    this.registroService.registrarEspecialista(this.signupForm.value)
   }  
 }
