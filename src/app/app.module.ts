@@ -11,19 +11,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 import { LoginComponent } from './bienvenida/login/login.component';
-import { RegistroComponent } from './bienvenida/registro/registro.component';
-import { RegistroEspecialistaComponent } from './bienvenida/registro/registro-especialista/registro-especialista.component';
-import { RegistroPacienteComponent } from './bienvenida/registro/registro-paciente/registro-paciente.component';
 import { VerificarComponent } from './bienvenida/registro/verificar/verificar.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     BienvenidaComponent,
     LoginComponent,
-    RegistroComponent,
-    RegistroEspecialistaComponent,
-    RegistroPacienteComponent,
     VerificarComponent
   ],
   imports: [
@@ -33,7 +28,8 @@ import { VerificarComponent } from './bienvenida/registro/verificar/verificar.co
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { AdministradorComponent } from './administrador.component';
 import { MenuAdministradorComponent } from './menu-administrador/menu-administrador.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    SharedModule
   ]
 })
 export class AdministradorModule { }

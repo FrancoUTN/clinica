@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { RegistroService } from 'src/app/services/registro.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-usuarios',
@@ -7,10 +9,14 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./usuarios.component.scss']
 })
 export class UsuariosComponent implements OnInit {
-
   usuarios:Array<any> = [];
+  esPaciente:boolean = true;
+  errorMsg:string = '';
   
-  constructor(private usuarioService:UsuarioService) {
+  constructor(
+    private router: Router,
+    private registroService: RegistroService,
+    private usuarioService:UsuarioService) {
   }
 
   ngOnInit(): void {
@@ -23,5 +29,23 @@ export class UsuariosComponent implements OnInit {
         );
       } 
     )
+  }
+
+  clickPacienteHandler() {
+    this.esPaciente = true;
+  }
+
+  clickEspecialistaHandler() {
+    this.esPaciente = false;
+  }
+
+  especialistaEnviadoHandler(objeto:any) {
+    // console.log(objeto);
+    this.registroService.registrarEspecialista(objeto).then(
+      () => this.router.navigateByUrl('verificar')
+    )
+    .catch(
+      err => this.errorMsg = err.message
+    );
   }
 }
