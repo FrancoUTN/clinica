@@ -15,34 +15,27 @@ export class RegistroService {
   uid:string = '';
   
   constructor(
-    private firestore: AngularFirestore,
+    firestore: AngularFirestore,
     private authService:AuthService,
     private fotosService: FotosService) {
       this.coleccion = firestore.collection('usuarios');
-
-      // this.authService.getAuthState().subscribe(
-      //   (usuario) => {
-      //     if (usuario && usuario.email) {
-      //         this.email = usuario.email;
-      //         this.uid = usuario.uid;
-      //     }
-      //   }
-      // );
   }
 
   registrarEspecialista(datos:any) {
     this.authService.SignUp(datos.email, datos.clave)
-      .then(uc => uc.user?.uid)
-      .then(
-        uid => {
-          if (uid) {
-            this.fotosService.subir(uid, datos.foto);
-          }
-          return uid;
+      .then(uc => {
+        if (uc.user) {
+          this.uid = uc.user.uid;
+
+          return this.fotosService.subir(this.uid, datos.foto);
         }
+        throw "Sin uid";
+      })
+      .then(
+        uts => uts.ref.getDownloadURL()
       )
       .then(
-        uid => {
+        url => {
           const documento = {
             rol: 'especialista',
             email: datos.email,
@@ -51,9 +44,9 @@ export class RegistroService {
             edad: datos.edad,
             dni: datos.dni,
             especialidades: datos.especialidades,
-            
+            foto: url
           }
-          this.firestore.collection('usuarios').doc(uid).set(documento);
+          this.coleccion.doc(this.uid).set(documento);
         }
       )
       .catch(
@@ -75,29 +68,11 @@ export class RegistroService {
             dni: datos.dni,
             obraSocial: datos.obraSocial
           }
-          this.firestore.collection('usuarios').doc(uid).set(documento);
+          this.coleccion.doc(uid).set(documento);
         }
       )
       .catch(
         err => console.log(err.message)
       );
   }
-
-  // agregarRespuesta(respuesta:any) {
-  //   const rta = {
-  //     uid: this.uid,
-  //     email: this.email,
-  //     nombre: respuesta.userData.nombre,
-  //     apellido: respuesta.userData.apellido,
-  //     edad: respuesta.userData.edad,
-  //     telefono: respuesta.userData.tel,
-  //     juego: respuesta.gameData.juego,
-  //     seDivirtio: respuesta.gameData.meGusta,
-  //     comentario: respuesta.gameData.comentario,
-  //   }
-
-  //   this.coleccion.add(rta);
-
-  //   return rta;
-  // }
 }

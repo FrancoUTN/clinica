@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
-import { FotosService } from 'src/app/services/fotos.service';
 import { RegistroService } from 'src/app/services/registro.service';
 
 @Component({
@@ -29,19 +28,18 @@ export class RegistroEspecialistaComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private registroService: RegistroService,
-    private fotosService: FotosService) {
+    private registroService: RegistroService) {
   }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      // 'nombre': new FormControl(null, [Validators.required, this.emptyValidator]),
-      // 'apellido': new FormControl(null, [Validators.required, this.emptyValidator]),
-      // 'edad': new FormControl(null, [Validators.required, Validators.min(18), Validators.max(99)]),
-      // 'dni': new FormControl(null, [Validators.required, Validators.max(99999999)]),
-      // 'especialidades': new FormArray([]),
-      // 'email': new FormControl(null, [Validators.required, Validators.max(99999999)]),
-      // 'clave': new FormControl(null, [Validators.required, Validators.max(99999999)])
+      'nombre': new FormControl(null, [Validators.required, this.emptyValidator]),
+      'apellido': new FormControl(null, [Validators.required, this.emptyValidator]),
+      'edad': new FormControl(null, [Validators.required, Validators.min(18), Validators.max(99)]),
+      'dni': new FormControl(null, [Validators.required, Validators.max(99999999)]),
+      'especialidades': new FormArray([]),
+      'email': new FormControl(null, [Validators.required, Validators.max(99999999)]),
+      'clave': new FormControl(null, [Validators.required, Validators.max(99999999)])
     });
   }
   onAddEspecialidad() {
@@ -84,16 +82,8 @@ export class RegistroEspecialistaComponent implements OnInit {
   }
 
   onSubmit() {
-    // let obj = this.signupForm.value;
-    // obj.foto = this.foto;
-    // console.log(obj);
-    this.fotosService.subir('asdvb', this.foto).then(
-      a => a.ref.getDownloadURL().then(
-        url => console.log(url)
-      )
-    ).catch(
-      err => console.log(err.message)
-    )
-    // this.registroService.registrarEspecialista(obj);
+    const obj = this.signupForm.value;
+    obj.foto = this.foto;
+    this.registroService.registrarEspecialista(obj);
   }
 }
