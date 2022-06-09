@@ -47,15 +47,17 @@ export class LoginComponent implements OnInit {
                 }
               );
             }
+            else {
+              throw {message: "Error en verificación."}
+            }
           }
-          throw {message: "Error en verificación."}
         }
       )
       .catch(razon => this.error = razon.message);
   }
   
   rellenarConPaciente() {
-    this.atrEmail = 'maxiterrabusi@gmail.com';
+    this.atrEmail = 'reaccionarnativo@gmail.com';
     this.atrPassword = '123123';
   }
 
@@ -65,7 +67,7 @@ export class LoginComponent implements OnInit {
   }
   
   rellenarConAdministrador() {
-    this.atrEmail = 'no@disponible';
+    this.atrEmail = 'maxiterrabusi@gmail.com';
     this.atrPassword = '123123';
   }
 
