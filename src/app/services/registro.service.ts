@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AuthService } from './auth.service';
 import { FotosService } from './fotos.service';
 
@@ -7,14 +7,8 @@ import { FotosService } from './fotos.service';
   providedIn: 'root'
 })
 export class RegistroService {
-
   coleccion:AngularFirestoreCollection<any>;
-  documento:AngularFirestoreDocument<any> | undefined;
-
-  email:string = '';
   uid:string = '';
-  utsArray:any;
-  // urlArray: string[] | any;
   
   constructor(
     firestore: AngularFirestore,
@@ -56,28 +50,7 @@ export class RegistroService {
       );
   }
 
-  // registrarPaciente(datos:any) {
-  //   const urlArray: string[] = [];
-
-  //   this.fotosService.subir('1' + 'adsdgfdsagf', datos.fotos[0])
-  //     .then(
-  //       uts => uts.ref.getDownloadURL()
-  //     )
-  //     .then(
-  //       url => urlArray.push(url)
-  //     )
-  //     .then(
-  //       () => console.log(urlArray)
-  //     )
-  //     .catch(
-  //       err => console.log(err.message)
-  //     );
-
-  //   console.log(urlArray)
-  // }
-
   registrarPaciente(datos:any) {
-    const utsArray: any[] = [];
     const urlArray: string[] = [];
 
     this.authService.SignUp(datos.email, datos.clave)
@@ -90,22 +63,16 @@ export class RegistroService {
         throw "Sin uid";
       })
       .then(
-        uts => utsArray.push(uts)
-      )
-      .then(
-        () => this.fotosService.subir(this.uid + '2', datos.fotos[1])
-      )
-      .then(
-        uts => utsArray.push(uts)
-      )
-      .then(
-        () => utsArray[0].ref.getDownloadURL()
+        uts => uts.ref.getDownloadURL()
       )
       .then(
         url => urlArray.push(url)
       )
       .then(
-        () => utsArray[1].ref.getDownloadURL()
+        () => this.fotosService.subir(this.uid + '2', datos.fotos[1])
+      )
+      .then(
+        uts => uts.ref.getDownloadURL()
       )
       .then(
         url => urlArray.push(url)
