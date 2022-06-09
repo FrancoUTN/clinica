@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { RegistroService } from 'src/app/services/registro.service';
 
 @Component({
   selector: 'app-registro-especialista',

@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from "@angular/router";
-import { RegistroService } from 'src/app/services/registro.service';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registro-paciente',
@@ -10,8 +8,9 @@ import { RegistroService } from 'src/app/services/registro.service';
 })
 export class RegistroPacienteComponent implements OnInit {
   signupForm: FormGroup | any;
-  error: string = '';
   fotos: File[] | any;
+  @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
+  @Input() error: string = '';
 
   get nombre() { return this.signupForm.get('nombre'); }
   get apellido() { return this.signupForm.get('apellido'); }
@@ -21,9 +20,7 @@ export class RegistroPacienteComponent implements OnInit {
   get email() { return this.signupForm.get('email'); }
   get clave() { return this.signupForm.get('clave'); }
 
-  constructor(
-    private router: Router,
-    private registroService: RegistroService) {
+  constructor() {
   }
 
   ngOnInit() {
@@ -60,11 +57,6 @@ export class RegistroPacienteComponent implements OnInit {
   onSubmit() {
     const obj = this.signupForm.value;
     obj.fotos = this.fotos;
-    this.registroService.registrarPaciente(obj).then(
-      () => this.router.navigateByUrl('verificar')
-    )
-    .catch(
-      err => this.error = err.message
-    );
+    this.formularioEnviado.emit(obj);    
   }
 }

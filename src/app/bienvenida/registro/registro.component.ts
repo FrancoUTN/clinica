@@ -35,4 +35,13 @@ export class RegistroComponent implements OnInit {
       err => this.errorMsg = err.message
     );
   }
+
+  pacienteEnviadoHandler(objeto:any) {
+    this.registroService.registrarPaciente(objeto).then(
+      () => this.router.navigateByUrl('verificar')
+    )
+    .catch(
+      err => this.errorMsg = err.message
+    );
+  }
 }
