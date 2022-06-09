@@ -12,6 +12,7 @@ export class UsuariosComponent implements OnInit {
   usuarios:Array<any> = [];
   esPaciente:boolean = true;
   errorMsg:string = '';
+  quieroAgregarUsuario:boolean = false;
   
   constructor(
     private router: Router,
@@ -47,5 +48,13 @@ export class UsuariosComponent implements OnInit {
     .catch(
       err => this.errorMsg = err.message
     );
+  }
+
+  agregarUsuario() {
+    this.quieroAgregarUsuario = true;
+  }
+
+  noAgregarUsuario() {
+    this.quieroAgregarUsuario = false;    
   }
 }
