@@ -92,6 +92,9 @@ export class RegistroService {
           this.coleccion.doc(this.uid).set(documento);
         }
       )
+      .then(
+        () => this.authService.SendVerificationMail()
+      )
       .catch(
         err => console.log(err.message)
       );

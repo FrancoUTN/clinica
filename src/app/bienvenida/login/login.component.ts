@@ -21,7 +21,16 @@ export class LoginComponent implements OnInit {
   
   signIn(value: any) {
     this.authService.SignIn(value.email, value.password)
-      .then(() => this.router.navigateByUrl('page/home')) // Definir
+      .then(
+        u => {
+          if (u.user) {
+            if (u.user.emailVerified) {
+              return this.router.navigateByUrl('paciente');
+            }
+          }
+          throw {message: "Error en verificación."}
+        }
+      )
       .catch(razon => this.error = razon.message);
   }
 

@@ -24,4 +24,15 @@ export class AuthService {
   getAuthState() {
     return this.angularFireAuth.authState;
   }
+
+  SendVerificationMail() {
+    return this.angularFireAuth.currentUser
+      .then((user) => {
+        if (user) {
+          return user.sendEmailVerification();
+        }
+        throw "No user";
+      });
+  }
+
 }
