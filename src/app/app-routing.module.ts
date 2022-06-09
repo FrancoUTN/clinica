@@ -4,14 +4,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 import { LoginComponent } from './bienvenida/login/login.component';
 import { RegistroComponent } from './bienvenida/registro/registro.component';
-import { PacienteComponent } from './paciente/paciente.component';
+
+import { VerifiedGuard } from './auth/verified.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
   { path: 'bienvenida', component: BienvenidaComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
-  { path: 'paciente', component: PacienteComponent },
+  {
+    path: 'paciente',
+    canActivate: [VerifiedGuard],
+    loadChildren: () => import('./paciente/paciente.module').then(m => m.PacienteModule)
+  },
 ];
 
 @NgModule({

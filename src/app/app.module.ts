@@ -14,7 +14,6 @@ import { LoginComponent } from './bienvenida/login/login.component';
 import { RegistroComponent } from './bienvenida/registro/registro.component';
 import { RegistroEspecialistaComponent } from './bienvenida/registro/registro-especialista/registro-especialista.component';
 import { RegistroPacienteComponent } from './bienvenida/registro/registro-paciente/registro-paciente.component';
-import { PacienteComponent } from './paciente/paciente.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +22,7 @@ import { PacienteComponent } from './paciente/paciente.component';
     LoginComponent,
     RegistroComponent,
     RegistroEspecialistaComponent,
-    RegistroPacienteComponent,
-    PacienteComponent
+    RegistroPacienteComponent
   ],
   imports: [
     BrowserModule,

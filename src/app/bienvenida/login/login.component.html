@@ -4,7 +4,7 @@
 >
     <div
         class="text-white text-center p-5"
-        style="background: rgba(0, 0, 0, .7); border-radius: .6rem;"
+        style="background: rgba(0, 0, 0, .7); border-radius: .6rem; width: 30rem;"
     >
         <form #f="ngForm" (ngSubmit)="signIn(f.value)" novalidate>
             <h2 class="fw-bold mb-4 text-uppercase">Login</h2>
@@ -33,19 +33,22 @@
             <button
                 type="button"
                 class="btn btn-secondary mb-4"
+                style="width: 12rem;"
                 (click)="rellenarConPaciente()">Acceso paciente</button>
             <button
                 type="button"
                 class="btn btn-secondary mb-4"
+                style="width: 12rem;"
                 (click)="rellenarConEspecialista()">Acceso especialista</button>
             <button
                 type="button"
                 class="btn btn-secondary mb-5"
+                style="width: 12rem;"
                 (click)="rellenarConAdministrador()">Acceso administrador</button>
             </div>
             <button class="btn btn-outline-light btn-lg px-5" type="submit">Ingresar</button>            
         </form>
-        <div style="height: 2rem; margin-top: 1rem;">
+        <div style="height: 6rem; margin-top: 1rem;">
             <span
             *ngIf="error"
             class="help-block text-danger">
@@ -56,7 +59,7 @@
             <p class="mb-0">
                 ¿No tienes una cuenta?
             </p>
-            <a href="registro" class="text-white-50 fw-bold">Regístrate</a>
+            <a href="registro" class="text-white-50">Regístrate</a>
         </div>
     </div>
 </div>
