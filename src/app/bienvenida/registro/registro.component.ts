@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RegistroService } from 'src/app/services/registro.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-registro',
@@ -7,8 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroComponent implements OnInit {
   esPaciente:boolean = true;
+  errorMsg:string = '';
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private registroService: RegistroService) { }
 
   ngOnInit(): void {
   }
@@ -19,5 +24,15 @@ export class RegistroComponent implements OnInit {
 
   clickEspecialistaHandler() {
     this.esPaciente = false;
+  }
+
+  especialistaEnviadoHandler(objeto:any) {
+    // console.log(objeto);
+    this.registroService.registrarEspecialista(objeto).then(
+      () => this.router.navigateByUrl('verificar')
+    )
+    .catch(
+      err => this.errorMsg = err.message
+    );
   }
 }
