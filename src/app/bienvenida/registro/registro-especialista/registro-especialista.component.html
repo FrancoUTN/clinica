@@ -1,5 +1,5 @@
 
-<div class="d-flex justify-content-center mb-4">
+<div class="d-flex justify-content-center mb-2">
     <h2>Registro de especialistas</h2>
 </div>
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
@@ -165,10 +165,10 @@
         <input type="file" class="form-control" (change)="uploadFile($event)"/>
     </div>
 
-    <div class="d-flex justify-content-center mt-5">
+    <div class="d-flex justify-content-center mt-3">
         <button
         class="btn btn-primary"
-        [ngClass]="{'disabled': !signupForm.valid}"
+        [ngClass]="{'disabled': !signupForm.valid || !this.foto}"
         >
         Enviar<i class="fas fa-plus-circle"></i>
         </button>

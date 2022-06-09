@@ -10,10 +10,10 @@ import { RegistroService } from 'src/app/services/registro.service';
 })
 export class RegistroEspecialistaComponent implements OnInit {
   especialidades = [
-    'General',
     'Nutrición',
     'Dermatología',
-    'Traumatología'    
+    'Traumatología',
+    'Cardiología',
   ];
   signupForm: FormGroup | any;
   error:string = '';
@@ -38,8 +38,8 @@ export class RegistroEspecialistaComponent implements OnInit {
       'edad': new FormControl(null, [Validators.required, Validators.min(18), Validators.max(99)]),
       'dni': new FormControl(null, [Validators.required, Validators.max(99999999)]),
       'especialidades': new FormArray([]),
-      'email': new FormControl(null, [Validators.required, Validators.max(99999999)]),
-      'clave': new FormControl(null, [Validators.required, Validators.max(99999999)])
+      'email': new FormControl(null, [Validators.required, this.emptyValidator]),
+      'clave': new FormControl(null, [Validators.required, this.emptyValidator])
     });
   }
   onAddEspecialidad() {
@@ -64,20 +64,21 @@ export class RegistroEspecialistaComponent implements OnInit {
   }
   
   uploadFile(event:any) {
-    if (event.target.files.length > 0) {
+    if (event.target.files.length === 1) {
       this.foto = event.target.files[0];
+    }
+    else {
+      this.foto = null;
     }
   }
 
   emptyValidator(control: AbstractControl): object | null {
     const valor = control.value;
-
     if (valor) {
       if (valor.trim().length === 0) {
         return { emptyField: true};
       };
     };
-
     return null;
   }
 

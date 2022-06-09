@@ -10,7 +10,8 @@ import { RegistroService } from 'src/app/services/registro.service';
 })
 export class RegistroPacienteComponent implements OnInit {
   signupForm: FormGroup | any;
-  error:string = '';
+  error: string = '';
+  fotos: File[] | any;
 
   get nombre() { return this.signupForm.get('nombre'); }
   get apellido() { return this.signupForm.get('apellido'); }
@@ -29,12 +30,21 @@ export class RegistroPacienteComponent implements OnInit {
     this.signupForm = new FormGroup({
       'nombre': new FormControl(null, [Validators.required, this.emptyValidator]),
       'apellido': new FormControl(null, [Validators.required, this.emptyValidator]),
-      'edad': new FormControl(null, [Validators.required, Validators.min(18), Validators.max(99)]),
+      'edad': new FormControl(null, [Validators.required, Validators.max(99)]),
       'dni': new FormControl(null, [Validators.required, Validators.max(99999999)]),
       'obraSocial': new FormControl(null, [Validators.required, this.emptyValidator]),
-      'email': new FormControl(null, [Validators.required, Validators.max(99999999)]),
-      'clave': new FormControl(null, [Validators.required, Validators.max(99999999)])
+      'email': new FormControl(null, [Validators.required, this.emptyValidator]),
+      'clave': new FormControl(null, [Validators.required, this.emptyValidator])
     });
+  }
+
+  uploadFiles(event:any) {
+    if (event.target.files.length === 2) {
+      this.fotos = event.target.files;
+    }
+    else {
+      this.fotos = null;
+    }
   }
   
   emptyValidator(control: AbstractControl): object | null {
