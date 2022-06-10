@@ -9,9 +9,11 @@ import { RegistroService } from 'src/app/services/registro.service';
 })
 export class UsuariosComponent implements OnInit {
   usuarios:Array<any> = [];
-  esPaciente:boolean = true;
+  // esPaciente:boolean = true;
   errorMsg:string = '';
   quieroAgregarUsuario:boolean = false;
+
+  rolSeleccionado:string = 'paciente';
   
   constructor(
     private registroService: RegistroService,
@@ -31,10 +33,13 @@ export class UsuariosComponent implements OnInit {
   }
 
   clickPacienteHandler() {
-    this.esPaciente = true;
+    this.rolSeleccionado = 'paciente';
   }
   clickEspecialistaHandler() {
-    this.esPaciente = false;
+    this.rolSeleccionado = 'especialista';
+  }
+  clickAdministradorHandler() {
+    this.rolSeleccionado = 'administrador';
   }
 
   agregarUsuario() {

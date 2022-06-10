@@ -71,32 +71,36 @@
         class="text-white"
         style="background: rgba(0, 0, 0, .7); border-radius: .6rem;"
     >
-        <div style="width: 30rem; padding: 2rem 3rem">
-            <app-registro-administrador (formularioEnviado)="administradorEnviadoHandler($event)" [error]="errorMsg">            
-            </app-registro-administrador>
-        </div>
-        <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-3">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-3">
             <div class="container-fluid navbar-nav">
                 <a
                     class="nav-link m-auto"
                     (click)="clickPacienteHandler()"
-                    [ngClass]="{'active': this.esPaciente}"
+                    [ngClass]="{'active': this.rolSeleccionado === 'paciente'}"
                 >Paciente</a>
                 <a
                     class="nav-link m-auto"
                     (click)="clickEspecialistaHandler()"
-                    [ngClass]="{'active': !this.esPaciente}"
+                    [ngClass]="{'active': this.rolSeleccionado === 'especialista'}"
                 >Especialista</a>
+                <a
+                    class="nav-link m-auto"
+                    (click)="clickAdministradorHandler()"
+                    [ngClass]="{'active': this.rolSeleccionado === 'administrador'}"
+                >Administrador</a>
             </div>
         </nav>
-
-        <div style="width: 30rem; padding: 2rem 3rem" *ngIf="this.esPaciente">
+        <div style="width: 30rem; padding: 2rem 3rem" *ngIf="this.rolSeleccionado === 'paciente'">
             <app-registro-paciente (formularioEnviado)="pacienteEnviadoHandler($event)" [error]="errorMsg">            
             </app-registro-paciente>
         </div>
-        <div style="width: 30rem; padding: 1rem 3rem" *ngIf="!this.esPaciente">
+        <div style="width: 30rem; padding: 1rem 3rem" *ngIf="this.rolSeleccionado === 'especialista'">
             <app-registro-especialista (formularioEnviado)="especialistaEnviadoHandler($event)" [error]="errorMsg">            
             </app-registro-especialista>
-        </div> -->
+        </div>
+        <div style="width: 30rem; padding: 2rem 3rem" *ngIf="this.rolSeleccionado === 'administrador'">
+            <app-registro-administrador (formularioEnviado)="administradorEnviadoHandler($event)" [error]="errorMsg">            
+            </app-registro-administrador>
+        </div>
     </div>
 </div>
