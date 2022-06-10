@@ -56,5 +56,11 @@ export class UsuariosComponent implements OnInit {
       err => this.errorMsg = err.message
     );
   }
+  administradorEnviadoHandler(objeto:any) {
+    this.registroService.registrarAdministrador(objeto)
+    .catch(
+      err => this.errorMsg = err.message
+    );
+  }
 
 }

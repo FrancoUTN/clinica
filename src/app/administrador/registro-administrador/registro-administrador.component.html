@@ -1,0 +1,149 @@
+
+<div class="d-flex justify-content-center mb-4">
+    <h2>Agregar administrador</h2>
+</div>
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div class="d-flex">
+        <div style="margin-right: 2rem;">
+            <label for="nombre">
+            Nombre
+            </label>
+            <input
+            type="text"
+            id="nombre"
+            formControlName="nombre"
+            class="form-control"
+            required
+            >
+            <div style="height: 2rem;">
+            <span
+                *ngIf="!nombre?.valid && nombre?.touched"
+                class="help-block text-danger"
+            >
+                Nombre requerido
+            </span>
+            </div>
+        </div>
+        <div>
+            <label for="apellido">
+            Apellido
+            </label>
+            <input
+            type="text"
+            id="apellido"
+            formControlName="apellido"
+            class="form-control"
+            required
+            >
+            <div style="height: 2rem;">
+                <span
+                    *ngIf="!apellido?.valid && apellido?.touched"
+                    class="help-block text-danger"
+                >
+                    Apellido requerido
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex">
+        <div style="margin-right: 2rem;">
+            <label for="edad">
+            Edad
+            </label>
+            <input
+            type="number"
+            id="edad"
+            formControlName="edad"
+            class="form-control"
+            required
+            >
+            <div style="height: 2rem;">
+            <span
+                *ngIf="!edad?.valid && edad?.touched"
+                class="help-block text-danger">
+                Edad inválida
+            </span>
+            </div>
+        </div>
+        <div>
+            <label for="dni">
+            DNI
+            </label>
+            <input
+            type="number"
+            id="dni"
+            formControlName="dni"
+            class="form-control"
+            required
+            >
+            <div style="height: 2rem;">
+            <span
+                *ngIf="!dni?.valid && dni?.touched"
+                class="help-block text-danger">
+                DNI inválido
+            </span>
+            </div>
+        </div>
+    </div>
+    
+    <div style="margin-top: 1rem;">
+        <label for="email">
+        Email
+        </label>
+        <input
+        type="text"
+        id="email"
+        formControlName="email"
+        class="form-control"
+        required
+        >
+        <div style="height: 2rem;">
+        <span
+            *ngIf="!email?.valid && email?.touched"
+            class="help-block text-danger"
+        >
+            Email requerido
+        </span>
+        </div>
+    </div>
+    <div>
+        <label for="clave">
+        Contraseña
+        </label>
+        <input
+        type="password"
+        id="clave"
+        formControlName="clave"
+        class="form-control"
+        required
+        >
+        <div style="height: 2rem;">
+        <span
+            *ngIf="!clave?.valid && clave?.touched"
+            class="help-block text-danger"
+        >
+            Contraseña requerida
+        </span>
+        </div>
+    </div>
+    <div>
+        <label class="form-label">Foto</label>
+        <input type="file" class="form-control" (change)="uploadFiles($event)"/>
+    </div>
+    <div style="height: 3rem; margin-top: 1rem;">
+        <span
+        *ngIf="error"
+        class="help-block text-danger">
+            {{error}}
+        </span>
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+        <button
+        class="btn btn-primary"
+        [disabled]="!signupForm.valid || !this.foto"
+        >
+        Enviar<i class="fas fa-plus-circle"></i>
+        </button>
+    </div>
+</form>

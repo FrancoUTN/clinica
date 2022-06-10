@@ -96,4 +96,36 @@ export class RegistroService {
         () => this.authService.SendVerificationMail()
       )
   }
+
+  registrarAdministrador(datos:any) {
+    return this.authService.SignUp(datos.email, datos.clave)
+      .then(uc => {
+        if (uc.user) {
+          this.uid = uc.user.uid;
+
+          return this.fotosService.subir(this.uid, datos.foto);
+        }
+        throw "Sin uid";
+      })
+      .then(
+        uts => uts.ref.getDownloadURL()
+      )
+      .then(
+        url => {
+          const documento = {
+            rol: 'administrador',
+            email: datos.email,
+            nombre: datos.nombre,
+            apellido: datos.apellido,
+            edad: datos.edad,
+            dni: datos.dni,
+            foto: url
+          }
+          this.coleccion.doc(this.uid).set(documento);
+        }
+      )
+      .then(
+        () => this.authService.SendVerificationMail()
+      )
+  }
 }

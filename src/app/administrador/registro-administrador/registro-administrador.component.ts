@@ -2,13 +2,13 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-registro-paciente',
-  templateUrl: './registro-paciente.component.html',
-  styleUrls: ['./registro-paciente.component.scss']
+  selector: 'app-registro-administrador',
+  templateUrl: './registro-administrador.component.html',
+  styleUrls: ['./registro-administrador.component.scss']
 })
-export class RegistroPacienteComponent implements OnInit {
+export class RegistroAdministradorComponent implements OnInit {
   signupForm: FormGroup | any;
-  fotos: File[] | any;
+  foto: File[] | any;
   @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
   @Input() error: string = '';
 
@@ -16,7 +16,6 @@ export class RegistroPacienteComponent implements OnInit {
   get apellido() { return this.signupForm.get('apellido'); }
   get edad() { return this.signupForm.get('edad'); }
   get dni() { return this.signupForm.get('dni'); }
-  get obraSocial() { return this.signupForm.get('obraSocial'); }
   get email() { return this.signupForm.get('email'); }
   get clave() { return this.signupForm.get('clave'); }
 
@@ -29,18 +28,17 @@ export class RegistroPacienteComponent implements OnInit {
       'apellido': new FormControl(null, [Validators.required, this.emptyValidator]),
       'edad': new FormControl(null, [Validators.required, Validators.max(99)]),
       'dni': new FormControl(null, [Validators.required, Validators.min(999999), Validators.max(99999999)]),
-      'obraSocial': new FormControl(null, [Validators.required, this.emptyValidator]),
       'email': new FormControl(null, [Validators.required, this.emptyValidator]),
       'clave': new FormControl(null, [Validators.required, this.emptyValidator])
     });
   }
 
   uploadFiles(event:any) {
-    if (event.target.files.length === 2) {
-      this.fotos = event.target.files;
+    if (event.target.files.length === 1) {
+      this.foto = event.target.files[0];
     }
     else {
-      this.fotos = null;
+      this.foto = null;
     }
   }
   
@@ -56,7 +54,7 @@ export class RegistroPacienteComponent implements OnInit {
 
   onSubmit() {
     const obj = this.signupForm.value;
-    obj.fotos = this.fotos;
+    obj.foto = this.foto;
     this.formularioEnviado.emit(obj);    
   }
 }

@@ -6,6 +6,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { AdministradorComponent } from './administrador.component';
 import { MenuAdministradorComponent } from './menu-administrador/menu-administrador.component';
 import { SharedModule } from '../shared/shared.module';
+import { RegistroAdministradorComponent } from './registro-administrador/registro-administrador.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   declarations: [
     UsuariosComponent,
     AdministradorComponent,
-    MenuAdministradorComponent
+    MenuAdministradorComponent,
+    RegistroAdministradorComponent
   ],
   imports: [
     CommonModule,

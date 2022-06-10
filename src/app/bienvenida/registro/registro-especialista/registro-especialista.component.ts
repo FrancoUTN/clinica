@@ -34,7 +34,7 @@ export class RegistroEspecialistaComponent implements OnInit {
       'nombre': new FormControl(null, [Validators.required, this.emptyValidator]),
       'apellido': new FormControl(null, [Validators.required, this.emptyValidator]),
       'edad': new FormControl(null, [Validators.required, Validators.min(18), Validators.max(99)]),
-      'dni': new FormControl(null, [Validators.required, Validators.max(99999999)]),
+      'dni': new FormControl(null, [Validators.required, Validators.min(999999), Validators.max(99999999)]),
       'especialidades': new FormArray([]),
       'email': new FormControl(null, [Validators.required, this.emptyValidator]),
       'clave': new FormControl(null, [Validators.required, this.emptyValidator])

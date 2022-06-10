@@ -20,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [
     RegistroComponent,
     RegistroEspecialistaComponent,
-    RegistroPacienteComponent
+    RegistroPacienteComponent,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }
