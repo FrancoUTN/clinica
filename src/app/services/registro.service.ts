@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AuthService } from './auth.service';
 import { FotosService } from './fotos.service';
+import { UsuarioService } from './usuario.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class RegistroService {
   constructor(
     firestore: AngularFirestore,
     private authService:AuthService,
-    private fotosService: FotosService) {
+    private fotosService: FotosService,
+    private usuarioService: UsuarioService) {
       this.coleccion = firestore.collection('usuarios');
   }
 
@@ -43,12 +45,12 @@ export class RegistroService {
             foto: url,
             habilitado: false
           }
-          this.coleccion.doc(this.uid).set(documento);
+          return this.usuarioService.createUsuario(this.uid, documento);
         }
       )
-      .then(
-        () => this.authService.SendVerificationMail()
-      )
+      // .then(
+      //   () => this.authService.SendVerificationMail()
+      // )
   }
 
   registrarPaciente(datos:any) {
@@ -90,7 +92,7 @@ export class RegistroService {
             obraSocial: datos.obraSocial,
             fotos: urlArray
           }
-          this.coleccion.doc(this.uid).set(documento);
+          this.usuarioService.createUsuario(this.uid, documento);
         }
       )
       .then(
@@ -122,11 +124,11 @@ export class RegistroService {
             dni: datos.dni,
             foto: url
           }
-          this.coleccion.doc(this.uid).set(documento);
+          this.usuarioService.createUsuario(this.uid, documento);
         }
       )
-      .then(
-        () => this.authService.SendVerificationMail()
-      )
+      // .then(
+      //   () => this.authService.SendVerificationMail()
+      // )
   }
 }

@@ -10,6 +10,7 @@ import { VerifiedGuard } from './auth/verified.guard';
 import { AdministradorGuard } from './auth/administrador.guard';
 import { PacienteGuard } from './auth/paciente.guard';
 import { EspecialistaGuard } from './auth/especialista.guard';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
@@ -24,12 +25,14 @@ const routes: Routes = [
   },
   {
     path: 'especialista',
-    canActivate: [VerifiedGuard, EspecialistaGuard],
+    // canActivate: [VerifiedGuard, EspecialistaGuard],
+    canActivate: [AuthGuard, EspecialistaGuard],
     loadChildren: () => import('./especialista/especialista.module').then(m => m.EspecialistaModule)
   },
   {
     path: 'administrador',
-    canActivate: [VerifiedGuard, AdministradorGuard],
+    // canActivate: [VerifiedGuard, AdministradorGuard],
+    canActivate: [AuthGuard, AdministradorGuard],
     loadChildren: () => import('./administrador/administrador.module').then(m => m.AdministradorModule)
   },
 ];

@@ -26,6 +26,12 @@ export class UsuarioService {
       .get()
   }
 
+  createUsuario(id: string, usuario: any) {
+    return this.angularFirestore.collection("usuarios")
+      .doc(id)
+      .set(usuario);
+  }
+
   updateEspecialista(habilitado: boolean, id: string) {
     return this.angularFirestore
       .collection("usuarios")
