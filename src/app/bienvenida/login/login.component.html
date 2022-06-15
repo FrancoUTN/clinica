@@ -69,12 +69,14 @@
         <img
             *ngIf="item.foto"
             [src]="item.foto"
+            (click)="rellenar(item.email)"
             class="btn rounded-circle p-0 m-2"
             style="width: 60px; height: 60px"
         >
         <img
             *ngIf="item.fotos"
             [src]="item.fotos[0]"
+            (click)="rellenar(item.email)"
             class="btn rounded-circle p-0 m-2"
             style="width: 60px; height: 60px"
         >

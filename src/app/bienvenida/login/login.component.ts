@@ -70,19 +70,24 @@ export class LoginComponent implements OnInit {
       .catch(razon => this.error = razon.message);
   }
   
-  rellenarConPaciente() {
-    this.atrEmail = 'reaccionarnativo@gmail.com';
+  rellenar(email: string) {
+    this.atrEmail = email;
     this.atrPassword = '123123';
   }
 
-  rellenarConEspecialista() {
-    this.atrEmail = 'cataniafrancodev@gmail.com';
-    this.atrPassword = '123123';
-  }
+  // rellenarConPaciente() {
+  //   this.atrEmail = 'reaccionarnativo@gmail.com';
+  //   this.atrPassword = '123123';
+  // }
+
+  // rellenarConEspecialista() {
+  //   this.atrEmail = 'cataniafrancodev@gmail.com';
+  //   this.atrPassword = '123123';
+  // }
   
-  rellenarConAdministrador() {
-    this.atrEmail = 'maxiterrabusi@gmail.com';
-    this.atrPassword = '123123';
-  }
+  // rellenarConAdministrador() {
+  //   this.atrEmail = 'maxiterrabusi@gmail.com';
+  //   this.atrPassword = '123123';
+  // }
 
 }
