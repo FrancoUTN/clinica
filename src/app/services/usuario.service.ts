@@ -14,7 +14,7 @@ export class UsuarioService {
       .snapshotChanges()
   }
 
-  getUsuario(id:string) {
+  getUsuario(id: string) {
     // return this.angularFirestore
     //   .collection("usuarios")
     //   .doc(id).
@@ -24,6 +24,15 @@ export class UsuarioService {
       .collection("usuarios")
       .doc(id)
       .get()
+  }
+
+  updateEspecialista(habilitado: boolean, id: string) {
+    return this.angularFirestore
+      .collection("usuarios")
+      .doc(id)
+      .update({
+        habilitado: habilitado
+      });
   }
 
 }

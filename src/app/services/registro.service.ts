@@ -40,7 +40,8 @@ export class RegistroService {
             edad: datos.edad,
             dni: datos.dni,
             especialidades: datos.especialidades,
-            foto: url
+            foto: url,
+            habilitado: false
           }
           this.coleccion.doc(this.uid).set(documento);
         }

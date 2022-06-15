@@ -40,7 +40,12 @@ export class EspecialistaGuard implements CanActivate {
                         const rol = ds.get('rol');
 
                         if (rol === 'especialista') {
-                            return true;
+                            const habilitado = ds.get('habilitado')
+                            
+                            if (habilitado) {
+                                return true;
+                            }
+                            throw Error('No está habilitado.');
                         }
                         return this.router.createUrlTree([rol]);
                     }

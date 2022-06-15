@@ -9,10 +9,8 @@ import { RegistroService } from 'src/app/services/registro.service';
 })
 export class UsuariosComponent implements OnInit {
   usuarios:Array<any> = [];
-  // esPaciente:boolean = true;
   errorMsg:string = '';
   quieroAgregarUsuario:boolean = false;
-
   rolSeleccionado:string = 'paciente';
   
   constructor(
@@ -22,14 +20,25 @@ export class UsuariosComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarioService.getUsuarios().subscribe(
-      dca => {
+      dcas => {
         this.usuarios = [];
 
-        dca.forEach(
-          a => this.usuarios.push(a.payload.doc.data())
+        dcas.forEach(
+          dca => {
+            const obj:any = dca.payload.doc.data();
+            obj.id = dca.payload.doc.id;
+            this.usuarios.push(obj);
+          }
         );
       } 
     )
+  }
+
+  onChangeHabilitado($event:any) {
+    const chequeado = $event.target.checked;
+    const especialista = $event.target.value;
+
+    this.usuarioService.updateEspecialista(chequeado, especialista);
   }
 
   clickPacienteHandler() {
