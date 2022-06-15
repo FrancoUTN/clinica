@@ -7,13 +7,11 @@ import { AdministradorComponent } from './administrador.component';
 import { MenuAdministradorComponent } from './menu-administrador/menu-administrador.component';
 import { SharedModule } from '../shared/shared.module';
 import { RegistroAdministradorComponent } from './registro-administrador/registro-administrador.component';
-import { AdministradorGuard } from '../auth/administrador.guard';
 
 
 const routes: Routes = [
   { path: '', component: AdministradorComponent, children: [
-    // { path: '', redirectTo: 'usuarios', pathMatch: 'full' },
-    { path: 'usuarios', canActivate: [AdministradorGuard], component: UsuariosComponent },
+    { path: 'usuarios', component: UsuariosComponent },
     ]
   }
 ];

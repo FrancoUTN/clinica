@@ -7,6 +7,7 @@ import { RegistroComponent } from './bienvenida/registro/registro.component';
 import { VerificarComponent } from './bienvenida/registro/verificar/verificar.component';
 
 import { VerifiedGuard } from './auth/verified.guard';
+import { AdministradorGuard } from './auth/administrador.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
@@ -26,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'administrador',
-    canActivate: [VerifiedGuard],
+    canActivate: [VerifiedGuard, AdministradorGuard],
     loadChildren: () => import('./administrador/administrador.module').then(m => m.AdministradorModule)
   },
 ];

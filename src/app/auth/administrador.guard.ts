@@ -6,8 +6,8 @@ import {
     UrlTree
 } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, finalize, map, switchMap } from 'rxjs/operators';
 
 import { AuthService } from '../services/auth.service';
 import { UsuarioService } from '../services/usuario.service';
@@ -32,7 +32,7 @@ export class AdministradorGuard implements CanActivate {
                         if (u) {
                             return this.usuarioService.getUsuario(u.uid)
                         }
-                        throw Error('No hay usuario.') 
+                        throw Error('No hay usuario.');
                     }
                 ),
                 map(
@@ -42,8 +42,11 @@ export class AdministradorGuard implements CanActivate {
                         if (rol === 'administrador') {
                             return true;
                         }
-                        return this.router.createUrlTree(['']);
+                        return this.router.createUrlTree([rol]);
                     }
+                ),
+                catchError(
+                    () => of(false)
                 )
             );
         }
