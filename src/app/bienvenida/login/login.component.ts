@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   error: string = '';
   atrEmail: string = '';
   atrPassword: string = '';
+  usuarios:Array<any> = [];
 
   constructor(    
     private router: Router,
@@ -19,6 +20,19 @@ export class LoginComponent implements OnInit {
     private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
+    this.usuarioService.getUsuarios().subscribe(
+      dcas => {
+        this.usuarios = [];
+
+        dcas.forEach(
+          dca => {
+            const obj:any = dca.payload.doc.data();
+            obj.id = dca.payload.doc.id;
+            this.usuarios.push(obj);
+          }
+        );
+      } 
+    )
   }
   
   signIn(value: any) {
