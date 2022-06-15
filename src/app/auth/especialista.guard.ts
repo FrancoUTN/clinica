@@ -14,7 +14,7 @@ import { UsuarioService } from '../services/usuario.service';
   
 @Injectable({ providedIn: 'root' })
 
-export class AdministradorGuard implements CanActivate {
+export class EspecialistaGuard implements CanActivate {
 
     constructor(
         private authService: AuthService,
@@ -39,7 +39,7 @@ export class AdministradorGuard implements CanActivate {
                     ds => {
                         const rol = ds.get('rol');
 
-                        if (rol === 'administrador') {
+                        if (rol === 'especialista') {
                             return true;
                         }
                         return this.router.createUrlTree([rol]);

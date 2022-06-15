@@ -8,6 +8,8 @@ import { VerificarComponent } from './bienvenida/registro/verificar/verificar.co
 
 import { VerifiedGuard } from './auth/verified.guard';
 import { AdministradorGuard } from './auth/administrador.guard';
+import { PacienteGuard } from './auth/paciente.guard';
+import { EspecialistaGuard } from './auth/especialista.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
@@ -17,12 +19,12 @@ const routes: Routes = [
   { path: 'verificar', component: VerificarComponent },
   {
     path: 'paciente',
-    canActivate: [VerifiedGuard],
+    canActivate: [VerifiedGuard, PacienteGuard],
     loadChildren: () => import('./paciente/paciente.module').then(m => m.PacienteModule)
   },
   {
     path: 'especialista',
-    canActivate: [VerifiedGuard],
+    canActivate: [VerifiedGuard, EspecialistaGuard],
     loadChildren: () => import('./especialista/especialista.module').then(m => m.EspecialistaModule)
   },
   {
