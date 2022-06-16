@@ -38,7 +38,7 @@ export class RegistroComponent implements OnInit {
   especialistaEnviadoHandler(objeto:any) {
     // console.log(objeto);
     this.registroService.registrarEspecialista(objeto).then(
-      () => this.router.navigateByUrl('verificar')
+      () => this.router.navigateByUrl('login')
     )
     .catch(
       err => this.errorMsg = err.message
