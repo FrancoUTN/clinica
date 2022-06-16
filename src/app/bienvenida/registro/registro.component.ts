@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 export class RegistroComponent implements OnInit {
   esPaciente:boolean = true;
   errorMsg:string = '';
+  elegi: boolean = false;
 
   constructor(
     private router: Router,
@@ -18,12 +19,20 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  clickPacienteHandler() {
-    this.esPaciente = true;
+  clickVolverHandler() {
+    this.router.navigateByUrl('')
+  }
+  clickCancelarHandler() {
+    this.elegi = false;
   }
 
+  clickPacienteHandler() {
+    this.esPaciente = true;
+    this.elegi = true;
+  }
   clickEspecialistaHandler() {
     this.esPaciente = false;
+    this.elegi = true;
   }
 
   especialistaEnviadoHandler(objeto:any) {
@@ -35,7 +44,6 @@ export class RegistroComponent implements OnInit {
       err => this.errorMsg = err.message
     );
   }
-
   pacienteEnviadoHandler(objeto:any) {
     this.registroService.registrarPaciente(objeto).then(
       () => this.router.navigateByUrl('verificar')
