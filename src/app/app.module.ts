@@ -13,13 +13,15 @@ import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 import { LoginComponent } from './bienvenida/login/login.component';
 import { VerificarComponent } from './bienvenida/registro/verificar/verificar.component';
 import { SharedModule } from './shared/shared.module';
+import { InhabilitadoComponent } from './especialista/inhabilitado/inhabilitado.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BienvenidaComponent,
     LoginComponent,
-    VerificarComponent
+    VerificarComponent,
+    InhabilitadoComponent
   ],
   imports: [
     BrowserModule,

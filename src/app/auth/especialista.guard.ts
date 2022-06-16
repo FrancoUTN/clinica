@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, take } from 'rxjs/operators';
 
 import { AuthService } from '../services/auth.service';
 import { UsuarioService } from '../services/usuario.service';
@@ -27,6 +27,7 @@ export class EspecialistaGuard implements CanActivate {
         | Promise<boolean | UrlTree>
         | Observable<boolean | UrlTree> {
             return this.authService.getAuthState().pipe(
+                take(1),
                 switchMap(
                     u => {
                         if (u) {
@@ -45,7 +46,7 @@ export class EspecialistaGuard implements CanActivate {
                             if (habilitado) {
                                 return true;
                             }
-                            throw Error('No está habilitado.');
+                            return this.router.createUrlTree(['inhabilitado']);
                         }
                         return this.router.createUrlTree([rol]);
                     }

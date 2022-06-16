@@ -11,6 +11,7 @@ import { AdministradorGuard } from './auth/administrador.guard';
 import { PacienteGuard } from './auth/paciente.guard';
 import { EspecialistaGuard } from './auth/especialista.guard';
 import { AuthGuard } from './auth/auth.guard';
+import { InhabilitadoComponent } from './especialista/inhabilitado/inhabilitado.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
@@ -35,6 +36,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, AdministradorGuard],
     loadChildren: () => import('./administrador/administrador.module').then(m => m.AdministradorModule)
   },
+  { path: 'inhabilitado', component: InhabilitadoComponent },
 ];
 
 @NgModule({

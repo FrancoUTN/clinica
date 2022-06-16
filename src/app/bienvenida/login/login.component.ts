@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       .then(
         u => {
           if (u.user) {
-            if (u.user.emailVerified) {
+            // if (u.user.emailVerified) {
               this.usuarioService.getUsuario(u.user.uid).subscribe(
                 ds => {
                   const obj:any = ds.data();
@@ -60,10 +60,10 @@ export class LoginComponent implements OnInit {
                   }
                 }
               );
-            }
-            else {
-              throw {message: "Error en verificación."}
-            }
+            // }
+            // else {
+            //   throw {message: "Error en verificación."}
+            // }
           }
         }
       )
