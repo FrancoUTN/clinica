@@ -4,6 +4,7 @@ import { RegistroEspecialistaComponent } from '../bienvenida/registro/registro-e
 import { RegistroPacienteComponent } from '../bienvenida/registro/registro-paciente/registro-paciente.component';
 import { RegistroComponent } from '../bienvenida/registro/registro.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SinVerificarComponent } from './sin-verificar/sin-verificar.component';
 
 
 
@@ -11,7 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     RegistroComponent,
     RegistroEspecialistaComponent,
-    RegistroPacienteComponent
+    RegistroPacienteComponent,
+    SinVerificarComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegistroComponent,
     RegistroEspecialistaComponent,
     RegistroPacienteComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SinVerificarComponent
   ]
 })
 export class SharedModule { }

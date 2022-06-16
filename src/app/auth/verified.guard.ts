@@ -32,7 +32,7 @@ export class VerifiedGuard implements CanActivate {
             return true;
           }
         }
-        return this.router.createUrlTree(['/login']);
+        return this.router.createUrlTree(['/sin-verificar']);
       })
     );
   }

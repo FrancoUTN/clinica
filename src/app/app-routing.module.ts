@@ -12,6 +12,7 @@ import { PacienteGuard } from './auth/paciente.guard';
 import { EspecialistaGuard } from './auth/especialista.guard';
 import { AuthGuard } from './auth/auth.guard';
 import { InhabilitadoComponent } from './especialista/inhabilitado/inhabilitado.component';
+import { SinVerificarComponent } from './shared/sin-verificar/sin-verificar.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
@@ -37,6 +38,7 @@ const routes: Routes = [
     loadChildren: () => import('./administrador/administrador.module').then(m => m.AdministradorModule)
   },
   { path: 'inhabilitado', component: InhabilitadoComponent },
+  { path: 'sin-verificar', component: SinVerificarComponent },
 ];
 
 @NgModule({
