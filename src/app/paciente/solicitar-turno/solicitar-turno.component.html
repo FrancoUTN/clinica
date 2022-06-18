@@ -2,7 +2,26 @@
     class="d-flex flex-column align-items-center text-white p-5 mb-5"
     style="background: rgba(0, 0, 0, .7); border-radius: .6rem;"
 >
-    <div *ngFor="let especialidad of especialidades">
-        <button class="btn btn-secondary mb-4" (click)="onEspecialidadSeleccionadaHandler()">{{ especialidad }}</button>
+    <div *ngIf="paso1" >
+        <div *ngFor="let especialidad of especialidades">
+            <button class="btn btn-secondary my-3 w-100" (click)="onEspecialidadSeleccionadaHandler()">{{ especialidad }}</button>
+        </div>
+    </div>
+    
+    <div *ngIf="paso2" class="d-flex">
+        <div
+            *ngFor="let especialista of especialistas"
+            class="card m-5"
+            style="width: 18rem; cursor:pointer;"
+            (click)="onEspecialistaSeleccionadoHandler()"
+        >
+            <div class="card-body">
+                <h5 class="card-title text-dark text-center">
+                    Dr. {{ especialista.apellido }}, {{ especialista.nombre }}
+                </h5>
+            </div>
+            <img [src]="especialista.foto" class="card-img-top">
+        </div>
+
     </div>
 </div>
