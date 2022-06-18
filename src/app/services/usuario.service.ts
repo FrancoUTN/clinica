@@ -14,6 +14,12 @@ export class UsuarioService {
       .snapshotChanges()
   }
 
+  getUsuariosRef() {
+    return this.angularFirestore
+      .collection("usuarios")
+      .ref
+  }
+
   getUsuario(id: string) {
     // return this.angularFirestore
     //   .collection("usuarios")

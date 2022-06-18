@@ -4,16 +4,23 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PacienteComponent } from './paciente.component';
 import { MenuPacienteComponent } from './menu-paciente/menu-paciente.component';
+import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
+import { SolicitarTurnoComponent } from './solicitar-turno/solicitar-turno.component';
 
 
 const routes: Routes = [
-  { path: '', component: PacienteComponent },
+  { path: '', component: PacienteComponent, children: [
+    { path: 'mis-turnos', component: MisTurnosComponent },
+    { path: 'solicitar-turno', component: SolicitarTurnoComponent }
+  ]}
 ];
 
 @NgModule({
   declarations: [
     PacienteComponent,
-    MenuPacienteComponent
+    MenuPacienteComponent,
+    MisTurnosComponent,
+    SolicitarTurnoComponent
   ],
   imports: [
     CommonModule,
