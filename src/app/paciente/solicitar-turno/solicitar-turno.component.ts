@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { on } from 'events';
+import { AgendaService } from 'src/app/services/agenda.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -10,9 +11,14 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class SolicitarTurnoComponent implements OnInit {
   especialidades: string[] = ["Nutrición", "Dermatología", "Traumatología"];
   especialistas: any[] = [];
-  paso1: boolean = false;
+
+  // paso1: boolean = false;
+  paso1: boolean = true;
+
   paso2: boolean = false;
-  paso3: boolean = true;
+
+  paso3: boolean = false;
+  // paso3: boolean = true;
 
   horarios: Date[] = [];
 
@@ -22,7 +28,9 @@ export class SolicitarTurnoComponent implements OnInit {
   quinceDias: number = 1296000;
 
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(
+    private usuarioService: UsuarioService,
+    private agendaService: AgendaService) { }
 
   ngOnInit(): void {
   }
@@ -45,7 +53,11 @@ export class SolicitarTurnoComponent implements OnInit {
       .then(
         qs => {
           qs.forEach(
-            doc => this.especialistas.push(doc.data())
+            doc => {
+              const obj:any = doc.data();
+              obj.id = doc.id;
+              this.especialistas.push(obj);
+            }
           )
           this.paso1 = false;
           this.paso2 = true;
@@ -53,8 +65,21 @@ export class SolicitarTurnoComponent implements OnInit {
       )
   }
 
-  onEspecialistaSeleccionadoHandler() {
+  onEspecialistaSeleccionadoHandler(id: string) {
     this.paso2 = false;
     this.paso3 = true;
+
+    // console.log(id);
+
+    this.agendaService.getAgenda(id).subscribe(
+      qs => {
+        qs.forEach(
+          // doc => console.log(doc.data())
+          // doc => this.horarios.push(new Date(doc.get("fecha")))
+          doc => this.horarios.push(new Date(doc.get("fecha").toDate()))
+          // doc => console.log(doc.get("fecha").toDate())
+        )
+      }
+    )
   }
 }

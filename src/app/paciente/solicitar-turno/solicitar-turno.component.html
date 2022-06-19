@@ -13,7 +13,7 @@
             *ngFor="let especialista of especialistas"
             class="card m-5"
             style="width: 18rem; cursor:pointer;"
-            (click)="onEspecialistaSeleccionadoHandler()"
+            (click)="onEspecialistaSeleccionadoHandler(especialista.id)"
         >
             <div class="card-body">
                 <h5 class="card-title text-dark text-center">
