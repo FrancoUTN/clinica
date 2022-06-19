@@ -7,7 +7,7 @@
             <button class="btn btn-secondary my-3 w-100" (click)="onEspecialidadSeleccionadaHandler()">{{ especialidad }}</button>
         </div>
     </div>
-    
+
     <div *ngIf="paso2" class="d-flex">
         <div
             *ngFor="let especialista of especialistas"
@@ -22,6 +22,21 @@
             </div>
             <img [src]="especialista.foto" class="card-img-top">
         </div>
+    </div>
 
+    <div *ngIf="paso3">
+        <h2>Seleccione el turno:</h2>
+        <div class="d-flex flex-column">
+            <!-- <button class="btn btn-info text-light m-2">18/06 10:00</button>
+            <button class="btn btn-info text-light">18/06 10:30</button>
+            <button class="btn btn-info text-light">18/06 11:30</button>
+            <button class="btn btn-info text-light">20/06 08:00</button>
+            <button class="btn btn-info text-light">20/06 08:30</button>
+            <button class="btn btn-info text-light">20/06 09:00</button> -->
+            <button *ngFor="let horario of horarios" class="btn btn-info text-light m-2">
+                {{horario | date:'MM/dd hh:mm' }}
+            </button>
+            <button class="btn btn-primary" (click)="rellenarHorarios()">(dev) Rellenar</button>
+        </div>
     </div>
 </div>
