@@ -21,7 +21,7 @@
             <span style="width: 37rem; margin: .5rem;">Opciones</span>
         </div>
 
-        <div *ngFor="let turno of turnos" class="d-flex flex-row">
+        <div *ngFor="let turno of turnos; let i = index" class="d-flex flex-row clase-borde">
             <div class="d-flex flex-row justify-content-center align-items-center">
                 <span style="width: 10rem;">{{turno.fecha.toDate() | date:'MM/dd HH:mm'}}</span>
                 <span style="width: 14rem;">{{turno.paciente.nombre}} {{turno.paciente.apellido}}</span>
@@ -29,8 +29,8 @@
                 <span style="width: 8rem;">{{turno.estado | uppercase}}</span>
                 <span style="width: 10rem;">{{turno.razon}}</span>
             </div>
-            <div class="d-flex flex-row align-items-center justify-content-center">
-                <div class="boton-turno">
+            <div class="d-flex flex-row align-items-center justify-content-center padre-botones">
+                <div>
                     <button
                         class="btn btn-danger w-100"
                         (click)="cancelarTurnoHandler(turno)"
@@ -38,7 +38,7 @@
                     >
                     Cancelar</button>
                 </div>
-                <div class="boton-turno">
+                <div>
                     <button
                         class="btn btn-outline-danger w-100"
                         (click)="rechazarTurnoHandler(turno)"
@@ -46,24 +46,24 @@
                     >
                         Rechazar</button>
                 </div>
-                <div class="boton-turno">
+                <div>
                     <button class="btn btn-success w-100"
                         (click)="aceptarTurnoHandler(turno)"
                         *ngIf="turno.estado === 'reservado'"
                     >
                     Aceptar</button>
                 </div>
-                    <div class="boton-turno">
+                <div>
                     <button
-                        class="btn btn-light w-100"
+                        class="btn btn-info w-100"
                         (click)="finalizarTurnoHandler(turno)"
                         *ngIf="turno.estado === 'aceptado'"
                     >
                     Finalizar</button>
                 </div>
-                    <div class="boton-turno">
+                <div>
                     <button
-                        class="btn btn-secondary w-100"
+                        class="btn btn-warning w-100"
                         (click)="verReviewHandler(turno)"
                         *ngIf="turno.review"
                     >
