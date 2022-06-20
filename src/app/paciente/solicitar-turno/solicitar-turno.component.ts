@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { on } from 'events';
+import { Query } from '@angular/fire/compat/firestore';
 import { AgendaService } from 'src/app/services/agenda.service';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -13,13 +13,9 @@ export class SolicitarTurnoComponent implements OnInit {
   especialidades: string[] = ["Nutrición", "Dermatología", "Traumatología"];
   especialistas: any[] = [];
 
-  paso1: boolean = false;
-  // paso1: boolean = true;
-
+  paso1: boolean = true;
   paso2: boolean = false;
-
-  // paso3: boolean = false;
-  paso3: boolean = true;
+  paso3: boolean = false;
 
   horarios: Date[] = [];
 
@@ -29,6 +25,8 @@ export class SolicitarTurnoComponent implements OnInit {
   quinceDias: number = 1296000;
 
   arrayDeArraysDeFechas: Array<Array<Date>> = [];
+  reservasEspecialistaRef: Query<any> | undefined;
+  idEsp: string = '';
 
   constructor(
     private usuarioService: UsuarioService,
@@ -38,23 +36,58 @@ export class SolicitarTurnoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  agregarFecha() {    
+    const fecha = new Date();
+    fecha.setDate(19);
+    fecha.setHours(9, 30, 0, 0);
+
+    this.reservaService.add(this.idEsp, fecha);
+  }
+
   rellenarHorarios() {
-    for(let i = 0; i < 15; i++) {
-      const fecha = new Date();
-      fecha.setDate(fecha.getDate() + i);
-      this.arrayDeArraysDeFechas.push([]);
+    // const fecha = new Date();
+    // // fecha.setDate(fecha.getDate() + i);
+    // fecha.setHours(9, 30, 0, 0);
+    // const marcaDeTiempo = timeStamp.fromDate(fecha);
 
-      const dia = fecha.getDay();
-      const horas = dia !== 6 ? 19 : 14;
+    // this.reservasEspecialistaRef?.where("fecha", "==", marcaDeTiempo).get()
+    //   .then(
+    //     qs => qs.forEach(
+    //       doc => console.log(doc.data())
+    //     )
+    //   )
 
-      if(dia !== 0)
-        for(let j = 8; j < horas; j++) {
-          const nuevaFecha = new Date(fecha);
-          nuevaFecha.setHours(j, 0);
+    const fecha = new Date();
+    fecha.setDate(19);
+    fecha.setHours(9, 30, 0, 0);
+    // console.log("Local: " + fecha);
+    console.log("Local    : " + fecha.valueOf());
+
+    this.reservasEspecialistaRef?.get().then(
+      qs => qs.forEach(
+        // doc => console.log("Firestore: " + doc.get("fecha").toDate().valueOf())
+        doc => console.log("Son iguales? " + (doc.get("fecha").toDate().valueOf() === fecha.valueOf()))
+      )
+    )
+
+    // const ref = this.reservaService.getRef()
+
+    // for(let i = 0; i < 15; i++) {
+    //   const fecha = new Date();
+    //   fecha.setDate(fecha.getDate() + i);
+    //   this.arrayDeArraysDeFechas.push([]);
+
+    //   const dia = fecha.getDay();
+    //   const horas = dia !== 6 ? 19 : 14;
+
+    //   if(dia !== 0)
+    //     for(let j = 8; j < horas; j++) {
+    //       const nuevaFecha = new Date(fecha);
+    //       nuevaFecha.setHours(j, 0);
           
-          this.arrayDeArraysDeFechas[i].push(nuevaFecha);
-        }
-    }
+    //       this.arrayDeArraysDeFechas[i].push(nuevaFecha);
+    //     }
+    // }
   }
   // rellenarHorarios() {
   //   // var someDate = new Date();
@@ -116,6 +149,7 @@ export class SolicitarTurnoComponent implements OnInit {
     this.paso2 = false;
     this.paso3 = true;
 
+    this.idEsp = id;
     // console.log(id);
 
     // this.reservaService.getRef().where("uid", "==", id).get()
@@ -127,7 +161,7 @@ export class SolicitarTurnoComponent implements OnInit {
     //     }
     //   );
 
-
+    this.reservasEspecialistaRef = this.reservaService.getRef().where("uid", "==", id);
   }
 
   // onEspecialistaSeleccionadoHandler(id: string) {

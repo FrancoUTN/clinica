@@ -14,4 +14,13 @@ export class ReservaService {
       .ref
   }
 
+  add(uid: string, fecha: Date) {
+    return this.angularFirestore
+      .collection("reservas")
+      .add({
+        uid: uid,
+        fecha: fecha,
+      })
+  }
+
 }
