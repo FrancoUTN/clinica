@@ -63,4 +63,20 @@ export class MisTurnosComponent implements OnInit {
     }
   }
 
+  cancelarHandler(turno: any) {
+
+  }
+  rechazarHandler(turno: any) {
+    
+  }
+  aceptarHandler(turno: any) {
+    
+  }
+  finalizarHandler(turno: any) {
+    
+  }
+  verReviewHandler(turno: any) {
+    
+  }
+
 }
