@@ -13,13 +13,13 @@ export class SolicitarTurnoComponent implements OnInit {
   especialidades: string[] = ["Nutrición", "Dermatología", "Traumatología"];
   especialistas: any[] = [];
 
-  // paso1: boolean = false;
-  paso1: boolean = true;
+  paso1: boolean = false;
+  // paso1: boolean = true;
 
   paso2: boolean = false;
 
-  paso3: boolean = false;
-  // paso3: boolean = true;
+  // paso3: boolean = false;
+  paso3: boolean = true;
 
   horarios: Date[] = [];
 
@@ -38,10 +38,34 @@ export class SolicitarTurnoComponent implements OnInit {
   }
 
   rellenarHorarios() {
-    var someDate = new Date();
-    var numberOfDaysToAdd = 15;
-    var result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-    console.log(new Date(result))
+    // var someDate = new Date();
+    // var numberOfDaysToAdd = 15;
+    // var result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+    // console.log(new Date(result))
+    
+    // const arrayDiaDeSemana = [];
+    // const arraySabado = [];
+    // const arrayDomingo = []; // Hace falta?
+
+    for(let i = 0; i < 3; i++) { // i < 15
+      const fecha = new Date();
+      fecha.setDate(fecha.getDate() + i);
+      // this.horarios.push(fecha);
+
+      for(let j = 8; j < 12; j++) { // j < 19
+        // const hora = new Date();
+        // const mediaHora = new Date();
+
+        // hora.setHours(i, 0);
+        // mediaHora.setHours(i, 30);
+
+        const nuevaFecha = new Date(fecha);
+        nuevaFecha.setHours(j, 0);
+
+        // this.horarios.push(hora, mediaHora);
+        this.horarios.push(nuevaFecha);
+      }
+    }
   }
 
   addDays(date: number, days: number) {
@@ -73,20 +97,16 @@ export class SolicitarTurnoComponent implements OnInit {
 
     // console.log(id);
 
-    this.reservaService.getRef().where("uid", "==", id).get()
-      .then(
-        qs => {
-          qs.forEach(
-            doc => console.log(doc.data())
-          )
-        }
-      );
+    // this.reservaService.getRef().where("uid", "==", id).get()
+    //   .then(
+    //     qs => {
+    //       qs.forEach(
+    //         doc => console.log(doc.data())
+    //       )
+    //     }
+    //   );
 
-    for(let i = 0; i < 15; i++) {
-      const fecha = new Date();
-      fecha.setDate(fecha.getDate() + i);
-      this.horarios.push(fecha);
-    }
+
   }
 
   // onEspecialistaSeleccionadoHandler(id: string) {

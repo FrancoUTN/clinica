@@ -34,7 +34,7 @@
             <button class="btn btn-info text-light">20/06 08:30</button>
             <button class="btn btn-info text-light">20/06 09:00</button> -->
             <button *ngFor="let horario of horarios" class="btn btn-info text-light m-2">
-                {{horario | date:'MM/dd hh:mm' }}
+                {{horario | date:'MM/dd HH:mm' }}
             </button>
             <button class="btn btn-primary" (click)="rellenarHorarios()">(dev) Rellenar</button>
         </div>
