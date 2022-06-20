@@ -17,6 +17,7 @@ export class SolicitarTurnoComponent implements OnInit {
   paso2: boolean = false;
   paso3: boolean = false;
   paso4: boolean = false;
+  paso5: boolean = false;
 
   horarios: Date[] = [];
 
@@ -201,8 +202,24 @@ export class SolicitarTurnoComponent implements OnInit {
     this.fechaElegida = fecha;
 
   }
-  onCancelarReservaHandler() {}
-  onConfirmarReservaHandler() {}
+
+  onCancelarReservaHandler() {
+
+  }
+
+  onConfirmarReservaHandler() {
+    if (this.fechaElegida) {
+      this.reservaService.add(this.idEsp, this.fechaElegida)
+        .then(
+          docRef => {
+            console.log("Reserva concretada.")
+            this.paso4 = false;
+            this.paso5 = true;
+          }
+        );
+    }
+  }
+
   // onEspecialistaSeleccionadoHandler(id: string) {
   //   this.paso2 = false;
   //   this.paso3 = true;

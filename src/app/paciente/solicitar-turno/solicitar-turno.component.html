@@ -75,4 +75,11 @@
         <button class="btn btn-danger m-auto" (click)="onCancelarReservaHandler()">Cancelar</button>
         <button class="btn btn-success m-auto" (click)="onConfirmarReservaHandler()">Confirmar</button>
     </div>
+    
+    <div *ngIf="paso5">
+        <h2>¡Su reserva ha sido confirmada!</h2>
+        <p>Doctor: {{especialista.apellido + ", " + especialista.nombre}}</p>
+        <p>Fecha: {{fechaElegida | date:'short'}}</p>
+        <button class="btn btn-secondary m-auto" routerLink="/paciente">Finalizar</button>
+    </div>
 </div>
