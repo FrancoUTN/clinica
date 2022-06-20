@@ -52,7 +52,7 @@
             </tr>
             <tr *ngFor="let arrayDeFechas of arrayDeArraysDeFechas">
                 <td>                    
-                    {{ arrayDeFechas[0] | date:'EEEE' }}
+                    {{ arrayDeFechas[0] | date:'EEEE' }} <!-- Si está tomada la primera, no se muestra -->                    
                 </td>
                 <td *ngFor="let fecha of arrayDeFechas">
                     <button

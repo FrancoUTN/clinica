@@ -234,6 +234,7 @@ export class SolicitarTurnoComponent implements OnInit {
             console.log("Reserva concretada.")
             this.paso4 = false;
             this.paso5 = true;
+            this.agregarTurno();
           }
         );
     }
@@ -243,8 +244,15 @@ export class SolicitarTurnoComponent implements OnInit {
     const turno = {
       paciente: this.usuarioActual,
       especialista: this.especialista,
-      especialidad: this.especialidadElegida
+      fecha: this.fechaElegida,
+      especialidad: this.especialidadElegida,
+      estado: 'reservado'
     }
+
+    this.turnoService.add(turno)
+      .then(
+        () => console.log("Turno agregado: " + turno)
+      )
   }
 
   // onEspecialistaSeleccionadoHandler(id: string) {
