@@ -3,7 +3,7 @@
     <div>
         <div class="mb-4">
             <label class="mb-2">
-                Buscar por paciente o especialidad
+                Buscar por especialista o especialidad
             </label>
             <input
                 [(ngModel)]="filtro"
@@ -14,7 +14,7 @@
 
         <div class="d-flex flex-row fs-5 align-items-center">
             <span style="width: 10rem;">Horario</span>
-            <span style="width: 14rem;">Paciente</span>
+            <span style="width: 14rem;">Especialista</span>
             <span style="width: 10rem;">Especialidad</span>
             <span style="width: 8rem;">Estado</span>
             <span style="width: 10rem;">Motivo</span>
@@ -24,7 +24,10 @@
         <div *ngFor="let turno of turnos; let i = index" class="d-flex flex-row clase-borde">
             <div class="d-flex flex-row justify-content-center align-items-center">
                 <span style="width: 10rem;">{{turno.fecha.toDate() | date:'MM/dd HH:mm'}}</span>
-                <span style="width: 14rem;">{{turno.paciente.nombre}} {{turno.paciente.apellido}}</span>
+                <span style="width: 14rem;">
+                    Dr. {{turno.especialista.apellido}},
+                    {{turno.especialista.nombre}}
+                </span>
                 <span style="width: 10rem;">{{turno.especialidad}}</span>
                 <span style="width: 8rem;">{{turno.estado | uppercase}}</span>
                 <span style="width: 10rem;">{{turno.razon}}</span>
@@ -38,29 +41,10 @@
                     >
                     Cancelar</button>
                 </div>
+
                 <div>
-                    <button
-                        class="btn btn-outline-danger w-100"
-                        (click)="rechazarTurnoHandler(turno)"
-                        *ngIf="turno.estado === 'reservado'"
-                    >
-                        Rechazar</button>
                 </div>
-                <div>
-                    <button class="btn btn-success w-100"
-                        (click)="aceptarTurnoHandler(turno)"
-                        *ngIf="turno.estado === 'reservado'"
-                    >
-                    Aceptar</button>
-                </div>
-                <div>
-                    <button
-                        class="btn btn-info w-100"
-                        (click)="finalizarTurnoHandler(turno)"
-                        *ngIf="turno.estado === 'aceptado'"
-                    >
-                    Finalizar</button>
-                </div>
+
                 <div>
                     <button
                         class="btn btn-warning w-100"
@@ -68,6 +52,22 @@
                         *ngIf="turno.review"
                     >
                     Ver reseña</button>
+                </div>
+                <div>
+                    <button
+                        class="btn btn-warning w-100"
+                        (click)="verReviewHandler(turno)"
+                        *ngIf="turno.estado === 'realizado'"
+                    >
+                    Completar encuesta</button>
+                </div>
+                <div>
+                    <button
+                        class="btn btn-warning w-100"
+                        (click)="verReviewHandler(turno)"
+                        *ngIf="turno.estado === 'realizado'"
+                    >
+                    Calificar atención</button>
                 </div>
             </div>
         </div>
@@ -77,9 +77,10 @@
     <h2>Estás a punto de cancelar un turno</h2>
     <div class="my-5">
         <h4>Detalles</h4>
-        <span>Paciente: </span>
+        <span>Especialista: </span>
         <span style="width: 14rem;">
-            {{turnoSeleccionado.paciente.nombre}} {{turnoSeleccionado.paciente.apellido}}
+            Dr. {{turnoSeleccionado.especialista.apellido}},
+            {{turnoSeleccionado.especialista.nombre}}
         </span>
         <br>
         <span>Fecha: </span>

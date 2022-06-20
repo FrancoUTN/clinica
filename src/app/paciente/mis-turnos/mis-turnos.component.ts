@@ -31,8 +31,8 @@ export class MisTurnosComponent implements OnInit {
         if(u) {
           this.turnoService
             .getRef()
-            .where('especialista.id', '==', u.uid)
-            .orderBy('fecha')
+            .where('paciente.email', '==', u.email) // especialista.id
+            // .orderBy('fecha')
             .onSnapshot(
               qs => {
                 this.turnosOriginal = [];
@@ -63,8 +63,8 @@ export class MisTurnosComponent implements OnInit {
         turno => {
           if(
             turno.especialidad.includes(this.filtro) ||
-            turno.paciente.nombre.includes(this.filtro) ||
-            turno.paciente.apellido.includes(this.filtro)
+            turno.especialista.nombre.includes(this.filtro) || // paciente.nombre
+            turno.especialista.apellido.includes(this.filtro) // paciente.apellido
             ) {
             filtrados.push(turno);
           }
