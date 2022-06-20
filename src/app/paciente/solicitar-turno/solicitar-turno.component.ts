@@ -32,7 +32,7 @@ export class SolicitarTurnoComponent implements OnInit {
   franjaHoraria: number[] = [];
 
   especialista: any;
-  fechaElegida: Date | undefined;
+  fechaElegida: Date | null = null;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -200,11 +200,13 @@ export class SolicitarTurnoComponent implements OnInit {
     this.paso4 = true;
 
     this.fechaElegida = fecha;
-
   }
 
   onCancelarReservaHandler() {
+    this.paso3 = true;
+    this.paso4 = false;
 
+    this.fechaElegida = null;
   }
 
   onConfirmarReservaHandler() {
