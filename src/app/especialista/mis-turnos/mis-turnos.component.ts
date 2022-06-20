@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map, switchMap, take } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { ReservaService } from 'src/app/services/reserva.service';
 import { TurnoService } from 'src/app/services/turno.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class MisTurnosComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private turnoService: TurnoService) { }
+    private turnoService: TurnoService,
+    private reservaService: ReservaService) { }
 
   ngOnInit(): void {
     this.authService.getAuthState().subscribe(
@@ -89,15 +91,18 @@ export class MisTurnosComponent implements OnInit {
       estado: 'cancelado',
       razon: this.razon
     };
-    
+
     this.turnoService.actualizar(this.turnoSeleccionado.id, nuevoTurno)
+      .then(
+        () => this.reservaService.eliminar(this.turnoSeleccionado.especialista.id, this.turnoSeleccionado.fecha)        
+      )
       .then(
         () => {
           this.modoNormal = true;
           this.modoCancelar = false;
           this.modoRechazar = false;
         }
-      );
+      )
   }
 
   rechazarTurnoHandler(turno: any) {

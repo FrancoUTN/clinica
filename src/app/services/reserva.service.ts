@@ -23,4 +23,15 @@ export class ReservaService {
       })
   }
 
+  async eliminar(uid: string, fecha: Date) {
+    const qs = await this.angularFirestore
+      .collection("reservas")
+      .ref
+      .where("uid", "==", uid)
+      .where("fecha", "==", fecha)
+      .get();
+    qs.forEach(
+      doc => doc.ref.delete()
+    );
+  }
 }
