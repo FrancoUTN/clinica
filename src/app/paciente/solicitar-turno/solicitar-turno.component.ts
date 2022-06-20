@@ -24,9 +24,10 @@ export class SolicitarTurnoComponent implements OnInit {
   unDia: number = 86400;
   quinceDias: number = 1296000;
 
-  arrayDeArraysDeFechas: Array<Array<Date>> = [];
+  arrayDeArraysDeFechas: Array<Array<Date|null>> = [];
   reservasEspecialistaRef: Query<any> | undefined;
   idEsp: string = '';
+  franjaHoraria: number[] = [];
 
   constructor(
     private usuarioService: UsuarioService,
@@ -34,6 +35,8 @@ export class SolicitarTurnoComponent implements OnInit {
     private reservaService: ReservaService) { }
 
   ngOnInit(): void {
+    for(let i = 8; i < 19; i++)
+      this.franjaHoraria.push(i);
   }
 
   agregarFecha() {    
@@ -92,16 +95,22 @@ export class SolicitarTurnoComponent implements OnInit {
         const dia = fecha.getDay();
         const horas = dia !== 6 ? 19 : 14;
 
-        if(dia !== 0)
+        if(dia !== 0) {
           for(let j = 8; j < horas; j++) {
             const nuevaFecha = new Date(fecha);
             nuevaFecha.setHours(j, 0, 0, 0);
 
-            if (reservas.indexOf(nuevaFecha.valueOf()) < 0)
+            if (reservas.indexOf(nuevaFecha.valueOf()) < 0) {
               this.arrayDeArraysDeFechas[i].push(nuevaFecha);
+            }
+            else {
+              this.arrayDeArraysDeFechas[i].push(null);
+            }
           }
+        }
       }
     })
+
   }
   // rellenarHorarios() {
   //   // var someDate = new Date();

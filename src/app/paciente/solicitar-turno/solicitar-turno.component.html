@@ -23,24 +23,8 @@
             <img [src]="especialista.foto" class="card-img-top">
         </div>
     </div>
-
-    <!-- <div *ngIf="paso3">
-        <h2>Seleccione el turno:</h2>
-        <div class="d-flex flex-column">
-            <button *ngFor="let horario of horarios" class="btn btn-info text-light m-2">
-                {{horario | date:'MM/dd HH:mm' }}
-            </button>
-            <button class="btn btn-primary" (click)="rellenarHorarios()">(dev) Rellenar</button>
-        </div>
-    </div> -->
-            <!-- <button class="btn btn-info text-light m-2">18/06 10:00</button>
-            <button class="btn btn-info text-light">18/06 10:30</button>
-            <button class="btn btn-info text-light">18/06 11:30</button>
-            <button class="btn btn-info text-light">20/06 08:00</button>
-            <button class="btn btn-info text-light">20/06 08:30</button>
-            <button class="btn btn-info text-light">20/06 09:00</button> -->
     
-    <div *ngIf="paso3">
+    <!-- <div *ngIf="paso3">
         <h2>Seleccione el turno:</h2>
         <div class="d-flex flex-column">
             <div class="d-flex flex-row" *ngFor="let arrayDeFechas of arrayDeArraysDeFechas">
@@ -54,5 +38,30 @@
             <button class="btn btn-primary" (click)="agregarFecha()">Agregar fecha</button>
             <button class="btn btn-primary" (click)="rellenarHorarios()">(dev) Rellenar</button>
         </div>
+    </div> -->
+
+    <div *ngIf="paso3">
+        <table>
+            <tr class="text-center">
+                <th>
+                    Día
+                </th>
+                <th *ngFor="let item of franjaHoraria">
+                    {{item}}:00
+                </th>
+            </tr>
+            <tr *ngFor="let arrayDeFechas of arrayDeArraysDeFechas">
+                <td>                    
+                    {{ arrayDeFechas[0] | date:'EEEE' }}
+                </td>
+                <td *ngFor="let fecha of arrayDeFechas">
+                    <button *ngIf="fecha" class="btn btn-outline-info text-light m-2">
+                        {{ fecha | date:'MM/dd HH:mm' }}
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <button class="btn btn-primary" (click)="rellenarHorarios()">(dev) Rellenar</button>
     </div>
+
 </div>
