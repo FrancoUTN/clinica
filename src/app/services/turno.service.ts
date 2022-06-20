@@ -20,4 +20,11 @@ export class TurnoService {
       .collection(this.strColeccion)
       .add(objeto)
   }
+
+  actualizar(id: string, objeto: any) {
+    return this.angularFirestore
+      .collection(this.strColeccion)
+      .doc(id)
+      .update(objeto)
+  }
 }

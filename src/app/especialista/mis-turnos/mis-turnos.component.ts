@@ -13,6 +13,11 @@ export class MisTurnosComponent implements OnInit {
   turnos: any[] = [];
   // uidActual: string = '';
   filtro: string = '';
+  razon: string = '';  
+  modoNormal: boolean = true;
+  modoCancelar: boolean = false;
+  modoRechazar: boolean = false;
+  turnoSeleccionado: any;
 
   constructor(
     private authService: AuthService,
@@ -30,7 +35,12 @@ export class MisTurnosComponent implements OnInit {
               qs => {
                 this.turnosOriginal = [];
 
-                qs.forEach(doc => this.turnosOriginal.push(doc.data()));
+                qs.forEach(doc => {
+                  const id: string = doc.id;
+                  const data: any = doc.data();
+
+                  this.turnosOriginal.push({...data, id});
+                });
 
                 this.turnos = this.turnosOriginal.slice();
               }
@@ -63,16 +73,40 @@ export class MisTurnosComponent implements OnInit {
     }
   }
 
-  cancelarHandler(turno: any) {
+  cancelarTurnoHandler(turno: any) {
+    this.turnoSeleccionado = turno;
+    this.modoNormal = false;
+    this.modoCancelar = true;
+    this.modoRechazar = false;
+  }
+  cancelarVolverHandler() {
+    this.modoNormal = true;
+    this.modoCancelar = false;
+    this.modoRechazar = false;
+  }
+  cancelarConfirmarHandler() {
+    const nuevoTurno = {
+      estado: 'cancelado',
+      razon: this.razon
+    };
+    
+    this.turnoService.actualizar(this.turnoSeleccionado.id, nuevoTurno)
+      .then(
+        () => {
+          this.modoNormal = true;
+          this.modoCancelar = false;
+          this.modoRechazar = false;
+        }
+      );
+  }
 
-  }
-  rechazarHandler(turno: any) {
+  rechazarTurnoHandler(turno: any) {
     
   }
-  aceptarHandler(turno: any) {
+  aceptarTurnoHandler(turno: any) {
     
   }
-  finalizarHandler(turno: any) {
+  finalizarTurnoHandler(turno: any) {
     
   }
   verReviewHandler(turno: any) {
