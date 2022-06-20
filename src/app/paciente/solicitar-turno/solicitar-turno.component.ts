@@ -66,38 +66,42 @@ export class SolicitarTurnoComponent implements OnInit {
     // console.log("Local: " + fecha);
     // console.log("Local    : " + fecha.valueOf());
 
-    // this.reservasEspecialistaRef?.get().then(
-    //   qs => qs.forEach(
-    //     // doc => console.log("Firestore: " + doc.get("fecha").toDate().valueOf())
-    //     doc => console.log("Son iguales? " + (doc.get("fecha").toDate().valueOf() === fecha.valueOf()))
-    //   )
-    // )
+    // this.reservasEspecialistaRef?.where("fecha", "==", fecha).get()
+    //     .then(
+    //       qs => qs.forEach(
+    //         doc => console.log("Te encontré")
+    //       )
+    //     )
+    const reservas: number[] = [];
+    
+    this.reservasEspecialistaRef?.get().then(
+      qs => qs.forEach(
+        // doc => console.log("Firestore: " + doc.get("fecha").toDate().valueOf())
+        doc => reservas.push(doc.get("fecha").toDate().valueOf())
+      )
+    )
+    .then(()=>{
+      // const ref = this.reservaService.getRef()
 
-    this.reservasEspecialistaRef?.where("fecha", "==", fecha).get()
-        .then(
-          qs => qs.forEach(
-            doc => console.log("Te encontré")
-          )
-        )
+      console.log(reservas);
+      for(let i = 0; i < 15; i++) {
+        const fecha = new Date();
+        fecha.setDate(fecha.getDate() + i);
+        this.arrayDeArraysDeFechas.push([]);
 
-    // const ref = this.reservaService.getRef()
+        const dia = fecha.getDay();
+        const horas = dia !== 6 ? 19 : 14;
 
-    // for(let i = 0; i < 15; i++) {
-    //   const fecha = new Date();
-    //   fecha.setDate(fecha.getDate() + i);
-    //   this.arrayDeArraysDeFechas.push([]);
+        if(dia !== 0)
+          for(let j = 8; j < horas; j++) {
+            const nuevaFecha = new Date(fecha);
+            nuevaFecha.setHours(j, 0, 0, 0);
 
-    //   const dia = fecha.getDay();
-    //   const horas = dia !== 6 ? 19 : 14;
-
-    //   if(dia !== 0)
-    //     for(let j = 8; j < horas; j++) {
-    //       const nuevaFecha = new Date(fecha);
-    //       nuevaFecha.setHours(j, 0);
-          
-    //       this.arrayDeArraysDeFechas[i].push(nuevaFecha);
-    //     }
-    // }
+            if (reservas.indexOf(nuevaFecha.valueOf()) < 0)
+              this.arrayDeArraysDeFechas[i].push(nuevaFecha);
+          }
+      }
+    })
   }
   // rellenarHorarios() {
   //   // var someDate = new Date();
