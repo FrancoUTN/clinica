@@ -16,6 +16,7 @@ export class SolicitarTurnoComponent implements OnInit {
   paso1: boolean = true;
   paso2: boolean = false;
   paso3: boolean = false;
+  paso4: boolean = false;
 
   horarios: Date[] = [];
 
@@ -28,6 +29,9 @@ export class SolicitarTurnoComponent implements OnInit {
   reservasEspecialistaRef: Query<any> | undefined;
   idEsp: string = '';
   franjaHoraria: number[] = [];
+
+  especialista: any;
+  fechaElegida: Date | undefined;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -168,11 +172,12 @@ export class SolicitarTurnoComponent implements OnInit {
       )
   }
 
-  onEspecialistaSeleccionadoHandler(id: string) {
+  onEspecialistaSeleccionadoHandler(especialista: any) {
     this.paso2 = false;
     this.paso3 = true;
 
-    this.idEsp = id;
+    this.especialista = especialista;
+    this.idEsp = especialista.id;
     // console.log(id);
 
     // this.reservaService.getRef().where("uid", "==", id).get()
@@ -184,9 +189,20 @@ export class SolicitarTurnoComponent implements OnInit {
     //     }
     //   );
 
-    this.reservasEspecialistaRef = this.reservaService.getRef().where("uid", "==", id);
+    this.reservasEspecialistaRef = this.reservaService.getRef().where("uid", "==", especialista.id);
+
+    this.rellenarHorarios();
   }
 
+  onFechaSeleccionadaHandler(fecha: Date) {
+    this.paso3 = false;
+    this.paso4 = true;
+
+    this.fechaElegida = fecha;
+
+  }
+  onCancelarReservaHandler() {}
+  onConfirmarReservaHandler() {}
   // onEspecialistaSeleccionadoHandler(id: string) {
   //   this.paso2 = false;
   //   this.paso3 = true;
