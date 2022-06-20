@@ -24,18 +24,33 @@
         </div>
     </div>
 
-    <div *ngIf="paso3">
+    <!-- <div *ngIf="paso3">
         <h2>Seleccione el turno:</h2>
         <div class="d-flex flex-column">
+            <button *ngFor="let horario of horarios" class="btn btn-info text-light m-2">
+                {{horario | date:'MM/dd HH:mm' }}
+            </button>
+            <button class="btn btn-primary" (click)="rellenarHorarios()">(dev) Rellenar</button>
+        </div>
+    </div> -->
             <!-- <button class="btn btn-info text-light m-2">18/06 10:00</button>
             <button class="btn btn-info text-light">18/06 10:30</button>
             <button class="btn btn-info text-light">18/06 11:30</button>
             <button class="btn btn-info text-light">20/06 08:00</button>
             <button class="btn btn-info text-light">20/06 08:30</button>
             <button class="btn btn-info text-light">20/06 09:00</button> -->
-            <button *ngFor="let horario of horarios" class="btn btn-info text-light m-2">
-                {{horario | date:'MM/dd HH:mm' }}
-            </button>
+    
+    <div *ngIf="paso3">
+        <h2>Seleccione el turno:</h2>
+        <div class="d-flex flex-column">
+            <div class="d-flex flex-row" *ngFor="let arrayDeFechas of arrayDeArraysDeFechas">
+                <div class="d-flex justify-content-center align-items-center" style="width: 6rem;">
+                    {{ arrayDeFechas[0] | date:'EEEE'}}
+                </div>
+                <button *ngFor="let fecha of arrayDeFechas" class="btn btn-info text-light m-2">
+                    {{fecha | date:'MM/dd HH:mm' }}
+                </button>
+            </div>
             <button class="btn btn-primary" (click)="rellenarHorarios()">(dev) Rellenar</button>
         </div>
     </div>

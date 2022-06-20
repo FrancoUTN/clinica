@@ -28,6 +28,7 @@ export class SolicitarTurnoComponent implements OnInit {
   unDia: number = 86400;
   quinceDias: number = 1296000;
 
+  arrayDeArraysDeFechas: Array<Array<Date>> = [];
 
   constructor(
     private usuarioService: UsuarioService,
@@ -38,35 +39,55 @@ export class SolicitarTurnoComponent implements OnInit {
   }
 
   rellenarHorarios() {
-    // var someDate = new Date();
-    // var numberOfDaysToAdd = 15;
-    // var result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-    // console.log(new Date(result))
-    
-    // const arrayDiaDeSemana = [];
-    // const arraySabado = [];
-    // const arrayDomingo = []; // Hace falta?
-
-    for(let i = 0; i < 3; i++) { // i < 15
+    for(let i = 0; i < 15; i++) {
       const fecha = new Date();
       fecha.setDate(fecha.getDate() + i);
-      // this.horarios.push(fecha);
+      this.arrayDeArraysDeFechas.push([]);
 
-      for(let j = 8; j < 12; j++) { // j < 19
-        // const hora = new Date();
-        // const mediaHora = new Date();
+      const dia = fecha.getDay();
+      const horas = dia !== 6 ? 19 : 14;
 
-        // hora.setHours(i, 0);
-        // mediaHora.setHours(i, 30);
-
-        const nuevaFecha = new Date(fecha);
-        nuevaFecha.setHours(j, 0);
-
-        // this.horarios.push(hora, mediaHora);
-        this.horarios.push(nuevaFecha);
-      }
+      if(dia !== 0)
+        for(let j = 8; j < horas; j++) {
+          const nuevaFecha = new Date(fecha);
+          nuevaFecha.setHours(j, 0);
+          
+          this.arrayDeArraysDeFechas[i].push(nuevaFecha);
+        }
     }
   }
+  // rellenarHorarios() {
+  //   // var someDate = new Date();
+  //   // var numberOfDaysToAdd = 15;
+  //   // var result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+  //   // console.log(new Date(result))
+    
+  //   // const arrayDiaDeSemana = [];
+  //   // const arraySabado = [];
+  //   // const arrayDomingo = []; // Hace falta?
+
+  //   const arrayDeArraysDeFechas: Array<Array<Date>> = [];
+
+  //   for(let i = 0; i < 3; i++) { // i < 15
+  //     const fecha = new Date();
+  //     fecha.setDate(fecha.getDate() + i);
+  //     // this.horarios.push(fecha);
+
+  //     for(let j = 8; j < 12; j++) { // j < 19
+  //       // const hora = new Date();
+  //       // const mediaHora = new Date();
+
+  //       // hora.setHours(i, 0);
+  //       // mediaHora.setHours(i, 30);
+
+  //       const nuevaFecha = new Date(fecha);
+  //       nuevaFecha.setHours(j, 0);
+
+  //       // this.horarios.push(hora, mediaHora);
+  //       this.horarios.push(nuevaFecha);
+  //     }
+  //   }
+  // }
 
   addDays(date: number, days: number) {
     var result = new Date(date);
