@@ -9,30 +9,16 @@ import { TurnoService } from 'src/app/services/turno.service';
   styleUrls: ['./mis-turnos.component.scss']
 })
 export class MisTurnosComponent implements OnInit {
+  turnosOriginal: any[] = [];
   turnos: any[] = [];
-  uidActual: string = '';
+  // uidActual: string = '';
+  filtro: string = '';
 
   constructor(
     private authService: AuthService,
     private turnoService: TurnoService) { }
 
   ngOnInit(): void {
-    // this.authService.getAuthState().pipe(
-    //   take(1),
-    //   switchMap(
-    //       u => {
-    //           if(u) {
-    //             return this.turnoService.getRef().where('especialista.id', '==', u.uid).get()
-    //           }
-    //           throw Error('No hay usuario.');
-    //       }
-    //   )
-    // ).subscribe(
-    //   qs => qs.forEach(
-    //     doc => this.turnos.push(doc.data())
-    //   )
-    // )
-
     this.authService.getAuthState().subscribe(
       u => {
         if(u) {
@@ -42,16 +28,39 @@ export class MisTurnosComponent implements OnInit {
             .orderBy('fecha')
             .onSnapshot(
               qs => {
-                this.turnos = [];
+                this.turnosOriginal = [];
 
-                qs.forEach(doc => this.turnos.push(doc.data()))
+                qs.forEach(doc => this.turnosOriginal.push(doc.data()));
+
+                this.turnos = this.turnosOriginal.slice();
               }
             )
         }
       }
     )
-
   }
 
+  filtrar() {
+    if (this.filtro === '') {
+      this.turnos = this.turnosOriginal.slice();
+    }
+    else {
+      const filtrados: any[] = [];
+
+      this.turnosOriginal.forEach(
+        turno => {
+          if(
+            turno.especialidad.includes(this.filtro) ||
+            turno.paciente.nombre.includes(this.filtro) ||
+            turno.paciente.apellido.includes(this.filtro)
+            ) {
+            filtrados.push(turno);
+          }
+        }
+      )
+
+      this.turnos = filtrados.slice();
+    }
+  }
 
 }

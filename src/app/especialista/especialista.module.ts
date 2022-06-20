@@ -7,6 +7,7 @@ import { MenuEspecialistaComponent } from './menu-especialista/menu-especialista
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { MisHorariosComponent } from './mis-horarios/mis-horarios.component';
 import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
+import { FormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    FormsModule
   ]
 })
 export class EspecialistaModule { }
