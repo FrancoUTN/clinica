@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Query } from '@angular/fire/compat/firestore';
 import { AgendaService } from 'src/app/services/agenda.service';
+import { OtroService } from 'src/app/services/otro.service';
 import { ReservaService } from 'src/app/services/reserva.service';
+import { TurnoService } from 'src/app/services/turno.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -34,12 +36,21 @@ export class SolicitarTurnoComponent implements OnInit {
   especialista: any;
   fechaElegida: Date | null = null;
 
+  usuarioActual: any;
+  especialidadElegida: string = '';
+
   constructor(
     private usuarioService: UsuarioService,
     private agendaService: AgendaService,
-    private reservaService: ReservaService) { }
+    private reservaService: ReservaService,
+    private turnoService: TurnoService,
+    private otroService: OtroService) { }
 
   ngOnInit(): void {
+    this.otroService.getUsuarioActual().subscribe(
+      usuarioActual => this.usuarioActual = usuarioActual
+    )
+
     for(let i = 8; i < 19; i++)
       this.franjaHoraria.push(i);
   }
@@ -156,8 +167,14 @@ export class SolicitarTurnoComponent implements OnInit {
     return result;
   }
 
-  onEspecialidadSeleccionadaHandler() {
-    this.usuarioService.getUsuariosRef().where('rol', '==', 'especialista').get()
+  onEspecialidadSeleccionadaHandler(especialidad: string) {
+    this.especialidadElegida = especialidad;
+
+    this.usuarioService
+      .getUsuariosRef()
+      .where('rol', '==', 'especialista')
+      .where('especialidades', 'array-contains', this.especialidadElegida)
+      .get()
       .then(
         qs => {
           qs.forEach(
@@ -219,6 +236,14 @@ export class SolicitarTurnoComponent implements OnInit {
             this.paso5 = true;
           }
         );
+    }
+  }
+
+  agregarTurno() {
+    const turno = {
+      paciente: this.usuarioActual,
+      especialista: this.especialista,
+      especialidad: this.especialidadElegida
     }
   }
 

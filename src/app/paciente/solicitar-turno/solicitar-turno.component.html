@@ -4,7 +4,7 @@
 >
     <div *ngIf="paso1" >
         <div *ngFor="let especialidad of especialidades">
-            <button class="btn btn-secondary my-3 w-100" (click)="onEspecialidadSeleccionadaHandler()">{{ especialidad }}</button>
+            <button class="btn btn-secondary my-3 w-100" (click)="onEspecialidadSeleccionadaHandler(especialidad)">{{ especialidad }}</button>
         </div>
     </div>
 
