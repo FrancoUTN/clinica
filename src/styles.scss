@@ -17,6 +17,28 @@
 }
 
 #especialista-contenedor {
-    min-height: 95vh;
     background-image: linear-gradient(#ff6b6b, #c8d4d9, #dbe9ee);
+}
+
+.mi-menu {
+    height: 5vh;
+}
+
+.contenedor-mayor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 95vh;
+    padding-top: 3rem;
+}
+
+.contenedor-menor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 2rem 3rem;
+    background: rgba(0, 0, 0, .7);
+    border-radius: .6rem;
 }

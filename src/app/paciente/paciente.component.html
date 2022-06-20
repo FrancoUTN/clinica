@@ -1,9 +1,11 @@
-<div style="height: 5vh;">
+<div class="mi-menu">
     <app-menu-paciente></app-menu-paciente>
 </div>
 <div
-    id="paciente-contenedor" 
-    class="d-flex justify-content-center align-items-center p-5"
+    id="paciente-contenedor"
+    class="contenedor-mayor"
 >
-    <router-outlet></router-outlet>
+    <div class="contenedor-menor">
+        <router-outlet></router-outlet>
+    </div>
 </div>

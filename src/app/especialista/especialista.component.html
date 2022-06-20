@@ -1,14 +1,11 @@
-<div style="height: 5vh;">
+<div class="mi-menu">
     <app-menu-especialista></app-menu-especialista>
 </div>
 <div
-    id="especialista-contenedor" 
-    class="d-flex justify-content-center align-items-center"
+    id="especialista-contenedor"
+    class="contenedor-mayor"
 >
-    <div
-        class="d-flex flex-column align-items-center text-white p-5"
-        style="background: rgba(0, 0, 0, .7); border-radius: .6rem;"
-    >
+    <div class="contenedor-menor">
         <router-outlet></router-outlet>
     </div>
 </div>

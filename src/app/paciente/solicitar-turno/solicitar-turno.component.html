@@ -1,85 +1,80 @@
-<div
-    class="d-flex flex-column align-items-center text-white px-5 py-3"
-    style="background: rgba(0, 0, 0, .7); border-radius: .6rem;"
->
-    <div *ngIf="paso1" >
-        <div *ngFor="let especialidad of especialidades">
-            <button class="btn btn-secondary my-3 w-100" (click)="onEspecialidadSeleccionadaHandler(especialidad)">{{ especialidad }}</button>
-        </div>
+<div *ngIf="paso1" >
+    <div *ngFor="let especialidad of especialidades">
+        <button class="btn btn-secondary my-3 w-100" (click)="onEspecialidadSeleccionadaHandler(especialidad)">{{ especialidad }}</button>
     </div>
+</div>
 
-    <div *ngIf="paso2" class="d-flex">
-        <div
-            *ngFor="let especialista of especialistas"
-            class="card m-5"
-            style="width: 18rem; cursor:pointer;"
-            (click)="onEspecialistaSeleccionadoHandler(especialista)"
-        >
-            <div class="card-body">
-                <h5 class="card-title text-dark text-center">
-                    Dr. {{ especialista.apellido }}, {{ especialista.nombre }}
-                </h5>
-            </div>
-            <img [src]="especialista.foto" class="card-img-top">
+<div *ngIf="paso2" class="d-flex">
+    <div
+        *ngFor="let especialista of especialistas"
+        class="card m-5"
+        style="width: 18rem; cursor:pointer;"
+        (click)="onEspecialistaSeleccionadoHandler(especialista)"
+    >
+        <div class="card-body">
+            <h5 class="card-title text-dark text-center">
+                Dr. {{ especialista.apellido }}, {{ especialista.nombre }}
+            </h5>
         </div>
+        <img [src]="especialista.foto" class="card-img-top">
     </div>
-    
-    <!-- <div *ngIf="paso3">
-        <h2>Seleccione el turno:</h2>
-        <div class="d-flex flex-column">
-            <div class="d-flex flex-row" *ngFor="let arrayDeFechas of arrayDeArraysDeFechas">
-                <div class="d-flex justify-content-center align-items-center" style="width: 6rem;">
-                    {{ arrayDeFechas[0] | date:'EEEE'}}
-                </div>
-                <button *ngFor="let fecha of arrayDeFechas" class="btn btn-info text-light m-2">
-                    {{fecha | date:'MM/dd HH:mm' }}
+</div>
+
+<!-- <div *ngIf="paso3">
+    <h2>Seleccione el turno:</h2>
+    <div class="d-flex flex-column">
+        <div class="d-flex flex-row" *ngFor="let arrayDeFechas of arrayDeArraysDeFechas">
+            <div class="d-flex justify-content-center align-items-center" style="width: 6rem;">
+                {{ arrayDeFechas[0] | date:'EEEE'}}
+            </div>
+            <button *ngFor="let fecha of arrayDeFechas" class="btn btn-info text-light m-2">
+                {{fecha | date:'MM/dd HH:mm' }}
+            </button>
+        </div>
+        <button class="btn btn-primary" (click)="agregarFecha()">Agregar fecha</button>
+        <button class="btn btn-primary" (click)="rellenarHorarios()">(dev) Rellenar</button>
+    </div>
+</div> -->
+
+<div *ngIf="paso3">
+    <table>
+        <tr class="text-center">
+            <th>
+                Día
+            </th>
+            <th *ngFor="let item of franjaHoraria">
+                {{item}}:00
+            </th>
+        </tr>
+        <tr *ngFor="let arrayDeFechas of arrayDeArraysDeFechas">
+            <td>                    
+                {{ arrayDeFechas[0] | date:'EEEE' }} <!-- Si está tomada la primera, no se muestra -->                    
+            </td>
+            <td *ngFor="let fecha of arrayDeFechas">
+                <button
+                    *ngIf="fecha"
+                    class="btn btn-outline-info text-light m-2"
+                    (click)="onFechaSeleccionadaHandler(fecha)"
+                >
+                    {{ fecha | date:'MM/dd HH:mm' }}
                 </button>
-            </div>
-            <button class="btn btn-primary" (click)="agregarFecha()">Agregar fecha</button>
-            <button class="btn btn-primary" (click)="rellenarHorarios()">(dev) Rellenar</button>
-        </div>
-    </div> -->
+            </td>
+        </tr>
+    </table>
+    <!-- <button class="btn btn-primary" (click)="rellenarHorarios()">(dev) Rellenar</button> -->
+</div>
 
-    <div *ngIf="paso3">
-        <table>
-            <tr class="text-center">
-                <th>
-                    Día
-                </th>
-                <th *ngFor="let item of franjaHoraria">
-                    {{item}}:00
-                </th>
-            </tr>
-            <tr *ngFor="let arrayDeFechas of arrayDeArraysDeFechas">
-                <td>                    
-                    {{ arrayDeFechas[0] | date:'EEEE' }} <!-- Si está tomada la primera, no se muestra -->                    
-                </td>
-                <td *ngFor="let fecha of arrayDeFechas">
-                    <button
-                        *ngIf="fecha"
-                        class="btn btn-outline-info text-light m-2"
-                        (click)="onFechaSeleccionadaHandler(fecha)"
-                    >
-                        {{ fecha | date:'MM/dd HH:mm' }}
-                    </button>
-                </td>
-            </tr>
-        </table>
-        <!-- <button class="btn btn-primary" (click)="rellenarHorarios()">(dev) Rellenar</button> -->
-    </div>
+<div *ngIf="paso4">
+    <h2>Verifique los datos de su reserva</h2>
+    <p>Doctor: {{especialista.apellido + ", " + especialista.nombre}}</p>
+    <p>Fecha: {{fechaElegida | date:'short'}}</p>
+    <button class="btn btn-danger m-auto" (click)="onCancelarReservaHandler()">Cancelar</button>
+    <button class="btn btn-success m-auto" (click)="onConfirmarReservaHandler()">Confirmar</button>
+</div>
 
-    <div *ngIf="paso4">
-        <h2>Verifique los datos de su reserva</h2>
-        <p>Doctor: {{especialista.apellido + ", " + especialista.nombre}}</p>
-        <p>Fecha: {{fechaElegida | date:'short'}}</p>
-        <button class="btn btn-danger m-auto" (click)="onCancelarReservaHandler()">Cancelar</button>
-        <button class="btn btn-success m-auto" (click)="onConfirmarReservaHandler()">Confirmar</button>
-    </div>
-    
-    <div *ngIf="paso5">
-        <h2>¡Su reserva ha sido confirmada!</h2>
-        <p>Doctor: {{especialista.apellido + ", " + especialista.nombre}}</p>
-        <p>Fecha: {{fechaElegida | date:'short'}}</p>
-        <button class="btn btn-secondary m-auto" routerLink="/paciente">Finalizar</button>
-    </div>
+<div *ngIf="paso5">
+    <h2>¡Su reserva ha sido confirmada!</h2>
+    <p>Doctor: {{especialista.apellido + ", " + especialista.nombre}}</p>
+    <p>Fecha: {{fechaElegida | date:'short'}}</p>
+    <button class="btn btn-secondary m-auto" routerLink="/paciente">Finalizar</button>
 </div>
