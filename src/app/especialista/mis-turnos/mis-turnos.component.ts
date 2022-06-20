@@ -109,8 +109,9 @@ export class MisTurnosComponent implements OnInit {
     
   }
   aceptarTurnoHandler(turno: any) {
-    
+    this.turnoService.actualizar(turno.id, {estado: 'aceptado'});
   }
+  
   finalizarTurnoHandler(turno: any) {
     
   }
