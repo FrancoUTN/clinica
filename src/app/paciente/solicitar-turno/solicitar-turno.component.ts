@@ -38,10 +38,13 @@ export class SolicitarTurnoComponent implements OnInit {
 
   agregarFecha() {    
     const fecha = new Date();
-    fecha.setDate(19);
-    fecha.setHours(9, 30, 0, 0);
+    fecha.setDate(20);
+    fecha.setHours(12, 0, 0, 0);
 
-    this.reservaService.add(this.idEsp, fecha);
+    this.reservaService.add(this.idEsp, fecha)
+      .then(
+        docRef => console.log("Fecha agregada: " + fecha)
+      );
   }
 
   rellenarHorarios() {
@@ -58,17 +61,24 @@ export class SolicitarTurnoComponent implements OnInit {
     //   )
 
     const fecha = new Date();
-    fecha.setDate(19);
-    fecha.setHours(9, 30, 0, 0);
+    fecha.setDate(20);
+    fecha.setHours(12, 0, 0, 0);
     // console.log("Local: " + fecha);
-    console.log("Local    : " + fecha.valueOf());
+    // console.log("Local    : " + fecha.valueOf());
 
-    this.reservasEspecialistaRef?.get().then(
-      qs => qs.forEach(
-        // doc => console.log("Firestore: " + doc.get("fecha").toDate().valueOf())
-        doc => console.log("Son iguales? " + (doc.get("fecha").toDate().valueOf() === fecha.valueOf()))
-      )
-    )
+    // this.reservasEspecialistaRef?.get().then(
+    //   qs => qs.forEach(
+    //     // doc => console.log("Firestore: " + doc.get("fecha").toDate().valueOf())
+    //     doc => console.log("Son iguales? " + (doc.get("fecha").toDate().valueOf() === fecha.valueOf()))
+    //   )
+    // )
+
+    this.reservasEspecialistaRef?.where("fecha", "==", fecha).get()
+        .then(
+          qs => qs.forEach(
+            doc => console.log("Te encontré")
+          )
+        )
 
     // const ref = this.reservaService.getRef()
 
