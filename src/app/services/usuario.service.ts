@@ -21,11 +21,6 @@ export class UsuarioService {
   }
 
   getUsuario(id: string) {
-    // return this.angularFirestore
-    //   .collection("usuarios")
-    //   .doc(id).
-    //   .valueChanges()
-
     return this.angularFirestore
       .collection("usuarios")
       .doc(id)

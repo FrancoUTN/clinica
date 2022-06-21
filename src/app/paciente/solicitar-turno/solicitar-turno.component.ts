@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { OtroService } from 'src/app/services/otro.service';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { TurnoService } from 'src/app/services/turno.service';
@@ -30,6 +31,8 @@ export class SolicitarTurnoComponent implements OnInit {
   usuarioActual: any;
   uid: string = '';
 
+  subscripcion: Subscription | undefined;
+
   constructor(
     private usuarioService: UsuarioService,
     private reservaService: ReservaService,
@@ -37,7 +40,7 @@ export class SolicitarTurnoComponent implements OnInit {
     private otroService: OtroService) { }
 
   ngOnInit(): void {
-    this.otroService.getDocumentSnapshotDeUsuario().subscribe(
+    this.subscripcion = this.otroService.getDocumentSnapshotDeUsuario().subscribe(
       ds => {
         this.uid = ds.id;
         this.usuarioActual = ds.data();

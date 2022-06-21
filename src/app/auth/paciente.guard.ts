@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, take } from 'rxjs/operators';
 
 import { AuthService } from '../services/auth.service';
 import { UsuarioService } from '../services/usuario.service';
@@ -27,6 +27,7 @@ export class PacienteGuard implements CanActivate {
         | Promise<boolean | UrlTree>
         | Observable<boolean | UrlTree> {
             return this.authService.getAuthState().pipe(
+                take(1),
                 switchMap(
                     u => {
                         if (u) {

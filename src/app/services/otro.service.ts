@@ -13,12 +13,8 @@ export class OtroService {
     private usuarioService: UsuarioService) { }
 
   // Cada método es más específico que el anterior; y, por eso, lo invoca
-  getIdDeUsuario(): Observable<any> {
-    return this.authService.getUserID();
-  }
-
   getDocumentSnapshotDeUsuario(): Observable<any> {
-    return this.getIdDeUsuario().pipe(
+    return this.authService.getUserID().pipe(
       switchMap(
           uid => this.usuarioService.getUsuario(uid)
       )
@@ -34,6 +30,10 @@ export class OtroService {
   }
 
   getRolActual() {
-    return this.getDataDeUsuario().pipe(map(usuario => usuario.rol));
+    return this.getDataDeUsuario().pipe(
+      map(
+        usuario => usuario.rol
+      )
+    );
   }
 }

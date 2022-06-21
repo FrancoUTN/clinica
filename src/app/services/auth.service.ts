@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { map, switchMap, take } from 'rxjs';
+import { map, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,7 @@ export class AuthService {
 
   getUserID() {
     return this.angularFireAuth.authState.pipe(
+      take(1),
       map(
         usuario => {
           if (usuario) {
