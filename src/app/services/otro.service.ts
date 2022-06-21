@@ -12,45 +12,28 @@ export class OtroService {
     private authService: AuthService,
     private usuarioService: UsuarioService) { }
 
-  // getUsuarioActual(): Observable<any> {
-  //   return this.authService.getAuthState().pipe(
-  //     take(1),
-  //     switchMap(
-  //         u => {
-  //             if (u) {
-  //                 return this.usuarioService.getUsuario(u.uid)
-  //             }
-  //             throw Error('No hay usuario.');
-  //         }
-  //     ),
-  //     map(
-  //       ds => {
-  //         return ds.data()
-  //       }
-  //     )
-  //   );
-  // }
+  // Cada método es más específico que el anterior; y, por eso, lo invoca
+  getIdDeUsuario(): Observable<any> {
+    return this.authService.getUserID();
+  }
 
-  getUsuarioActual(): Observable<any> {
-    return this.authService.getUserID().pipe(
+  getDocumentSnapshotDeUsuario(): Observable<any> {
+    return this.getIdDeUsuario().pipe(
       switchMap(
           uid => this.usuarioService.getUsuario(uid)
-      ),
+      )
+    );
+  }
+
+  getDataDeUsuario(): Observable<any> {
+    return this.getDocumentSnapshotDeUsuario().pipe(
       map(
-        ds => {
-          return ds.data()
-        }
+        ds => ds.data()
       )
     );
   }
 
   getRolActual() {
-    return this.getUsuarioActual().pipe(map(usuario => usuario.rol))
+    return this.getDataDeUsuario().pipe(map(usuario => usuario.rol));
   }
-
-  getUsuarioActualConID(): Observable<any> {
-    return this.authService.getUserID()
-
-  }
-
 }

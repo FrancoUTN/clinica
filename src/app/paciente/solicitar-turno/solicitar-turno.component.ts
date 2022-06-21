@@ -28,6 +28,7 @@ export class SolicitarTurnoComponent implements OnInit {
   fechaElegida: Date | null = null;
 
   usuarioActual: any;
+  uid: string = '';
 
   constructor(
     private usuarioService: UsuarioService,
@@ -36,12 +37,11 @@ export class SolicitarTurnoComponent implements OnInit {
     private otroService: OtroService) { }
 
   ngOnInit(): void {
-    this.otroService.getUsuarioActual().subscribe(
-      usuarioActual => this.usuarioActual = usuarioActual
-    )
-
-    this.otroService.getUsuarioActualConID().subscribe(
-      a => console.log(a)
+    this.otroService.getDocumentSnapshotDeUsuario().subscribe(
+      ds => {
+        this.uid = ds.id;
+        this.usuarioActual = ds.data();
+      }
     )
 
     for(let i = 8; i < 19; i++)
@@ -147,6 +147,7 @@ export class SolicitarTurnoComponent implements OnInit {
 
   agregarTurno() {
     const turno = {
+      idPac: this.uid,
       paciente: this.usuarioActual,
       idEsp: this.idEsp,
       especialista: this.especialistaElegido,
