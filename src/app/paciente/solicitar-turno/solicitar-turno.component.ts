@@ -31,8 +31,6 @@ export class SolicitarTurnoComponent implements OnInit {
   usuarioActual: any;
   uid: string = '';
 
-  subscripcion: Subscription | undefined;
-
   constructor(
     private usuarioService: UsuarioService,
     private reservaService: ReservaService,
@@ -40,7 +38,7 @@ export class SolicitarTurnoComponent implements OnInit {
     private otroService: OtroService) { }
 
   ngOnInit(): void {
-    this.subscripcion = this.otroService.getDocumentSnapshotDeUsuario().subscribe(
+    this.otroService.getDocumentSnapshotDeUsuario().subscribe(
       ds => {
         this.uid = ds.id;
         this.usuarioActual = ds.data();
