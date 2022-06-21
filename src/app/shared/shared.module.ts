@@ -13,6 +13,7 @@ import { RechazarTurnoComponent } from './rechazar-turno/rechazar-turno.componen
 import { RegistroEspecialistaComponent } from '../bienvenida/registro/registro-especialista/registro-especialista.component';
 import { RegistroPacienteComponent } from '../bienvenida/registro/registro-paciente/registro-paciente.component';
 import { RegistroComponent } from '../bienvenida/registro/registro.component';
+import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { RegistroComponent } from '../bienvenida/registro/registro.component';
     ReviewComponent,
     MisTurnosComponent,
     CalificarAtencionComponent,
-    RechazarTurnoComponent
+    RechazarTurnoComponent,
+    MiPerfilComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import { RegistroComponent } from '../bienvenida/registro/registro.component';
     RegistroEspecialistaComponent,
     RegistroPacienteComponent,
     SinVerificarComponent,
-    MisTurnosComponent
+    MisTurnosComponent,
+    MiPerfilComponent
   ]
 })
 export class SharedModule { }
