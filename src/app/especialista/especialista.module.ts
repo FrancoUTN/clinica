@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 import { EspecialistaComponent } from './especialista.component';
 import { MenuEspecialistaComponent } from './menu-especialista/menu-especialista.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { MisHorariosComponent } from './mis-horarios/mis-horarios.component';
-// import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
 import { MisTurnosComponent } from '../shared/mis-turnos/mis-turnos.component';
-import { FormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
 
 
 const routes: Routes = [
@@ -36,13 +33,10 @@ const routes: Routes = [
     EspecialistaComponent,
     MenuEspecialistaComponent,
     MiPerfilComponent,
-    MisHorariosComponent,
-    // MisTurnosComponent
+    MisHorariosComponent
   ],
   imports: [
-    CommonModule,
     RouterModule.forChild(routes),
-    FormsModule,
     SharedModule
   ]
 })

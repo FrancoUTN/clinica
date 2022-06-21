@@ -57,12 +57,12 @@
                     >
                     Ver reseña</button>
                 </td>
-                <td *ngIf="turno.estado === 'realizado' && miRol === 'paciente'">
+                <!-- <td *ngIf="turno.estado === 'realizado' && miRol === 'paciente'">
                     <button
                         class="btn btn-outline-light"                        
                     >
                     Completar encuesta</button>                    
-                </td>
+                </td> -->
                 <td *ngIf="turno.estado === 'realizado' && miRol === 'paciente' && !turno.reviewPac">
                     <button
                         class="btn btn-outline-info"
