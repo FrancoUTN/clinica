@@ -12,12 +12,14 @@ import { TurnoService } from 'src/app/services/turno.service';
 export class MisTurnosComponent implements OnInit {
   turnosOriginal: any[] = [];
   turnos: any[] = [];
+  turnoSeleccionado: any;
+
   filtro: string = '';
-  // razon: string = '';
+
   modoNormal: boolean = true;
   modoCancelar: boolean = false;
   modoRechazar: boolean = false;
-  turnoSeleccionado: any;
+  modoFinalizar: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -74,17 +76,26 @@ export class MisTurnosComponent implements OnInit {
     }
   }
 
+  volverHandler() {
+    this.modoNormal = true;
+    this.modoCancelar = false;
+    this.modoRechazar = false;
+    this.modoFinalizar = false;
+  }
+
   cancelarTurnoHandler(turno: any) {
     this.turnoSeleccionado = turno;
     this.modoNormal = false;
     this.modoCancelar = true;
-    this.modoRechazar = false;
   }
-  cancelarVolverHandler() {
-    this.modoNormal = true;
-    this.modoCancelar = false;
-    this.modoRechazar = false;
-  }
+
+  // cancelarVolverHandler() {
+  //   this.modoNormal = true;
+  //   this.modoCancelar = false;
+  //   this.modoRechazar = false;
+  //   this.modoFinalizar = false;
+  // }
+
   cancelarConfirmarHandler(razon: string) {
     const nuevoTurno = {
       estado: 'cancelado',
@@ -99,7 +110,6 @@ export class MisTurnosComponent implements OnInit {
         () => {
           this.modoNormal = true;
           this.modoCancelar = false;
-          this.modoRechazar = false;
         }
       )
   }
@@ -107,13 +117,34 @@ export class MisTurnosComponent implements OnInit {
   rechazarTurnoHandler(turno: any) {
     
   }
+
   aceptarTurnoHandler(turno: any) {
     this.turnoService.actualizar(turno.id, {estado: 'aceptado'});
   }
   
   finalizarTurnoHandler(turno: any) {
-    
+    this.modoNormal = false;
+    this.modoFinalizar = true;    
   }
+
+  finalizarConfirmarHandler(review: string) {
+    const nuevoTurno = {
+      estado: 'realizado',
+      reviewEsp: review
+    };
+
+    this.turnoService.actualizar(this.turnoSeleccionado.id, nuevoTurno)
+      .then(
+        () => this.reservaService.eliminar(this.turnoSeleccionado.especialista.id, this.turnoSeleccionado.fecha)        
+      )
+      .then(
+        () => {
+          this.modoNormal = true;
+          this.modoFinalizar = false;
+        }
+      )
+  }
+
   verReviewHandler(turno: any) {
     
   }

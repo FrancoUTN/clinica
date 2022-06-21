@@ -6,6 +6,7 @@ import { RegistroComponent } from '../bienvenida/registro/registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SinVerificarComponent } from './sin-verificar/sin-verificar.component';
 import { CancelarTurnoComponent } from './cancelar-turno/cancelar-turno.component';
+import { FinalizarTurnoComponent } from './finalizar-turno/finalizar-turno.component';
 
 
 
@@ -15,7 +16,8 @@ import { CancelarTurnoComponent } from './cancelar-turno/cancelar-turno.componen
     RegistroEspecialistaComponent,
     RegistroPacienteComponent,
     SinVerificarComponent,
-    CancelarTurnoComponent
+    CancelarTurnoComponent,
+    FinalizarTurnoComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { CancelarTurnoComponent } from './cancelar-turno/cancelar-turno.componen
     RegistroPacienteComponent,
     ReactiveFormsModule,
     SinVerificarComponent,
-    CancelarTurnoComponent
+    CancelarTurnoComponent,
+    FinalizarTurnoComponent
   ]
 })
 export class SharedModule { }

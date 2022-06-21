@@ -76,36 +76,15 @@
 <app-cancelar-turno
     *ngIf="modoCancelar"
     [turno]="turnoSeleccionado"
-    (volver)="cancelarVolverHandler()"
+    (volver)="volverHandler()"
     (cancelar)="cancelarConfirmarHandler($event)"
 >
-
 </app-cancelar-turno>
-<!-- <div *ngIf="modoCancelar">
-    <h2>Estás a punto de cancelar un turno</h2>
-    <div class="my-5">
-        <h4>Detalles</h4>
-        <span>Paciente: </span>
-        <span style="width: 14rem;">
-            {{turnoSeleccionado.paciente.nombre}} {{turnoSeleccionado.paciente.apellido}}
-        </span>
-        <br>
-        <span>Fecha: </span>
-        <span style="width: 10rem;">
-            {{turnoSeleccionado.fecha.toDate() | date:'MM/dd HH:mm'}}
-        </span>
-    </div>
-    <div class="mb-5">
-        <label class="mb-2">
-            Explica el motivo:
-        </label>
-        <input
-            [(ngModel)]="razon"
-            class="form-control"
-        >
-    </div>
-    <div class="d-flex justify-content-around">
-        <button class="btn btn-danger" (click)="cancelarVolverHandler()">Volver</button>
-        <button class="btn btn-outline-light" (click)="cancelarConfirmarHandler()">Confirmar</button>
-    </div>
-</div> -->
+
+<app-finalizar-turno
+    *ngIf="modoFinalizar"
+    [turno]="turnoSeleccionado"
+    (volver)="volverHandler()"
+    (finalizar)="finalizarConfirmarHandler($event)"
+>
+</app-finalizar-turno>
