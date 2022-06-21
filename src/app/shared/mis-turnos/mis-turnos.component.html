@@ -50,7 +50,7 @@
                     >
                     Cancelar</button>
                 </td>
-                <td *ngIf="turno.reviewEsp">
+                <td *ngIf="(miRol === 'paciente' && turno.reviewEsp) || (miRol === 'especialista' && turno.reviewPac)">
                     <button
                         class="btn btn-info"
                         (click)="verReviewHandler(turno)"
@@ -63,9 +63,10 @@
                     >
                     Completar encuesta</button>                    
                 </td>
-                <td *ngIf="turno.estado === 'realizado' && miRol === 'paciente'">
+                <td *ngIf="turno.estado === 'realizado' && miRol === 'paciente' && !turno.reviewPac">
                     <button
                         class="btn btn-outline-info"
+                        (click)="calificarAtencionHandler(turno)"
                     >
                     Calificar atención</button>
                 </td>
@@ -116,5 +117,11 @@
     [rol]="miRol"
     (volver)="volverHandler()"
 >
-    
 </app-review>
+
+<app-calificar-atencion
+    *ngIf="modoCalificarAtencion"
+    (volver)="volverHandler()"
+    (calificar)="calificarConfirmarHandler($event)"
+>
+</app-calificar-atencion>

@@ -1,0 +1,14 @@
+<h2 class="mb-5">Deja tu reseña</h2>
+<div class="mb-5">
+    <label class="mb-2">
+        ¿Cómo fue la atención recibida?
+    </label>
+    <input
+        [(ngModel)]="review"
+        class="form-control"
+    >
+</div>
+<div class="d-flex justify-content-around">
+    <button class="btn btn-danger" (click)="volver.emit()">Volver</button>
+    <button class="btn btn-outline-light" (click)="calificar.emit(review)">Confirmar</button>
+</div>

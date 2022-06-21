@@ -149,9 +149,21 @@ export class MisTurnosComponent implements OnInit {
   completarEncuestaHandler() {
     
   }
+  
+  calificarAtencionHandler(turno: any) {
+    this.turnoSeleccionado = turno;
 
-  calificarAtencionHandler() {
-    
+    this.modoNormal = false;
+    this.modoCalificarAtencion = true;
+  }
+  calificarConfirmarHandler(review: string) {
+    this.turnoService.actualizar(this.turnoSeleccionado.id, {reviewPac: review})
+      .then(
+        () => {
+          this.modoNormal = true;
+          this.modoCalificarAtencion = false;
+        }
+      )
   }
 
   verReviewHandler(turno: any) {

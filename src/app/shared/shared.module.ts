@@ -9,6 +9,7 @@ import { CancelarTurnoComponent } from './cancelar-turno/cancelar-turno.componen
 import { FinalizarTurnoComponent } from './finalizar-turno/finalizar-turno.component';
 import { ReviewComponent } from './review/review.component';
 import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
+import { CalificarAtencionComponent } from './calificar-atencion/calificar-atencion.component';
 
 
 
@@ -21,7 +22,8 @@ import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
     CancelarTurnoComponent,
     FinalizarTurnoComponent,
     ReviewComponent,
-    MisTurnosComponent
+    MisTurnosComponent,
+    CalificarAtencionComponent
   ],
   imports: [
     CommonModule,
