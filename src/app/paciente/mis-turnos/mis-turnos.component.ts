@@ -18,6 +18,7 @@ export class MisTurnosComponent implements OnInit {
   modoNormal: boolean = true;
   modoCancelar: boolean = false;
   modoRechazar: boolean = false;
+  modoReview: boolean = false;
   turnoSeleccionado: any;
 
   constructor(

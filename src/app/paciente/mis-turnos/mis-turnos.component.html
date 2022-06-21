@@ -49,22 +49,20 @@
                     <button
                         class="btn btn-warning w-100"
                         (click)="verReviewHandler(turno)"
-                        *ngIf="turno.review"
+                        *ngIf="turno.reviewEsp"
                     >
                     Ver reseña</button>
                 </div>
                 <div>
                     <button
-                        class="btn btn-warning w-100"
-                        (click)="verReviewHandler(turno)"
+                        class="btn btn-outline-light w-100"
                         *ngIf="turno.estado === 'realizado'"
                     >
                     Completar encuesta</button>
                 </div>
                 <div>
                     <button
-                        class="btn btn-warning w-100"
-                        (click)="verReviewHandler(turno)"
+                        class="btn btn-outline-warning w-100"
                         *ngIf="turno.estado === 'realizado'"
                     >
                     Calificar atención</button>
