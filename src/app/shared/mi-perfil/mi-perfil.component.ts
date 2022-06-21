@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OtroService } from 'src/app/services/otro.service';
 
 @Component({
   selector: 'app-mi-perfil',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mi-perfil.component.scss']
 })
 export class MiPerfilComponent implements OnInit {
+  usuario: any;
 
-  constructor() { }
+  constructor(private otroService: OtroService) { }
 
   ngOnInit(): void {
+    this.otroService.getDataDeUsuario().subscribe(
+      data => this.usuario = data
+    );
+  }
+
+  verMisHorariosHandler() {
+    console.log(this.usuario)
   }
 
 }
