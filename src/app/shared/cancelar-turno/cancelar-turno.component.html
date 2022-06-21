@@ -1,11 +1,19 @@
 <h2>Estás a punto de cancelar un turno</h2>
 <div class="my-5">
     <h4>Detalles</h4>
-    <span>Paciente: </span>
-    <span style="width: 14rem;">
-        {{turno.paciente.nombre}} {{turno.paciente.apellido}}
-    </span>
-    <br>
+    <div *ngIf="rol === 'paciente'">
+        <span>Especialista: </span>
+        <span style="width: 14rem;">
+            Dr. {{turno.especialista.apellido}},
+            {{turno.especialista.nombre}}
+        </span>
+    </div>
+    <div *ngIf="rol === 'especialista'">
+        <span>Paciente: </span>
+        <span style="width: 14rem;">
+            {{turno.paciente.nombre}} {{turno.paciente.apellido}}
+        </span>
+    </div>
     <span>Fecha: </span>
     <span style="width: 10rem;">
         {{turno.fecha.toDate() | date:'MM/dd HH:mm'}}

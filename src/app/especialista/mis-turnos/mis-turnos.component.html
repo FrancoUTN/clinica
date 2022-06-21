@@ -76,6 +76,7 @@
 <app-cancelar-turno
     *ngIf="modoCancelar"
     [turno]="turnoSeleccionado"
+    [rol]="miRol"
     (volver)="volverHandler()"
     (cancelar)="cancelarConfirmarHandler($event)"
 >

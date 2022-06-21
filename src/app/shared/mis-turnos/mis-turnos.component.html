@@ -1,13 +1,23 @@
 <div *ngIf="modoNormal" style="width: 92rem;">
     <h1 class="text-center">Mis Turnos</h1>
     <div>
-        <div class="mb-4">
+        <div *ngIf="miRol === 'paciente'" class="mb-4">
             <label class="mb-2">
                 Buscar por especialidad o especialista
             </label>
             <input
                 [(ngModel)]="filtro"
-                (ngModelChange)="filtrar()"
+                (ngModelChange)="pacienteFiltrar()"
+                class="form-control w-25"
+            >
+        </div>
+        <div *ngIf="miRol === 'especialista'" class="mb-4">
+            <label class="mb-2">
+                Buscar por especialidad o paciente
+            </label>
+            <input
+                [(ngModel)]="filtro"
+                (ngModelChange)="especialistaFiltrar()"
                 class="form-control w-25"
             >
         </div>
@@ -68,32 +78,11 @@
         </div>
     </div>
 </div>
-<div *ngIf="modoCancelar">
-    <h2>Estás a punto de cancelar un turno</h2>
-    <div class="my-5">
-        <h4>Detalles</h4>
-        <span>Especialista: </span>
-        <span style="width: 14rem;">
-            Dr. {{turnoSeleccionado.especialista.apellido}},
-            {{turnoSeleccionado.especialista.nombre}}
-        </span>
-        <br>
-        <span>Fecha: </span>
-        <span style="width: 10rem;">
-            {{turnoSeleccionado.fecha.toDate() | date:'MM/dd HH:mm'}}
-        </span>
-    </div>
-    <div class="mb-5">
-        <label class="mb-2">
-            Explica el motivo:
-        </label>
-        <input
-            [(ngModel)]="razon"
-            class="form-control"
-        >
-    </div>
-    <div class="d-flex justify-content-around">
-        <button class="btn btn-danger" (click)="cancelarVolverHandler()">Volver</button>
-        <button class="btn btn-outline-light" (click)="cancelarConfirmarHandler()">Confirmar</button>
-    </div>
-</div>
+<app-cancelar-turno
+    *ngIf="modoCancelar"
+    [turno]="turnoSeleccionado"
+    [rol]="miRol"
+    (volver)="volverHandler()"
+    (cancelar)="cancelarConfirmarHandler($event)"
+>
+</app-cancelar-turno>

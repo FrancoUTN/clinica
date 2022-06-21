@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class CancelarTurnoComponent implements OnInit {
   @Input() turno: any;
+  @Input() rol: any;
   @Output() volver = new EventEmitter();
   @Output() cancelar = new EventEmitter<any>();
 

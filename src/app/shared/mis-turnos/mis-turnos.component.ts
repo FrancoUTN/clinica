@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
 import { OtroService } from 'src/app/services/otro.service';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { TurnoService } from 'src/app/services/turno.service';
@@ -11,20 +10,21 @@ import { TurnoService } from 'src/app/services/turno.service';
 })
 export class MisTurnosComponent implements OnInit {
   turnosOriginal: any[] = [];
-  turnos: any[] = [];
-  // uidActual: string = '';
+  turnos: any[] = [];  
+  turnoSeleccionado: any;
+
   filtro: string = '';
-  razon: string = '';  
+  // razon: string = '';
+
   modoNormal: boolean = true;
   modoCancelar: boolean = false;
   modoRechazar: boolean = false;
   modoReview: boolean = false;
-  turnoSeleccionado: any;
+  modoFinalizar: boolean = false;
 
   miRol: string = '';
 
   constructor(
-    private authService: AuthService,
     private turnoService: TurnoService,
     private reservaService: ReservaService,
     private otroService: OtroService) { }
@@ -48,6 +48,8 @@ export class MisTurnosComponent implements OnInit {
           .where(idTipo, '==', miUID)
           .onSnapshot(
             qs => {
+              this.turnosOriginal = [];
+              
               qs.forEach(doc => {
                 const id: string = doc.id;
                 const data: any = doc.data();
@@ -63,7 +65,8 @@ export class MisTurnosComponent implements OnInit {
 
   }
 
-  filtrar() {
+  // filtrar() {
+  pacienteFiltrar() {
     if (this.filtro === '') {
       this.turnos = this.turnosOriginal.slice();
     }
@@ -85,6 +88,28 @@ export class MisTurnosComponent implements OnInit {
       this.turnos = filtrados.slice();
     }
   }
+  especialistaFiltrar() {
+    if (this.filtro === '') {
+      this.turnos = this.turnosOriginal.slice();
+    }
+    else {
+      const filtrados: any[] = [];
+
+      this.turnosOriginal.forEach(
+        turno => {
+          if(
+            turno.especialidad.includes(this.filtro) ||
+            turno.paciente.nombre.includes(this.filtro) ||
+            turno.paciente.apellido.includes(this.filtro)
+            ) {
+            filtrados.push(turno);
+          }
+        }
+      )
+
+      this.turnos = filtrados.slice();
+    }
+  }
 
   cancelarTurnoHandler(turno: any) {
     this.turnoSeleccionado = turno;
@@ -97,10 +122,10 @@ export class MisTurnosComponent implements OnInit {
     this.modoCancelar = false;
     this.modoRechazar = false;
   }
-  cancelarConfirmarHandler() {
+  cancelarConfirmarHandler(razon: string) {
     const nuevoTurno = {
       estado: 'cancelado',
-      razon: this.razon
+      razon: razon
     };
 
     this.turnoService.actualizar(this.turnoSeleccionado.id, nuevoTurno)
@@ -111,7 +136,6 @@ export class MisTurnosComponent implements OnInit {
         () => {
           this.modoNormal = true;
           this.modoCancelar = false;
-          this.modoRechazar = false;
         }
       )
   }
@@ -130,4 +154,10 @@ export class MisTurnosComponent implements OnInit {
     
   }
 
+  volverHandler() {
+    this.modoNormal = true;
+    this.modoCancelar = false;
+    this.modoRechazar = false;
+    this.modoFinalizar = false;
+  }
 }
