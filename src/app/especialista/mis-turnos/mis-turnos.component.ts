@@ -32,8 +32,9 @@ export class MisTurnosComponent implements OnInit {
         if(u) {
           this.turnoService
             .getRef()
-            .where('especialista.id', '==', u.uid)
-            .orderBy('fecha')
+            // .where('especialista.id', '==', u.uid)
+            .where('idEsp', '==', u.uid)
+            // .orderBy('fecha') // Crear firestore index
             .onSnapshot(
               qs => {
                 this.turnosOriginal = [];
