@@ -40,6 +40,10 @@ export class SolicitarTurnoComponent implements OnInit {
       usuarioActual => this.usuarioActual = usuarioActual
     )
 
+    this.otroService.getUsuarioActualConID().subscribe(
+      a => console.log(a)
+    )
+
     for(let i = 8; i < 19; i++)
       this.franjaHoraria.push(i);
   }
