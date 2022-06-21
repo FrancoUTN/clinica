@@ -101,7 +101,7 @@ export class MisTurnosComponent implements OnInit {
 
     this.turnoService.actualizar(this.turnoSeleccionado.id, nuevoTurno)
       .then(
-        () => this.reservaService.eliminar(this.turnoSeleccionado.especialista.id, this.turnoSeleccionado.fecha)        
+        () => this.reservaService.eliminar(this.turnoSeleccionado.idEsp, this.turnoSeleccionado.fecha)        
       )
       .then(
         () => {

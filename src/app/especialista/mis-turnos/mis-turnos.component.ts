@@ -86,16 +86,10 @@ export class MisTurnosComponent implements OnInit {
 
   cancelarTurnoHandler(turno: any) {
     this.turnoSeleccionado = turno;
+
     this.modoNormal = false;
     this.modoCancelar = true;
   }
-
-  // cancelarVolverHandler() {
-  //   this.modoNormal = true;
-  //   this.modoCancelar = false;
-  //   this.modoRechazar = false;
-  //   this.modoFinalizar = false;
-  // }
 
   cancelarConfirmarHandler(razon: string) {
     const nuevoTurno = {
@@ -124,6 +118,8 @@ export class MisTurnosComponent implements OnInit {
   }
   
   finalizarTurnoHandler(turno: any) {
+    this.turnoSeleccionado = turno;
+
     this.modoNormal = false;
     this.modoFinalizar = true;    
   }
@@ -136,7 +132,7 @@ export class MisTurnosComponent implements OnInit {
 
     this.turnoService.actualizar(this.turnoSeleccionado.id, nuevoTurno)
       .then(
-        () => this.reservaService.eliminar(this.turnoSeleccionado.especialista.id, this.turnoSeleccionado.fecha)        
+        () => this.reservaService.eliminar(this.turnoSeleccionado.idEsp, this.turnoSeleccionado.fecha)        
       )
       .then(
         () => {
