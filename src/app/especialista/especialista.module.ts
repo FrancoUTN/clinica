@@ -6,7 +6,8 @@ import { EspecialistaComponent } from './especialista.component';
 import { MenuEspecialistaComponent } from './menu-especialista/menu-especialista.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { MisHorariosComponent } from './mis-horarios/mis-horarios.component';
-import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
+// import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
+import { MisTurnosComponent } from '../shared/mis-turnos/mis-turnos.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 
@@ -36,7 +37,7 @@ const routes: Routes = [
     MenuEspecialistaComponent,
     MiPerfilComponent,
     MisHorariosComponent,
-    MisTurnosComponent
+    // MisTurnosComponent
   ],
   imports: [
     CommonModule,

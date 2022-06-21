@@ -13,7 +13,6 @@ import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   { path: '', component: PacienteComponent, children: [
-    // { path: 'mis-turnos', component: MisTurnosComponent },
     { path: 'mis-turnos', component: MisTurnosComponent },
     { path: 'solicitar-turno', component: SolicitarTurnoComponent }
   ]}
