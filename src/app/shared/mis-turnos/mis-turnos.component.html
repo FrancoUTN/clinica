@@ -1,0 +1,102 @@
+<div *ngIf="modoNormal" style="width: 92rem;">
+    <h1 class="text-center">Mis Turnos</h1>
+    <div>
+        <div class="mb-4">
+            <label class="mb-2">
+                Buscar por especialista o especialidad
+            </label>
+            <input
+                [(ngModel)]="filtro"
+                (ngModelChange)="filtrar()"
+                class="form-control w-25"
+            >
+        </div>
+
+        <div class="d-flex flex-row fs-5 align-items-center">
+            <span style="width: 10rem;">Horario</span>
+            <span style="width: 14rem;">Especialista</span>
+            <span style="width: 10rem;">Especialidad</span>
+            <span style="width: 8rem;">Estado</span>
+            <span style="width: 10rem;">Motivo</span>
+            <span style="width: 37rem; margin: .5rem;">Opciones</span>
+        </div>
+
+        <div *ngFor="let turno of turnos; let i = index" class="d-flex flex-row clase-borde">
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <span style="width: 10rem;">{{turno.fecha.toDate() | date:'MM/dd HH:mm'}}</span>
+                <span style="width: 14rem;">
+                    Dr. {{turno.especialista.apellido}},
+                    {{turno.especialista.nombre}}
+                </span>
+                <span style="width: 10rem;">{{turno.especialidad}}</span>
+                <span style="width: 8rem;">{{turno.estado | uppercase}}</span>
+                <span style="width: 10rem;">{{turno.razon}}</span>
+            </div>
+            <div class="d-flex flex-row align-items-center justify-content-center padre-botones">
+                <div>
+                    <button
+                        class="btn btn-danger w-100"
+                        (click)="cancelarTurnoHandler(turno)"
+                        *ngIf="turno.estado === 'reservado'"
+                    >
+                    Cancelar</button>
+                </div>
+
+                <div>
+                </div>
+
+                <div>
+                    <button
+                        class="btn btn-warning w-100"
+                        (click)="verReviewHandler(turno)"
+                        *ngIf="turno.reviewEsp"
+                    >
+                    Ver reseña</button>
+                </div>
+                <div>
+                    <button
+                        class="btn btn-outline-light w-100"
+                        *ngIf="turno.estado === 'realizado'"
+                    >
+                    Completar encuesta</button>
+                </div>
+                <div>
+                    <button
+                        class="btn btn-outline-warning w-100"
+                        *ngIf="turno.estado === 'realizado'"
+                    >
+                    Calificar atención</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="modoCancelar">
+    <h2>Estás a punto de cancelar un turno</h2>
+    <div class="my-5">
+        <h4>Detalles</h4>
+        <span>Especialista: </span>
+        <span style="width: 14rem;">
+            Dr. {{turnoSeleccionado.especialista.apellido}},
+            {{turnoSeleccionado.especialista.nombre}}
+        </span>
+        <br>
+        <span>Fecha: </span>
+        <span style="width: 10rem;">
+            {{turnoSeleccionado.fecha.toDate() | date:'MM/dd HH:mm'}}
+        </span>
+    </div>
+    <div class="mb-5">
+        <label class="mb-2">
+            Explica el motivo:
+        </label>
+        <input
+            [(ngModel)]="razon"
+            class="form-control"
+        >
+    </div>
+    <div class="d-flex justify-content-around">
+        <button class="btn btn-danger" (click)="cancelarVolverHandler()">Volver</button>
+        <button class="btn btn-outline-light" (click)="cancelarConfirmarHandler()">Confirmar</button>
+    </div>
+</div>

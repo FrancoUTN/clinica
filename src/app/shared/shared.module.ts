@@ -8,6 +8,7 @@ import { SinVerificarComponent } from './sin-verificar/sin-verificar.component';
 import { CancelarTurnoComponent } from './cancelar-turno/cancelar-turno.component';
 import { FinalizarTurnoComponent } from './finalizar-turno/finalizar-turno.component';
 import { ReviewComponent } from './review/review.component';
+import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
 
 
 
@@ -19,7 +20,8 @@ import { ReviewComponent } from './review/review.component';
     SinVerificarComponent,
     CancelarTurnoComponent,
     FinalizarTurnoComponent,
-    ReviewComponent
+    ReviewComponent,
+    MisTurnosComponent
   ],
   imports: [
     CommonModule,
@@ -27,14 +29,18 @@ import { ReviewComponent } from './review/review.component';
     FormsModule
   ],
   exports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+
     RegistroComponent,
     RegistroEspecialistaComponent,
     RegistroPacienteComponent,
-    ReactiveFormsModule,
     SinVerificarComponent,
     CancelarTurnoComponent,
     FinalizarTurnoComponent,
-    ReviewComponent
+    ReviewComponent,
+    MisTurnosComponent
   ]
 })
 export class SharedModule { }

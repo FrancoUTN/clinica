@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
 import { PacienteComponent } from './paciente.component';
 import { MenuPacienteComponent } from './menu-paciente/menu-paciente.component';
-import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
+// import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
+import { MisTurnosComponent } from '../shared/mis-turnos/mis-turnos.component';
 import { SolicitarTurnoComponent } from './solicitar-turno/solicitar-turno.component';
-import { FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 const routes: Routes = [
   { path: '', component: PacienteComponent, children: [
+    // { path: 'mis-turnos', component: MisTurnosComponent },
     { path: 'mis-turnos', component: MisTurnosComponent },
     { path: 'solicitar-turno', component: SolicitarTurnoComponent }
   ]}
@@ -20,13 +23,14 @@ const routes: Routes = [
   declarations: [
     PacienteComponent,
     MenuPacienteComponent,
-    MisTurnosComponent,
+    // MisTurnosComponent,
     SolicitarTurnoComponent
   ],
   imports: [
-    CommonModule,
+    // CommonModule,
     RouterModule.forChild(routes),
-    FormsModule
+    // FormsModule,
+    SharedModule
   ]
 })
 export class PacienteModule { }
