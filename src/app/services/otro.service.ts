@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, switchMap, take } from 'rxjs';
+import { map, Observable, switchMap, take } from 'rxjs';
 import { AuthService } from './auth.service';
 import { UsuarioService } from './usuario.service';
 
@@ -12,7 +12,7 @@ export class OtroService {
     private authService: AuthService,
     private usuarioService: UsuarioService) { }
 
-  getUsuarioActual() {
+  getUsuarioActual(): Observable<any> {
     return this.authService.getAuthState().pipe(
       take(1),
       switchMap(
@@ -29,6 +29,10 @@ export class OtroService {
         }
       )
     );
+  }
+
+  getRolActual() {
+    return this.getUsuarioActual().pipe(map(usuario => usuario.rol))
   }
 
 }

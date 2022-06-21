@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map, switchMap, take } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { OtroService } from 'src/app/services/otro.service';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { TurnoService } from 'src/app/services/turno.service';
 
@@ -24,7 +25,8 @@ export class MisTurnosComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private turnoService: TurnoService,
-    private reservaService: ReservaService) { }
+    private reservaService: ReservaService,
+    private otroService: OtroService) { }
 
   ngOnInit(): void {
     this.authService.getAuthState().subscribe(
@@ -51,6 +53,10 @@ export class MisTurnosComponent implements OnInit {
         }
       }
     )
+
+    this.otroService.getRolActual().subscribe(
+      rol => console.log(rol)
+    );
   }
 
   filtrar() {
