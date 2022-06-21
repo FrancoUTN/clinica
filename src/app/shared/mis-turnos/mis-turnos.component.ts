@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { map, switchMap, take } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { OtroService } from 'src/app/services/otro.service';
 import { ReservaService } from 'src/app/services/reserva.service';
@@ -22,6 +21,8 @@ export class MisTurnosComponent implements OnInit {
   modoReview: boolean = false;
   turnoSeleccionado: any;
 
+  miRol: string = '';
+
   constructor(
     private authService: AuthService,
     private turnoService: TurnoService,
@@ -29,34 +30,37 @@ export class MisTurnosComponent implements OnInit {
     private otroService: OtroService) { }
 
   ngOnInit(): void {
-    this.authService.getAuthState().subscribe(
-      u => {
-        if(u) {
-          this.turnoService
-            .getRef()
-            .where('paciente.email', '==', u.email) // especialista.id
-            // .orderBy('fecha')
-            .onSnapshot(
-              qs => {
-                this.turnosOriginal = [];
+    this.otroService.getDocumentSnapshotDeUsuario().subscribe(
+      ds => {
+        const miUID = ds.id;
+        this.miRol = ds.data().rol;
 
-                qs.forEach(doc => {
-                  const id: string = doc.id;
-                  const data: any = doc.data();
+        let idTipo = '';
 
-                  this.turnosOriginal.push({...data, id});
-                });
-
-                this.turnos = this.turnosOriginal.slice();
-              }
-            )
+        if (this.miRol === 'paciente') {
+          idTipo = 'idPac';
         }
-      }
-    )
+        else if (this.miRol === 'especialista') {
+          idTipo = 'idEsp';
+        }
 
-    this.otroService.getRolActual().subscribe(
-      rol => console.log(rol)
+        this.turnoService.getRef()
+          .where(idTipo, '==', miUID)
+          .onSnapshot(
+            qs => {
+              qs.forEach(doc => {
+                const id: string = doc.id;
+                const data: any = doc.data();
+
+                this.turnosOriginal.push({...data, id});
+              });
+
+              this.turnos = this.turnosOriginal.slice();
+            }
+          )
+      }
     );
+
   }
 
   filtrar() {

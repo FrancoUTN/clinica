@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { map, switchMap, take } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { OtroService } from 'src/app/services/otro.service';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { TurnoService } from 'src/app/services/turno.service';
 
@@ -21,37 +21,45 @@ export class MisTurnosComponent implements OnInit {
   modoRechazar: boolean = false;
   modoFinalizar: boolean = false;
 
+  miRol: string = '';
+  
   constructor(
     private authService: AuthService,
     private turnoService: TurnoService,
-    private reservaService: ReservaService) { }
+    private reservaService: ReservaService,
+    private otroService: OtroService) { }
 
   ngOnInit(): void {
-    this.authService.getAuthState().subscribe(
-      u => {
-        if(u) {
-          this.turnoService
-            .getRef()
-            // .where('especialista.id', '==', u.uid)
-            .where('idEsp', '==', u.uid)
-            // .orderBy('fecha') // Crear firestore index
-            .onSnapshot(
-              qs => {
-                this.turnosOriginal = [];
+    this.otroService.getDocumentSnapshotDeUsuario().subscribe(
+      ds => {
+        const miUID = ds.id;
+        this.miRol = ds.data().rol;
 
-                qs.forEach(doc => {
-                  const id: string = doc.id;
-                  const data: any = doc.data();
-
-                  this.turnosOriginal.push({...data, id});
-                });
-
-                this.turnos = this.turnosOriginal.slice();
-              }
-            )
+        let idTipo = '';
+        
+        if (this.miRol === 'paciente') {
+          idTipo = 'idPac';
         }
+        else if (this.miRol === 'especialista') {
+          idTipo = 'idEsp';
+        }
+
+        this.turnoService.getRef()
+          .where(idTipo, '==', miUID)
+          .onSnapshot(
+            qs => {
+              qs.forEach(doc => {
+                const id: string = doc.id;
+                const data: any = doc.data();
+
+                this.turnosOriginal.push({...data, id});
+              });
+
+              this.turnos = this.turnosOriginal.slice();
+            }
+          )
       }
-    )
+    );
   }
 
   filtrar() {
