@@ -19,22 +19,15 @@ export class SolicitarTurnoComponent implements OnInit {
   paso4: boolean = false;
   paso5: boolean = false;
 
-  horarios: Date[] = [];
-
-  mediaHora: number = 1800;
-  unaHora: number = 3600;
-  unDia: number = 86400;
-  quinceDias: number = 1296000;
-
   arrayDeArraysDeFechas: Array<Array<Date|null>> = [];
   idEsp: string = '';
   franjaHoraria: number[] = [];
 
-  especialista: any;
+  especialidadElegida: string = '';
+  especialistaElegido: any;
   fechaElegida: Date | null = null;
 
   usuarioActual: any;
-  especialidadElegida: string = '';
 
   constructor(
     private usuarioService: UsuarioService,
@@ -51,17 +44,6 @@ export class SolicitarTurnoComponent implements OnInit {
       this.franjaHoraria.push(i);
   }
 
-  // agregarFecha() {    
-  //   const fecha = new Date();
-  //   fecha.setDate(20);
-  //   fecha.setHours(12, 0, 0, 0);
-
-  //   this.reservaService.add(this.idEsp, fecha)
-  //     .then(
-  //       docRef => console.log("Fecha agregada: " + fecha)
-  //     );
-  // }
-
   rellenarHorarios() {
     const reservas: number[] = [];
     
@@ -72,7 +54,6 @@ export class SolicitarTurnoComponent implements OnInit {
     )
     .then(
       () => {
-        // console.log(reservas);
         for(let i = 0; i < 15; i++) {
           const fecha = new Date();
           fecha.setDate(fecha.getDate() + i);
@@ -102,12 +83,6 @@ export class SolicitarTurnoComponent implements OnInit {
 
   }
 
-  addDays(date: number, days: number) {
-    var result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result;
-  }
-
   onEspecialidadSeleccionadaHandler(especialidad: string) {
     this.especialidadElegida = especialidad;
 
@@ -119,10 +94,7 @@ export class SolicitarTurnoComponent implements OnInit {
       .then(
         qs => {
           qs.forEach(
-            doc => {
-              // const obj:any = doc.data();
-              // obj.id = doc.id;
-              
+            doc => {              
               const obj:any = {
                 id: doc.id,
                 data: doc.data()
@@ -141,7 +113,7 @@ export class SolicitarTurnoComponent implements OnInit {
     this.paso2 = false;
     this.paso3 = true;
 
-    this.especialista = especialista.data;
+    this.especialistaElegido = especialista.data;
     this.idEsp = especialista.id;
 
     this.rellenarHorarios();
@@ -173,7 +145,7 @@ export class SolicitarTurnoComponent implements OnInit {
     const turno = {
       paciente: this.usuarioActual,
       idEsp: this.idEsp,
-      especialista: this.especialista,
+      especialista: this.especialistaElegido,
       fecha: this.fechaElegida,
       especialidad: this.especialidadElegida,
       estado: 'reservado'
