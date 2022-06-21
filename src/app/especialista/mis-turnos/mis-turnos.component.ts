@@ -12,9 +12,8 @@ import { TurnoService } from 'src/app/services/turno.service';
 export class MisTurnosComponent implements OnInit {
   turnosOriginal: any[] = [];
   turnos: any[] = [];
-  // uidActual: string = '';
   filtro: string = '';
-  razon: string = '';  
+  // razon: string = '';
   modoNormal: boolean = true;
   modoCancelar: boolean = false;
   modoRechazar: boolean = false;
@@ -86,10 +85,10 @@ export class MisTurnosComponent implements OnInit {
     this.modoCancelar = false;
     this.modoRechazar = false;
   }
-  cancelarConfirmarHandler() {
+  cancelarConfirmarHandler(razon: string) {
     const nuevoTurno = {
       estado: 'cancelado',
-      razon: this.razon
+      razon: razon
     };
 
     this.turnoService.actualizar(this.turnoSeleccionado.id, nuevoTurno)

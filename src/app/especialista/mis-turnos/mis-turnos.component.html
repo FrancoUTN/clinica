@@ -73,7 +73,15 @@
         </div>
     </div>
 </div>
-<div *ngIf="modoCancelar">
+<app-cancelar-turno
+    *ngIf="modoCancelar"
+    [turno]="turnoSeleccionado"
+    (volver)="cancelarVolverHandler()"
+    (cancelar)="cancelarConfirmarHandler($event)"
+>
+
+</app-cancelar-turno>
+<!-- <div *ngIf="modoCancelar">
     <h2>Estás a punto de cancelar un turno</h2>
     <div class="my-5">
         <h4>Detalles</h4>
@@ -100,4 +108,4 @@
         <button class="btn btn-danger" (click)="cancelarVolverHandler()">Volver</button>
         <button class="btn btn-outline-light" (click)="cancelarConfirmarHandler()">Confirmar</button>
     </div>
-</div>
+</div> -->

@@ -8,6 +8,7 @@ import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { MisHorariosComponent } from './mis-horarios/mis-horarios.component';
 import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 const routes: Routes = [
@@ -40,7 +41,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class EspecialistaModule { }
