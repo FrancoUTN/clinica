@@ -14,12 +14,13 @@ export class MisTurnosComponent implements OnInit {
   turnoSeleccionado: any;
 
   filtro: string = '';
-  // razon: string = '';
 
   modoNormal: boolean = true;
   modoCancelar: boolean = false;
-  modoRechazar: boolean = false;
   modoReview: boolean = false;
+  modoCompletarEncuesta: boolean = false;
+  modoCalificarAtencion: boolean = false;
+  modoRechazar: boolean = false;
   modoFinalizar: boolean = false;
 
   miRol: string = '';
@@ -111,16 +112,21 @@ export class MisTurnosComponent implements OnInit {
     }
   }
 
+  volverHandler() {
+    this.modoNormal = true;
+    this.modoCancelar= false;
+    this.modoReview= false;
+    this.modoCompletarEncuesta= false;
+    this.modoCalificarAtencion= false;
+    this.modoRechazar= false;
+    this.modoFinalizar= false;
+  }
+
   cancelarTurnoHandler(turno: any) {
     this.turnoSeleccionado = turno;
+
     this.modoNormal = false;
     this.modoCancelar = true;
-    this.modoRechazar = false;
-  }
-  cancelarVolverHandler() {
-    this.modoNormal = true;
-    this.modoCancelar = false;
-    this.modoRechazar = false;
   }
   cancelarConfirmarHandler(razon: string) {
     const nuevoTurno = {
@@ -140,24 +146,51 @@ export class MisTurnosComponent implements OnInit {
       )
   }
 
+  completarEncuestaHandler() {
+    
+  }
+
+  calificarAtencionHandler() {
+    
+  }
+
+  verReviewHandler(turno: any) {
+    this.turnoSeleccionado = turno;
+
+    this.modoNormal = false;
+    this.modoReview = true;
+  }
+
   rechazarTurnoHandler(turno: any) {
     
   }
+
   aceptarTurnoHandler(turno: any) {
     this.turnoService.actualizar(turno.id, {estado: 'aceptado'});
   }
   
   finalizarTurnoHandler(turno: any) {
-    
+    this.turnoSeleccionado = turno;
+
+    this.modoNormal = false;
+    this.modoFinalizar = true;
   }
-  verReviewHandler(turno: any) {
-    
+  finalizarConfirmarHandler(review: string) {
+    const nuevoTurno = {
+      estado: 'realizado',
+      reviewEsp: review
+    };
+
+    this.turnoService.actualizar(this.turnoSeleccionado.id, nuevoTurno)
+      .then(
+        () => this.reservaService.eliminar(this.turnoSeleccionado.idEsp, this.turnoSeleccionado.fecha)        
+      )
+      .then(
+        () => {
+          this.modoNormal = true;
+          this.modoFinalizar = false;
+        }
+      )
   }
 
-  volverHandler() {
-    this.modoNormal = true;
-    this.modoCancelar = false;
-    this.modoRechazar = false;
-    this.modoFinalizar = false;
-  }
 }

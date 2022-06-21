@@ -52,7 +52,7 @@
                 </td>
                 <td *ngIf="turno.reviewEsp">
                     <button
-                        class="btn btn-warning"
+                        class="btn btn-info"
                         (click)="verReviewHandler(turno)"
                     >
                     Ver reseña</button>
@@ -65,7 +65,7 @@
                 </td>
                 <td *ngIf="turno.estado === 'realizado' && miRol === 'paciente'">
                     <button
-                        class="btn btn-outline-warning"
+                        class="btn btn-outline-info"
                     >
                     Calificar atención</button>
                 </td>
@@ -84,7 +84,7 @@
                 </td>
                 <td *ngIf="turno.estado === 'aceptado' && miRol === 'especialista'">
                     <button
-                        class="btn btn-info"
+                        class="btn btn-light"
                         (click)="finalizarTurnoHandler(turno)"
                     >
                     Finalizar</button>
@@ -101,3 +101,20 @@
     (cancelar)="cancelarConfirmarHandler($event)"
 >
 </app-cancelar-turno>
+
+<app-finalizar-turno
+    *ngIf="modoFinalizar"
+    [turno]="turnoSeleccionado"
+    (volver)="volverHandler()"
+    (finalizar)="finalizarConfirmarHandler($event)"
+>
+</app-finalizar-turno>
+
+<app-review
+    *ngIf="modoReview"
+    [turno]="turnoSeleccionado"
+    [rol]="miRol"
+    (volver)="volverHandler()"
+>
+    
+</app-review>

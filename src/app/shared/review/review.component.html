@@ -1,1 +1,17 @@
-<p>review works!</p>
+<h2>Reseña:</h2>
+<div class="my-5">
+    <div *ngIf="rol === 'paciente'">
+        <span style="width: 14rem;">
+            {{turno.reviewEsp}}
+        </span>
+    </div>
+    <div *ngIf="rol === 'especialista'">
+        <span style="width: 14rem;">
+            {{turno.reviewPac}}
+        </span>
+    </div>
+</div>
+
+<div class="d-flex justify-content-around">
+    <button class="btn btn-primary" (click)="volver.emit()">Volver</button>
+</div>
