@@ -146,6 +146,30 @@ export class MisTurnosComponent implements OnInit {
       )
   }
 
+  rechazarTurnoHandler(turno: any) {
+    this.turnoSeleccionado = turno;
+
+    this.modoNormal = false;
+    this.modoRechazar = true;
+  }
+  rechazarConfirmarHandler(razon: string) {
+    const nuevoTurno = {
+      estado: 'rechazado',
+      razon: razon
+    };
+
+    this.turnoService.actualizar(this.turnoSeleccionado.id, nuevoTurno)
+      .then(
+        () => this.reservaService.eliminar(this.turnoSeleccionado.idEsp, this.turnoSeleccionado.fecha)        
+      )
+      .then(
+        () => {
+          this.modoNormal = true;
+          this.modoRechazar = false;
+        }
+      )
+  }
+
   completarEncuestaHandler() {
     
   }
@@ -171,10 +195,6 @@ export class MisTurnosComponent implements OnInit {
 
     this.modoNormal = false;
     this.modoReview = true;
-  }
-
-  rechazarTurnoHandler(turno: any) {
-    
   }
 
   aceptarTurnoHandler(turno: any) {

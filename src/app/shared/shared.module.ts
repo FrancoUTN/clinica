@@ -10,6 +10,7 @@ import { FinalizarTurnoComponent } from './finalizar-turno/finalizar-turno.compo
 import { ReviewComponent } from './review/review.component';
 import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
 import { CalificarAtencionComponent } from './calificar-atencion/calificar-atencion.component';
+import { RechazarTurnoComponent } from './rechazar-turno/rechazar-turno.component';
 
 
 
@@ -23,7 +24,8 @@ import { CalificarAtencionComponent } from './calificar-atencion/calificar-atenc
     FinalizarTurnoComponent,
     ReviewComponent,
     MisTurnosComponent,
-    CalificarAtencionComponent
+    CalificarAtencionComponent,
+    RechazarTurnoComponent
   ],
   imports: [
     CommonModule,

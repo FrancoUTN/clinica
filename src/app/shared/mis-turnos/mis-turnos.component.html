@@ -103,6 +103,14 @@
 >
 </app-cancelar-turno>
 
+<app-rechazar-turno
+    *ngIf="modoRechazar"
+    [turno]="turnoSeleccionado"
+    (volver)="volverHandler()"
+    (rechazar)="rechazarConfirmarHandler($event)"
+>
+</app-rechazar-turno>
+
 <app-finalizar-turno
     *ngIf="modoFinalizar"
     [turno]="turnoSeleccionado"

@@ -1,0 +1,27 @@
+<h2>Estás a punto de rechazar un turno</h2>
+<div class="my-5">
+    <h4>Detalles</h4>
+    <div>
+        <span>Paciente: </span>
+        <span style="width: 14rem;">
+            {{turno.paciente.nombre}} {{turno.paciente.apellido}}
+        </span>
+    </div>
+    <span>Fecha: </span>
+    <span style="width: 10rem;">
+        {{turno.fecha.toDate() | date:'MM/dd HH:mm'}}
+    </span>
+</div>
+<div class="mb-5">
+    <label class="mb-2">
+        Explica el motivo:
+    </label>
+    <input
+        [(ngModel)]="razon"
+        class="form-control"
+    >
+</div>
+<div class="d-flex justify-content-around">
+    <button class="btn btn-danger" (click)="volver.emit()">Volver</button>
+    <button class="btn btn-outline-light" (click)="rechazar.emit(razon)">Confirmar</button>
+</div>
