@@ -114,13 +114,13 @@
         <h2>¡Su reserva ha sido confirmada!</h2>
         <p>Doctor: {{especialistaElegido.apellido + ", " + especialistaElegido.nombre}}</p>
         <p>Fecha: {{fechaElegida | date:'short'}}</p>
-        <button class="btn btn-secondary m-auto" routerLink="paciente/mis-turnos">Finalizar</button>
+        <button class="btn btn-secondary m-auto" (click)="regresar()">Finalizar</button>
     </div>
     <div *ngIf="paso5 && this.usuarioActual.rol === 'administrador'">
         <h2>¡Su reserva ha sido confirmada!</h2>
         <p>Paciente: {{pacienteElegido.nombre + " " + pacienteElegido.apellido}}</p>
         <p>Doctor: {{especialistaElegido.apellido + ", " + especialistaElegido.nombre}}</p>
         <p>Fecha: {{fechaElegida | date:'short'}}</p>
-        <button class="btn btn-secondary m-auto" routerLink="administrador/turnos">Finalizar</button>
+        <button class="btn btn-secondary m-auto" (click)="regresar()">Finalizar</button>
     </div>
 </div>

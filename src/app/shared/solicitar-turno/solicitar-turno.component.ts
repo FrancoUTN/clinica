@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { OtroService } from 'src/app/services/otro.service';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { TurnoService } from 'src/app/services/turno.service';
@@ -34,6 +35,7 @@ export class SolicitarTurnoComponent implements OnInit {
   uid: string = '';
 
   constructor(
+    private router: Router,
     private usuarioService: UsuarioService,
     private reservaService: ReservaService,
     private turnoService: TurnoService,
@@ -199,6 +201,15 @@ export class SolicitarTurnoComponent implements OnInit {
         this.paso5 = true;
       }
     )
+  }
+
+  regresar() {
+    if (this.usuarioActual.rol === 'paciente') {
+      this.router.navigateByUrl('/paciente/mis-turnos');
+    }
+    else if (this.usuarioActual.rol === 'administrador') {
+      this.router.navigateByUrl('/administrador/turnos');
+    }
   }
 
 }
