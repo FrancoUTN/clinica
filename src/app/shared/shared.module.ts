@@ -15,6 +15,7 @@ import { RegistroPacienteComponent } from '../bienvenida/registro/registro-pacie
 import { RegistroComponent } from '../bienvenida/registro/registro.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { SolicitarTurnoComponent } from './solicitar-turno/solicitar-turno.component';
+import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { SolicitarTurnoComponent } from './solicitar-turno/solicitar-turno.compo
     CalificarAtencionComponent,
     RechazarTurnoComponent,
     MiPerfilComponent,
-    SolicitarTurnoComponent
+    SolicitarTurnoComponent,
+    HistoriaClinicaComponent
   ],
   imports: [
     CommonModule,

@@ -21,4 +21,7 @@ export class MiPerfilComponent implements OnInit {
     console.log(this.usuario)
   }
 
+  verMiHistoriaClinicaHandler() {
+    console.log(this.usuario.historiaClinica)
+  }
 }

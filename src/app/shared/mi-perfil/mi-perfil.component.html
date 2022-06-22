@@ -1,51 +1,52 @@
 <div *ngIf="usuario">
-    <div *ngIf="usuario.rol === 'paciente'">        
-        <div class="card mb-3 text-dark" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img [src]="usuario.fotos[0]" class="img-fluid rounded-start">
-                    <img [src]="usuario.fotos[1]" class="img-fluid rounded-start">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h3 class="card-title mb-4">{{usuario.nombre + ' ' + usuario.apellido}}</h3>
-                        <p class="card-text">Edad: {{usuario.edad}}</p>
-                        <p class="card-text">DNI: {{usuario.dni}}</p>
-                        <p class="card-text">Obra Social: {{usuario.obraSocial}}</p>
-                    </div>
+    <div *ngIf="usuario.rol === 'paciente'" class="card mb-3 text-dark" style="max-width: 540px;">        
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img [src]="usuario.fotos[0]" class="img-fluid rounded-start">
+                <img [src]="usuario.fotos[1]" class="img-fluid rounded-start">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title mb-4">{{usuario.nombre + ' ' + usuario.apellido}}</h3>
+                    <p class="card-text">Edad: {{usuario.edad}}</p>
+                    <p class="card-text">DNI: {{usuario.dni}}</p>
+                    <p class="card-text">Obra Social: {{usuario.obraSocial}}</p>
+                    <button
+                    *ngIf="usuario.rol === 'paciente'"
+                    class="btn btn-primary"
+                    (click)="verMiHistoriaClinicaHandler()"
+                    >Ver mi historia clínica</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div *ngIf="usuario.rol === 'especialista'">
-        <div class="card mb-3 text-dark" style="max-width: 1000px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img [src]="usuario.foto" class="img-fluid rounded-start">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h3 class="card-title mb-3">Dr. {{usuario.apellido + ', ' + usuario.nombre}}</h3>
-                        <p class="card-text">Edad: {{usuario.edad}}</p>
-                        <p class="card-text">DNI: {{usuario.dni}}</p>
-                        <span class="card-text">Especialidades:</span>
-                        <ul>
-                            <li *ngFor="let especialidad of usuario.especialidades" class="card-text">
-                                {{especialidad}}
-                            </li>
-                        </ul>
-                    </div>
+    <div *ngIf="usuario.rol === 'especialista'" class="card mb-3 text-dark" style="max-width: 1000px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img [src]="usuario.foto" class="img-fluid rounded-start">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title mb-3">Dr. {{usuario.apellido + ', ' + usuario.nombre}}</h3>
+                    <p class="card-text">Edad: {{usuario.edad}}</p>
+                    <p class="card-text">DNI: {{usuario.dni}}</p>
+                    <span class="card-text">Especialidades:</span>
+                    <ul>
+                        <li *ngFor="let especialidad of usuario.especialidades" class="card-text">
+                            {{especialidad}}
+                        </li>
+                    </ul>
+                    <!-- <button
+                    class="btn btn-primary"
+                    (click)="verMisHorariosHandler()"
+                    >Ver mis horarios</button>        
+                    <button
+                    class="btn btn-danger"
+                    >Cancelar</button> -->
                 </div>
             </div>
         </div>
-        <!-- <button
-        class="btn btn-primary"
-        (click)="verMisHorariosHandler()"
-        >Ver mis horarios</button>
-        <button
-        class="btn btn-danger"
-        >Cancelar</button> -->
     </div>
 
     <div *ngIf="usuario.rol === 'administrador'">        
