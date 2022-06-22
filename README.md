@@ -1,11 +1,14 @@
 # :hospital: Clínica OnLine
 
-Para quienes busquen brindar un servicio moderno, con llegada al gran público,
-de forma novedosa e innovadora, presentamos la **Clínica OnLine**:
+Para quienes buscan brindar un servicio moderno,
+que facilite el intercambio paciente-profesional,
+sin contratiempos,
+presentamos la **Clínica OnLine**:
 
-Un sistema de administración de instituciones dedicadas a la Salud, que te permitirá destacarte no sólo
-por la calidad de tu atención profesional, si no también por una gustosa experiencia de usuario tanto
-para pacientes como para empleados.
+Un sistema de gestión de turnos ideado para instituciones dedicadas a la Salud,
+que les permite destacarse no sólo por la calidad de su atención médica,
+sino también por brindar una experiencia de usuario satisfactoria
+tanto a los pacientes como a especialistas y administradores.
 
 ## Secciones
 
@@ -56,7 +59,7 @@ Los administradores pueden ver *todos* los turnos de la clínica.
 
 Además, desde esta sección se van a poder **administrar los turnos reservados**.
 
-Cualquier usuario puede, por ejemplo, *cancelar un turno* explicando el motivo:
+Cualquier usuario puede, por ejemplo, **cancelar un turno** explicando el motivo:
 
 ![alt text](./pantallas/cancelar-turno.png)
 
@@ -76,10 +79,3 @@ acerca de todos los usuarios**, habilitar o deshabilitar el acceso a especialist
 ...y **generar nuevos usuarios** de *cualquier* tipo:
 
 ![alt text](./pantallas/agregar-usuario.png)
-
-
-## :heavy_check_mark: Conclusión
-
-La tecnología debe estar al serivicio de la salud.
-
-Cambia la manera en que figuras en internet **hoy**.
