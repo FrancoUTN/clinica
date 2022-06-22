@@ -1,1 +1,52 @@
-<p>historia-clinica works!</p>
+<div
+    class="p-4"
+    style="background-color: white; color: black; border-radius: .6rem;"
+>
+    <h2 class="mb-5 text-center">Historia clínica</h2>
+    <div class="d-flex justify-content-between align-items-end mb-5">
+        <div class="d-flex flex-column justify-content-between">
+            <div class="d-flex flex-column justify-content-between mb-5">
+                <span>
+                    <span>Paciente:</span> {{paciente.nombre + ' ' + paciente.apellido}}
+                </span>
+                <span>
+                    <span>Edad:</span> {{paciente.edad}}
+                </span>
+                <span>
+                    <span>DNI:</span> {{paciente.dni}}
+                </span>
+                <span>
+                    <span>Obra Social:</span> {{paciente.obraSocial}}
+                </span>
+            </div>
+            <div *ngIf="hc" class="d-flex flex-column justify-content-between">
+                <span>
+                    <span>Altura:</span> {{hc.altura + 'cm'}}
+                </span>
+                <span>
+                    <span>Peso:</span> {{hc.peso + 'kg'}}
+                </span>
+                <span>
+                    <span>Temperatura:</span> {{hc.temperatura + 'ºC'}}
+                </span>
+                <span>
+                    <span>Presión:</span> {{hc.presion + 'mmHg'}}
+                </span>
+                <span>
+                    <span>Lesiones:</span> {{hc.lesiones}}
+                </span>
+                <span>
+                    <span>Glucemia:</span> {{hc.glucemia + 'mg/dl'}}
+                </span>
+            </div>
+        </div>
+        <img src="../../../assets/medical-report.png" id="hc-logo">
+    </div>
+    <div class="text-center">
+        <button
+            class="btn btn-danger"
+            (click)="volver.emit()"
+        >
+        Volver</button>
+    </div>
+</div>
