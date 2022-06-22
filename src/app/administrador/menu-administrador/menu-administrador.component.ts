@@ -28,6 +28,6 @@ export class MenuAdministradorComponent implements OnInit {
 
   signOut() {
     this.authService.SignOut()
-      .then(() => this.router.navigateByUrl('/login'));
+      .then(() => this.router.navigateByUrl(''));
   }
 }

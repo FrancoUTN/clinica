@@ -29,6 +29,6 @@ export class MenuEspecialistaComponent implements OnInit {
   signOut() {
     this.authService.SignOut();
     
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('');
   }
 }
