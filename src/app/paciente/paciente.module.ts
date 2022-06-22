@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: '', component: PacienteComponent, children: [
     { path: 'mi-perfil', component: MiPerfilComponent },
     { path: 'mis-turnos', component: MisTurnosComponent },
-    { path: 'solicitar-turno', component: SolicitarTurnoComponent }
+    { path: 'solicitar-turno', component: SolicitarTurnoComponent } // Cambiar por shared
   ]}
 ];
 
