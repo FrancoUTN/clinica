@@ -2,14 +2,14 @@
     [ngClass]="{'fondo-oscuro contenedor-menor': this.usuarioActual.rol === 'administrador'}"
 ><!-- Chanchada -->
     <div *ngIf="paso0" >
-        <!-- <div *ngFor="let paciente of pacientes">
+        <div *ngFor="let paciente of pacientes">
             <button
                 class="btn btn-primary my-3 w-100"
                 (click)="onPacienteSeleccionadoHandler(paciente)"
             >
-                {{ paciente.nombre }}
+                {{ paciente.data.nombre }}
             </button>
-        </div> -->
+        </div>
         admin
     </div>
 

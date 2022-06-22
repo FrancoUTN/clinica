@@ -12,6 +12,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class SolicitarTurnoComponent implements OnInit {
   especialidades: string[] = ["Nutrición", "Dermatología", "Traumatología"]; // Revisar
   especialistas: any[] = [];
+  pacientes: any[] = [];
 
   paso0: boolean = false;
   paso1: boolean = false;
@@ -54,8 +55,24 @@ export class SolicitarTurnoComponent implements OnInit {
           this.paso1 = true;
         }
         else if (this.usuarioActual.rol === 'administrador') {
-          this.paso1 = true;
+          this.paso0 = true;
+          this.usuarioService.getUsuariosRef().where('rol', '==', 'paciente').get()            
+            .then(
+              qs => {
+                qs.forEach(
+                  doc => {              
+                    const obj:any = {
+                      id: doc.id,
+                      data: doc.data()
+                    }
 
+                    this.pacientes.push(obj);
+                  }
+                )
+                // this.paso0 = false;
+                // this.paso1 = true;
+              }
+            )
         }
       }
     )
@@ -101,6 +118,16 @@ export class SolicitarTurnoComponent implements OnInit {
       }
     )
 
+  }
+
+  onPacienteSeleccionadoHandler(paciente: any) {
+    // this.paso2 = false;
+    // this.paso3 = true;
+
+    // this.especialistaElegido = especialista.data;
+    // this.idEsp = especialista.id;
+
+    // this.rellenarHorarios();
   }
 
   onEspecialidadSeleccionadaHandler(especialidad: string) {
