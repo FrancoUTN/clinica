@@ -2,8 +2,8 @@
     id="bienvenida-contenedor" class="d-flex justify-content-center align-items-center"
 >
     <div
-        class="text-white text-center p-5"
-        style="background: rgba(10, 10, 10, .9); border-radius: .6rem; width: 30rem;"
+        class="text-white text-center p-5 fondo-oscuro"
+        style="width: 30rem;"
     >
         <form #f="ngForm" (ngSubmit)="signIn(f.value)" novalidate>
             <h2 class="fw-bold mb-4 text-uppercase">Login</h2>
@@ -49,7 +49,13 @@
         >Volver</button>
     </div>
 </div>
-<div style="position: absolute; bottom: 40px; right: 40px; background: rgba(10, 10, 10, .3); border-radius: .6rem;">
+<div style="
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    background: rgba(10, 10, 10, .3);
+    border-radius: .6rem;"
+>
     <div *ngFor="let item of usuarios" class="p-0">
         <img
             *ngIf="item.foto"
