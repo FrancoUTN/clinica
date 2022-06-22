@@ -5,15 +5,16 @@ import { SharedModule } from '../shared/shared.module';
 import { PacienteComponent } from './paciente.component';
 import { MenuPacienteComponent } from './menu-paciente/menu-paciente.component';
 import { MisTurnosComponent } from '../shared/mis-turnos/mis-turnos.component';
-import { SolicitarTurnoComponent } from './solicitar-turno/solicitar-turno.component';
+// import { SolicitarTurnoComponent } from './solicitar-turno/solicitar-turno.component';
 import { MiPerfilComponent } from '../shared/mi-perfil/mi-perfil.component';
+import { SolicitarTurnoComponent } from '../shared/solicitar-turno/solicitar-turno.component';
 
 
 const routes: Routes = [
   { path: '', component: PacienteComponent, children: [
     { path: 'mi-perfil', component: MiPerfilComponent },
     { path: 'mis-turnos', component: MisTurnosComponent },
-    { path: 'solicitar-turno', component: SolicitarTurnoComponent } // Cambiar por shared
+    { path: 'solicitar-turno', component: SolicitarTurnoComponent }
   ]}
 ];
 
@@ -21,7 +22,7 @@ const routes: Routes = [
   declarations: [
     PacienteComponent,
     MenuPacienteComponent,
-    SolicitarTurnoComponent
+    // SolicitarTurnoComponent
   ],
   imports: [
     RouterModule.forChild(routes),
