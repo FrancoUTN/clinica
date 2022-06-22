@@ -10,22 +10,12 @@ import { MiPerfilComponent } from '../shared/mi-perfil/mi-perfil.component';
 
 
 const routes: Routes = [
-  {
-    path: '', component: EspecialistaComponent, children:
-    [
-      {
-        path: 'mi-perfil', component: MiPerfilComponent, children:
-        [
-          {
-            path: 'mis-horarios', component: MisHorariosComponent
-          }
-        ]
-      },
-      {
-        path: 'mis-turnos', component: MisTurnosComponent
-      }
-    ]
-  }
+  { path: '', component: EspecialistaComponent, children: [
+    { path: 'mi-perfil', component: MiPerfilComponent, children: [
+      { path: 'mis-horarios', component: MisHorariosComponent }
+    ]},
+    { path: 'mis-turnos', component: MisTurnosComponent }
+  ]}
 ];
 
 @NgModule({

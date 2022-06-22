@@ -33,37 +33,46 @@ export class MisTurnosComponent implements OnInit {
   ngOnInit(): void {
     this.otroService.getDocumentSnapshotDeUsuario().subscribe(
       ds => {
-        const miUID = ds.id;
         this.miRol = ds.data().rol;
 
-        let idTipo = '';
-
-        if (this.miRol === 'paciente') {
-          idTipo = 'idPac';
+        if (this.miRol === 'administrador') {          
+          this.turnoService.getRef()
+            .onSnapshot(
+              qs => this.cargarTurnos(qs)
+            )
         }
-        else if (this.miRol === 'especialista') {
-          idTipo = 'idEsp';
+        else {
+          const miUID = ds.id;
+          let idTipo = '';
+
+          if (this.miRol === 'paciente') {
+            idTipo = 'idPac';
+          }
+          else if (this.miRol === 'especialista') {
+            idTipo = 'idEsp';
+          }
+
+          this.turnoService.getRef()
+            .where(idTipo, '==', miUID)
+            .onSnapshot(
+              qs => this.cargarTurnos(qs)
+            )
         }
-
-        this.turnoService.getRef()
-          .where(idTipo, '==', miUID)
-          .onSnapshot(
-            qs => {
-              this.turnosOriginal = [];
-              
-              qs.forEach(doc => {
-                const id: string = doc.id;
-                const data: any = doc.data();
-
-                this.turnosOriginal.push({...data, id});
-              });
-
-              this.turnos = this.turnosOriginal.slice();
-            }
-          )
       }
     );
+  }
 
+  cargarTurnos(qs: any) {
+    this.turnosOriginal = [];
+    
+    qs.forEach((doc:any) => {
+      const id: string = doc.id;
+      const data: any = doc.data();
+
+      this.turnosOriginal.push({...data, id});
+    });
+
+    this.turnos = this.turnosOriginal.slice();
   }
 
   // filtrar() {

@@ -1,14 +1,14 @@
 <h2>Estás a punto de cancelar un turno</h2>
 <div class="my-5">
     <h4>Detalles</h4>
-    <div *ngIf="rol === 'paciente'">
+    <div *ngIf="rol === 'paciente' || rol === 'administrador'">
         <span>Especialista: </span>
         <span style="width: 14rem;">
             Dr. {{turno.especialista.apellido}},
             {{turno.especialista.nombre}}
         </span>
     </div>
-    <div *ngIf="rol === 'especialista'">
+    <div *ngIf="rol === 'especialista' || rol === 'administrador'">
         <span>Paciente: </span>
         <span style="width: 14rem;">
             {{turno.paciente.nombre}} {{turno.paciente.apellido}}

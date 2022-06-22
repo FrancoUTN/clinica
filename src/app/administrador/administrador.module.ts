@@ -7,14 +7,15 @@ import { AdministradorComponent } from './administrador.component';
 import { MenuAdministradorComponent } from './menu-administrador/menu-administrador.component';
 import { RegistroAdministradorComponent } from './registro-administrador/registro-administrador.component';
 import { MiPerfilComponent } from '../shared/mi-perfil/mi-perfil.component';
+import { MisTurnosComponent } from '../shared/mis-turnos/mis-turnos.component';
 
 
 const routes: Routes = [
   { path: '', component: AdministradorComponent, children: [
     { path: 'usuarios', component: UsuariosComponent },
-    { path: 'mi-perfil', component: MiPerfilComponent }
-    ]
-  }
+    { path: 'mi-perfil', component: MiPerfilComponent },
+    { path: 'turnos', component: MisTurnosComponent }
+  ]}
 ];
 
 @NgModule({
