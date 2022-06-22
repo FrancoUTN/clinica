@@ -5,7 +5,6 @@ import { SharedModule } from '../shared/shared.module';
 import { PacienteComponent } from './paciente.component';
 import { MenuPacienteComponent } from './menu-paciente/menu-paciente.component';
 import { MisTurnosComponent } from '../shared/mis-turnos/mis-turnos.component';
-// import { SolicitarTurnoComponent } from './solicitar-turno/solicitar-turno.component';
 import { MiPerfilComponent } from '../shared/mi-perfil/mi-perfil.component';
 import { SolicitarTurnoComponent } from '../shared/solicitar-turno/solicitar-turno.component';
 
@@ -21,8 +20,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     PacienteComponent,
-    MenuPacienteComponent,
-    // SolicitarTurnoComponent
+    MenuPacienteComponent
   ],
   imports: [
     RouterModule.forChild(routes),

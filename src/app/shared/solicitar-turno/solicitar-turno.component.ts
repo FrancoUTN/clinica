@@ -40,12 +40,6 @@ export class SolicitarTurnoComponent implements OnInit {
     private otroService: OtroService) { }
 
   ngOnInit(): void {
-    // this.otroService.getDocumentSnapshotDeUsuario().subscribe(
-    //   ds => {
-    //     this.uid = ds.id;
-    //     this.usuarioActual = ds.data();
-    //   }
-    // )
     this.otroService.getDocumentSnapshotDeUsuario().subscribe(
       ds => {
         this.uid = ds.id;
@@ -56,7 +50,8 @@ export class SolicitarTurnoComponent implements OnInit {
         }
         else if (this.usuarioActual.rol === 'administrador') {
           this.paso0 = true;
-          this.usuarioService.getUsuariosRef().where('rol', '==', 'paciente').get()            
+
+          this.usuarioService.getUsuariosRef().where('rol', '==', 'paciente').get()
             .then(
               qs => {
                 qs.forEach(
@@ -69,8 +64,6 @@ export class SolicitarTurnoComponent implements OnInit {
                     this.pacientes.push(obj);
                   }
                 )
-                // this.paso0 = false;
-                // this.paso1 = true;
               }
             )
         }
@@ -117,7 +110,6 @@ export class SolicitarTurnoComponent implements OnInit {
         }
       }
     )
-
   }
 
   onPacienteSeleccionadoHandler(paciente: any) {
@@ -207,7 +199,6 @@ export class SolicitarTurnoComponent implements OnInit {
         this.paso5 = true;
       }
     )
-
   }
 
 }
