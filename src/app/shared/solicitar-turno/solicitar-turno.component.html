@@ -1,16 +1,27 @@
 <div
+    *ngIf="this.usuarioActual"
     [ngClass]="{'fondo-oscuro contenedor-menor': this.usuarioActual.rol === 'administrador'}"
 ><!-- Chanchada -->
-    <div *ngIf="paso0" >
-        <div *ngFor="let paciente of pacientes">
-            <button
-                class="btn btn-primary my-3 w-100"
+    <div *ngIf="paso0">
+        <h2 class="text-center">Seleccione el paciente:</h2>
+        <div class="d-flex">
+            <div
+                *ngFor="let paciente of pacientes"
+                class="card m-5"
+                style="width: 18rem; cursor:pointer;"
                 (click)="onPacienteSeleccionadoHandler(paciente)"
             >
-                {{ paciente.data.nombre }}
-            </button>
+                <div class="card-body">
+                    <h5 class="card-title text-dark text-center">
+                        {{ paciente.data.nombre }} {{ paciente.data.apellido }}
+                    </h5>
+                </div>
+                <img
+                [src]="paciente.data.fotos[0]"
+                class="card-img-top imagen-card"
+                >
+            </div>
         </div>
-        admin
     </div>
 
     <div *ngIf="paso1" >
@@ -24,19 +35,25 @@
         </div>
     </div>
 
-    <div *ngIf="paso2" class="d-flex">
-        <div
-            *ngFor="let especialista of especialistas"
-            class="card m-5"
-            style="width: 18rem; cursor:pointer;"
-            (click)="onEspecialistaSeleccionadoHandler(especialista)"
-        >
-            <div class="card-body">
-                <h5 class="card-title text-dark text-center">
-                    Dr. {{ especialista.data.apellido }}, {{ especialista.data.nombre }}
-                </h5>
+    <div *ngIf="paso2">
+        <h2 class="text-center">Seleccione especialista:</h2>
+        <div class="d-flex">
+            <div
+                *ngFor="let especialista of especialistas"
+                class="card m-5"
+                style="width: 18rem; cursor:pointer;"
+                (click)="onEspecialistaSeleccionadoHandler(especialista)"
+            >
+                <div class="card-body">
+                    <h5 class="card-title text-dark text-center">
+                        Dr. {{ especialista.data.apellido }}, {{ especialista.data.nombre }}
+                    </h5>
+                </div>
+                <img
+                    [src]="especialista.data.foto"
+                    class="card-img-top"
+                >
             </div>
-            <img [src]="especialista.data.foto" class="card-img-top">
         </div>
     </div>
 
@@ -73,6 +90,9 @@
         <h2>Verifique los datos de su reserva</h2>
         <div class="my-5">
             <h4>Detalles:</h4>
+            <p *ngIf="this.usuarioActual.rol === 'administrador'">
+                Paciente: {{pacienteElegido.nombre + " " + pacienteElegido.apellido}}
+            </p>
             <p>Doctor: {{especialistaElegido.apellido + ", " + especialistaElegido.nombre}}</p>
             <p>Fecha: {{fechaElegida | date:'short'}}</p>
         </div>
@@ -90,10 +110,17 @@
         </div>
     </div>
 
-    <div *ngIf="paso5">
+    <div *ngIf="paso5 && this.usuarioActual.rol === 'paciente'">
         <h2>¡Su reserva ha sido confirmada!</h2>
         <p>Doctor: {{especialistaElegido.apellido + ", " + especialistaElegido.nombre}}</p>
         <p>Fecha: {{fechaElegida | date:'short'}}</p>
-        <button class="btn btn-secondary m-auto" routerLink="../mis-turnos">Finalizar</button>
+        <button class="btn btn-secondary m-auto" routerLink="paciente/mis-turnos">Finalizar</button>
+    </div>
+    <div *ngIf="paso5 && this.usuarioActual.rol === 'administrador'">
+        <h2>¡Su reserva ha sido confirmada!</h2>
+        <p>Paciente: {{pacienteElegido.nombre + " " + pacienteElegido.apellido}}</p>
+        <p>Doctor: {{especialistaElegido.apellido + ", " + especialistaElegido.nombre}}</p>
+        <p>Fecha: {{fechaElegida | date:'short'}}</p>
+        <button class="btn btn-secondary m-auto" routerLink="administrador/turnos">Finalizar</button>
     </div>
 </div>

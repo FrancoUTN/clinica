@@ -121,13 +121,11 @@ export class SolicitarTurnoComponent implements OnInit {
   }
 
   onPacienteSeleccionadoHandler(paciente: any) {
-    // this.paso2 = false;
-    // this.paso3 = true;
+    this.paso0 = false;
+    this.paso1 = true;
 
-    // this.especialistaElegido = especialista.data;
-    // this.idEsp = especialista.id;
-
-    // this.rellenarHorarios();
+    this.pacienteElegido = paciente.data;
+    this.idEsp = paciente.id;
   }
 
   onEspecialidadSeleccionadaHandler(especialidad: string) {
