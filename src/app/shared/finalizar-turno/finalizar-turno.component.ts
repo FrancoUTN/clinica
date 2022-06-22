@@ -11,10 +11,14 @@ export class FinalizarTurnoComponent implements OnInit {
   @Output() finalizar = new EventEmitter<any>();
 
   review: string = '';
-
+  
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  signIn(value: any) {
+    console.log(value);
   }
 
 }

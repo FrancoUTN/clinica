@@ -1,5 +1,5 @@
 <h2>Finalizar turno</h2>
-<div class="my-5">
+<div class="my-4">
     <h4>Detalles</h4>
     <span>Paciente: </span>
     <span style="width: 14rem;">
@@ -11,7 +11,86 @@
         {{turno.fecha.toDate() | date:'MM/dd HH:mm'}}
     </span>
 </div>
-<div class="mb-5">
+
+<label class="form-label">
+    Reseña:
+</label>
+<input
+    [(ngModel)]="review"
+    class="form-control mb-5"
+>
+
+<form #f="ngForm" (ngSubmit)="signIn(f.value)" novalidate>
+    <h4 class="mb-3">Datos para la historia clínica:</h4>
+    <div class="form-outline form-white mb-3">
+        <label class="form-label">Altura</label>
+        <input
+            name="altura"
+            ngModel
+            required
+            type="number"
+            class="form-control"
+        >
+    </div>
+    <div class="form-outline form-white mb-3">   
+        <label class="form-label">Peso</label>
+        <input
+            name="peso"
+            ngModel
+            required
+            type="number"
+            class="form-control"
+        >
+    </div>
+    <div class="form-outline form-white mb-3">   
+        <label class="form-label">Temperatura</label>
+        <input
+            name="temperatura"
+            ngModel
+            required
+            type="number"
+            class="form-control"
+        >
+    </div>
+    <div class="form-outline form-white mb-3">   
+        <label class="form-label">Presión</label>
+        <input
+            name="presion"
+            ngModel
+            required
+            type="number"
+            class="form-control"
+        >
+    </div>
+    <div class="form-outline form-white mb-3">   
+        <label class="form-label">Glucemia</label>
+        <input
+            name="glucemia"
+            ngModel
+            required
+            type="number"
+            class="form-control"
+        >
+    </div>
+    <div class="form-outline form-white mb-5">   
+        <label class="form-label">Lesiones</label>
+        <input
+            name="lesiones"
+            ngModel
+            required
+            type="number"
+            class="form-control"
+        >
+    </div>
+    <div class="d-flex justify-content-around">
+        <button class="btn btn-danger" type="button" (click)="volver.emit()">Volver</button>
+        <!-- <button class="btn btn-outline-light" (click)="finalizar.emit(review)">Confirmar</button> -->
+        <button class="btn btn-outline-light">Confirmar</button>
+    </div>
+</form>
+
+
+<!-- <div class="mb-5">
     <label class="mb-2">
         Deja una reseña:
     </label>
@@ -23,4 +102,4 @@
 <div class="d-flex justify-content-around">
     <button class="btn btn-danger" (click)="volver.emit()">Volver</button>
     <button class="btn btn-outline-light" (click)="finalizar.emit(review)">Confirmar</button>
-</div>
+</div> -->
