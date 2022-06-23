@@ -37,6 +37,13 @@ export class HistoriaClinicaComponent implements OnInit {
       )
     }
 
+    const fechaEmision = new Date().toLocaleDateString();
+    const fechaTexto = {
+      text: fechaEmision,
+      alignment: 'center',
+      style: 'fecha'
+    }
+
     const pdfDefinition: any = {
       content: [
         {
@@ -44,6 +51,7 @@ export class HistoriaClinicaComponent implements OnInit {
           style: 'titulo',
           alignment: 'center'
         },
+        fechaTexto,
         {
           text: 'Datos personales',
           style: 'subtitulo1'
@@ -75,7 +83,11 @@ export class HistoriaClinicaComponent implements OnInit {
 			    alignment: 'justify',
           fontSize: 34,
           bold: true,
-          margin: [0, 0, 0, 60]
+        },
+        fecha: {
+			    alignment: 'justify',
+          fontSize: 18,
+          margin: [0, 0, 0, 50]
         },
         subtitulo1: {
           fontSize: 20,
