@@ -216,22 +216,26 @@ export class MisTurnosComponent implements OnInit {
     this.modoNormal = false;
     this.modoFinalizar = true;
   }
-  finalizarConfirmarHandler(review: string) {
-    const nuevoTurno = {
-      estado: 'realizado',
-      reviewEsp: review
-    };
-
-    this.turnoService.actualizar(this.turnoSeleccionado.id, nuevoTurno)
-      .then(
-        () => this.reservaService.eliminar(this.turnoSeleccionado.idEsp, this.turnoSeleccionado.fecha)        
-      )
-      .then(
-        () => {
-          this.modoNormal = true;
-          this.modoFinalizar = false;
-        }
-      )
+  finalizarConfirmarHandler(reviewEHistoriaClinica: any) {
+    console.log(reviewEHistoriaClinica);
   }
+
+  // finalizarConfirmarHandler(review: string) {
+  //   const nuevoTurno = {
+  //     estado: 'realizado',
+  //     reviewEsp: review
+  //   };
+
+  //   this.turnoService.actualizar(this.turnoSeleccionado.id, nuevoTurno)
+  //     .then(
+  //       () => this.reservaService.eliminar(this.turnoSeleccionado.idEsp, this.turnoSeleccionado.fecha)        
+  //     )
+  //     .then(
+  //       () => {
+  //         this.modoNormal = true;
+  //         this.modoFinalizar = false;
+  //       }
+  //     )
+  // }
 
 }

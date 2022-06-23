@@ -23,69 +23,100 @@
 <form #f="ngForm" (ngSubmit)="signIn(f.value)" novalidate>
     <h4 class="mb-3">Datos para la historia clínica:</h4>
     <div class="form-outline form-white mb-3">
-        <label class="form-label">Altura</label>
+        <label class="form-label">Altura*</label>
         <input
             name="altura"
+            id="altura"
             ngModel
+            #altura="ngModel"
             required
             type="number"
             class="form-control"
         >
+        <div class="aviso">
+            <span
+                *ngIf="altura.invalid && (altura.dirty || altura.touched)"
+                class="text-danger"
+            >Requerido</span>
+        </div>
     </div>
     <div class="form-outline form-white mb-3">   
-        <label class="form-label">Peso</label>
+        <label class="form-label">Peso*</label>
         <input
             name="peso"
             ngModel
+            #peso="ngModel"
             required
             type="number"
             class="form-control"
         >
+        <div class="aviso">
+            <span
+                *ngIf="peso.invalid && (peso.dirty || peso.touched)"
+                class="text-danger"
+            >Requerido</span>
+        </div>
     </div>
     <div class="form-outline form-white mb-3">   
-        <label class="form-label">Temperatura</label>
+        <label class="form-label">Temperatura*</label>
         <input
             name="temperatura"
             ngModel
+            #temperatura="ngModel"
             required
             type="number"
             class="form-control"
         >
+        <div class="aviso">
+            <span
+                *ngIf="temperatura.invalid && (temperatura.dirty || temperatura.touched)"
+                class="text-danger"
+            >Requerido</span>
+        </div>
     </div>
     <div class="form-outline form-white mb-3">   
-        <label class="form-label">Presión</label>
+        <label class="form-label">Presión*</label>
         <input
             name="presion"
             ngModel
+            #presion="ngModel"
             required
             type="number"
             class="form-control"
         >
+        <div class="aviso">
+            <span
+                *ngIf="presion.invalid && (presion.dirty || presion.touched)"
+                class="text-danger"
+            >Requerido</span>
+        </div>
     </div>
     <div class="form-outline form-white mb-3">   
         <label class="form-label">Glucemia</label>
         <input
             name="glucemia"
             ngModel
-            required
             type="number"
             class="form-control"
         >
+        <div class="aviso">
+        </div>
     </div>
     <div class="form-outline form-white mb-5">   
         <label class="form-label">Lesiones</label>
         <input
             name="lesiones"
             ngModel
-            required
             type="number"
             class="form-control"
         >
+        <div class="aviso">
+        </div>
     </div>
     <div class="d-flex justify-content-around">
         <button class="btn btn-danger" type="button" (click)="volver.emit()">Volver</button>
         <!-- <button class="btn btn-outline-light" (click)="finalizar.emit(review)">Confirmar</button> -->
-        <button class="btn btn-outline-light">Confirmar</button>
+        <button class="btn btn-outline-light" [disabled]="!f.valid">Confirmar</button>
     </div>
 </form>
 
