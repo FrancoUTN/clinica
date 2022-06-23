@@ -20,7 +20,7 @@
                 </span>
             </div>
             <div *ngIf="hc" class="d-flex flex-column justify-content-between">
-                <span>
+                <!-- <span>
                     <span>Altura:</span> {{hc.altura + 'cm'}}
                 </span>
                 <span>
@@ -31,13 +31,15 @@
                 </span>
                 <span>
                     <span>Presión:</span> {{hc.presion + 'mmHg'}}
+                </span> -->
+
+                <span *ngFor="let item of hc | keyvalue">
+                    <span>{{item.key}}:</span> {{item.value}}
                 </span>
-                <span>
-                    <span>Lesiones:</span> {{hc.lesiones}}
-                </span>
-                <span>
+
+                <!-- <span>
                     <span>Glucemia:</span> {{hc.glucemia + 'mg/dl'}}
-                </span>
+                </span> -->
             </div>
         </div>
         <img src="../../../assets/medical-report.png" id="hc-logo">
