@@ -10,10 +10,12 @@ export class FinalizarTurnoComponent implements OnInit {
   @Output() volver = new EventEmitter();
   @Output() finalizar = new EventEmitter<any>();
   review: string = '';
+  hcPrevia: any;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
+    this.hcPrevia = this.turno.paciente.historiaClinica ? this.turno.paciente.historiaClinica : null;
   }
 
   signIn(value: any) {
