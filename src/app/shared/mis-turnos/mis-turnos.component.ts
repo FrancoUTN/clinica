@@ -222,14 +222,6 @@ export class MisTurnosComponent implements OnInit {
   finalizarConfirmarHandler(reviewEHistoriaClinica: {review:string, historiaClinica:HistoriaClinica}) {
     const review = reviewEHistoriaClinica.review;
     const hc = reviewEHistoriaClinica.historiaClinica;
-
-    // const hcActualizada:HistoriaClinica = {
-    //   altura: 0,
-    //   peso: 0,
-    //   presion: 0,
-    //   temperatura: 0,
-    // };
-
     let hcActualizada:HistoriaClinica;
 
     if (this.turnoSeleccionado.paciente.historiaClinica) {
@@ -268,23 +260,5 @@ export class MisTurnosComponent implements OnInit {
           )
       });
   }
-
-  // finalizarConfirmarHandler(review: string) {
-  //   const nuevoTurno = {
-  //     estado: 'realizado',
-  //     reviewEsp: review
-  //   };
-
-  //   this.turnoService.actualizar(this.turnoSeleccionado.id, nuevoTurno)
-  //     .then(
-  //       () => this.reservaService.eliminar(this.turnoSeleccionado.idEsp, this.turnoSeleccionado.fecha)        
-  //     )
-  //     .then(
-  //       () => {
-  //         this.modoNormal = true;
-  //         this.modoFinalizar = false;
-  //       }
-  //     )
-  // }
 
 }
