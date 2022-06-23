@@ -10,16 +10,31 @@ export class FinalizarTurnoComponent implements OnInit {
   @Output() volver = new EventEmitter();
   @Output() finalizar = new EventEmitter<any>();
   review: string = '';
-  hcPrevia: any;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.hcPrevia = this.turno.paciente.historiaClinica ? this.turno.paciente.historiaClinica : null;
   }
 
   signIn(value: any) {
-    this.finalizar.emit({review: this.review, historiaClinica: value})
+    const fijos:any = {
+      altura: value.altura,
+      peso: value.peso,
+      temperatura: value.temperatura,
+      presion: value.presion,
+    }
+
+    if (value.clave1 && value.valor1) {
+      fijos[value.clave1] = value.valor1
+    }
+    if (value.clave2 && value.valor2) {
+      fijos[value.clave2] = value.valor2      
+    }
+    if (value.clave3 && value.valor3) {
+      fijos[value.clave3] = value.valor3      
+    }
+
+    this.finalizar.emit({review: this.review, historiaClinica: fijos})
   }
 
 }

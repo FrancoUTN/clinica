@@ -20,16 +20,14 @@
     class="form-control mb-5"
 >
 <form #f="ngForm" (ngSubmit)="signIn(f.value)" novalidate>
-    <h4 class="mb-3">Datos para la historia clínica:</h4>
-
+    <h4 class="mb-3">Datos para la historia clínica</h4>
     <div>
         <div class="form-outline form-white mb-3">
             <label class="form-label">Altura*</label>
             <input
                 name="altura"
                 id="altura"
-                [ngModel]="hcPrevia?.altura"
-                [disabled]="hcPrevia"
+                ngModel
                 #altura="ngModel"
                 required
                 type="number"
@@ -46,8 +44,7 @@
             <label class="form-label">Peso*</label>
             <input
                 name="peso"
-                [ngModel]="hcPrevia?.peso"
-                [disabled]="hcPrevia"
+                ngModel
                 #peso="ngModel"
                 required
                 type="number"
@@ -64,8 +61,7 @@
             <label class="form-label">Temperatura*</label>
             <input
                 name="temperatura"
-                [ngModel]="hcPrevia?.temperatura"
-                [disabled]="hcPrevia"
+                ngModel
                 #temperatura="ngModel"
                 required
                 type="number"
@@ -82,8 +78,7 @@
             <label class="form-label">Presión*</label>
             <input
                 name="presion"
-                [ngModel]="hcPrevia?.presion"
-                [disabled]="hcPrevia"
+                ngModel
                 #presion="ngModel"
                 required
                 type="number"
@@ -97,90 +92,83 @@
             </div>
         </div>
     </div>
-
-    <!-- <div *ngIf="this.hcPrevia">
-        <div class="form-outline form-white mb-3">
-            <label class="form-label">Altura</label>
+    <h6>Opcionales:</h6>
+    <div class="d-flex">
+        <div class="form-outline form-white" style="margin-right: 2rem;">   
+            <label class="form-label">Clave 1</label>
             <input
+                name="clave1"
+                ngModel
+                type="text"
                 class="form-control"
-                [disabled]="this.hcPrevia"
-                [value]="hcPrevia.altura"
             >
             <div class="aviso">
             </div>
         </div>
-        <div class="form-outline form-white mb-3">
-            <label class="form-label">Peso</label>
+        <div class="form-outline form-white" style="width: 7rem;">   
+            <label class="form-label">Valor 1</label>
             <input
+                name="valor1"
+                ngModel
+                type="number"
                 class="form-control"
-                disabled
-                [value]="hcPrevia.peso"
             >
             <div class="aviso">
             </div>
-        </div>
-        <div class="form-outline form-white mb-3">
-            <label class="form-label">Temperatura</label>
-            <input
-                class="form-control"
-                disabled
-                [value]="hcPrevia.temperatura"
-            >
-            <div class="aviso">
-            </div>
-        </div>
-        <div class="form-outline form-white mb-3">
-            <label class="form-label">Presión</label>
-            <input
-                class="form-control"
-                disabled
-                [value]="hcPrevia.presion"
-            >
-            <div class="aviso">
-            </div>
-        </div>
-    </div> -->
-
-    <div class="form-outline form-white mb-3">   
-        <label class="form-label">Glucemia</label>
-        <input
-            name="glucemia"
-            ngModel
-            type="number"
-            class="form-control"
-        >
-        <div class="aviso">
         </div>
     </div>
-    <div class="form-outline form-white mb-5">   
-        <label class="form-label">Lesiones</label>
-        <input
-            name="lesiones"
-            ngModel
-            type="number"
-            class="form-control"
-        >
-        <div class="aviso">
+    <div class="d-flex">
+        <div class="form-outline form-white" style="margin-right: 2rem;">   
+            <label class="form-label">Clave 2</label>
+            <input
+                name="clave2"
+                ngModel
+                type="text"
+                class="form-control"
+            >
+            <div class="aviso">
+            </div>
+        </div>
+        <div class="form-outline form-white" style="width: 7rem;">   
+            <label class="form-label">Valor 2</label>
+            <input
+                name="valor2"
+                ngModel
+                type="number"
+                class="form-control"
+            >
+            <div class="aviso">
+            </div>
         </div>
     </div>
+    <div class="d-flex mb-5">
+        <div class="form-outline form-white" style="margin-right: 2rem;">   
+            <label class="form-label">Clave 3</label>
+            <input
+                name="clave2"
+                ngModel
+                type="text"
+                class="form-control"
+            >
+            <div class="aviso">
+            </div>
+        </div>
+        <div class="form-outline form-white" style="width: 7rem;">   
+            <label class="form-label">Valor 3</label>
+            <input
+                name="valor2"
+                ngModel
+                type="number"
+                class="form-control"
+            >
+            <div class="aviso">
+            </div>
+        </div>
+    </div>
+
+
     <div class="d-flex justify-content-around">
         <button class="btn btn-danger" type="button" (click)="volver.emit()">Volver</button>
-        <!-- <button class="btn btn-outline-light" (click)="finalizar.emit(review)">Confirmar</button> -->
         <button class="btn btn-outline-light" [disabled]="!f.valid">Confirmar</button>
     </div>
 </form>
-
-
-<!-- <div class="mb-5">
-    <label class="mb-2">
-        Deja una reseña:
-    </label>
-    <input
-        [(ngModel)]="review"
-        class="form-control"
-    >
-</div>
-<div class="d-flex justify-content-around">
-    <button class="btn btn-danger" (click)="volver.emit()">Volver</button>
-    <button class="btn btn-outline-light" (click)="finalizar.emit(review)">Confirmar</button>
-</div> -->

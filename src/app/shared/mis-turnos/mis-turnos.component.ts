@@ -219,46 +219,45 @@ export class MisTurnosComponent implements OnInit {
     this.modoNormal = false;
     this.modoFinalizar = true;
   }
-  finalizarConfirmarHandler(reviewEHistoriaClinica: {review:string, historiaClinica:HistoriaClinica}) {
+  finalizarConfirmarHandler(reviewEHistoriaClinica: {review:string, historiaClinica:any}) {
     const review = reviewEHistoriaClinica.review;
     const hc = reviewEHistoriaClinica.historiaClinica;
-    let hcActualizada:HistoriaClinica;
+    let hcActualizada = {};
+
 
     if (this.turnoSeleccionado.paciente.historiaClinica) {
       hcActualizada = this.turnoSeleccionado.paciente.historiaClinica;
 
-      hcActualizada.glucemia = hc.glucemia;
-      hcActualizada.lesiones = hc.lesiones;      
+      console.log(hc)
+
     }
     else {
       hcActualizada = hc;
     }
 
-    this.usuarioService.updatePaciente(this.turnoSeleccionado.idPac, hcActualizada)
-      .then(
-        () => {
+    // this.usuarioService.updatePaciente(this.turnoSeleccionado.idPac, hcActualizada)
+    //   .then(
+    //     () => {
+    //       const turnoActualizado = {
+    //         estado: 'realizado',
+    //         reviewEsp: review,
+    //         paciente: {
+    //           ...this.turnoSeleccionado.paciente,
+    //           historiaClinica: hcActualizada
+    //         }
+    //       };
 
-
-          const turnoActualizado = {
-            estado: 'realizado',
-            reviewEsp: review,
-            paciente: {
-              ...this.turnoSeleccionado.paciente,
-              historiaClinica: hcActualizada
-            }
-          };
-
-        this.turnoService.actualizar(this.turnoSeleccionado.id, turnoActualizado)
-          .then(
-            () => this.reservaService.eliminar(this.turnoSeleccionado.idEsp, this.turnoSeleccionado.fecha)        
-          )
-          .then(
-            () => {
-              this.modoNormal = true;
-              this.modoFinalizar = false;
-            }
-          )
-      });
+    //     this.turnoService.actualizar(this.turnoSeleccionado.id, turnoActualizado)
+    //       .then(
+    //         () => this.reservaService.eliminar(this.turnoSeleccionado.idEsp, this.turnoSeleccionado.fecha)        
+    //       )
+    //       .then(
+    //         () => {
+    //           this.modoNormal = true;
+    //           this.modoFinalizar = false;
+    //         }
+    //       )
+    //   });
   }
 
 }
