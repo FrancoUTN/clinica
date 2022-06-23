@@ -3,6 +3,7 @@ import { OtroService } from 'src/app/services/otro.service';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { TurnoService } from 'src/app/services/turno.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { HistoriaClinica } from 'src/app/models/HistoriaClinica';
 
 @Component({
   selector: 'app-mis-turnos',
@@ -218,16 +219,40 @@ export class MisTurnosComponent implements OnInit {
     this.modoNormal = false;
     this.modoFinalizar = true;
   }
-  finalizarConfirmarHandler(reviewEHistoriaClinica: any) {
-    this.usuarioService.updatePaciente(this.turnoSeleccionado.idPac, reviewEHistoriaClinica.historiaClinica)
+  finalizarConfirmarHandler(reviewEHistoriaClinica: {review:string, historiaClinica:HistoriaClinica}) {
+    const review = reviewEHistoriaClinica.review;
+    const hc = reviewEHistoriaClinica.historiaClinica;
+
+    // const hcActualizada:HistoriaClinica = {
+    //   altura: 0,
+    //   peso: 0,
+    //   presion: 0,
+    //   temperatura: 0,
+    // };
+
+    let hcActualizada:HistoriaClinica;
+
+    if (this.turnoSeleccionado.paciente.historiaClinica) {
+      hcActualizada = this.turnoSeleccionado.paciente.historiaClinica;
+
+      hcActualizada.glucemia = hc.glucemia;
+      hcActualizada.lesiones = hc.lesiones;      
+    }
+    else {
+      hcActualizada = hc;
+    }
+
+    this.usuarioService.updatePaciente(this.turnoSeleccionado.idPac, hcActualizada)
       .then(
         () => {
+
+
           const turnoActualizado = {
             estado: 'realizado',
-            reviewEsp: reviewEHistoriaClinica.review,
+            reviewEsp: review,
             paciente: {
               ...this.turnoSeleccionado.paciente,
-              historiaClinica: reviewEHistoriaClinica.historiaClinica
+              historiaClinica: hcActualizada
             }
           };
 

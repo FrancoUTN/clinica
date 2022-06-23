@@ -19,17 +19,17 @@
     [(ngModel)]="review"
     class="form-control mb-5"
 >
-
 <form #f="ngForm" (ngSubmit)="signIn(f.value)" novalidate>
     <h4 class="mb-3">Datos para la historia clínica:</h4>
 
-    <div *ngIf="!this.hcPrevia">
+    <div>
         <div class="form-outline form-white mb-3">
             <label class="form-label">Altura*</label>
             <input
                 name="altura"
                 id="altura"
-                ngModel
+                [ngModel]="hcPrevia?.altura"
+                [disabled]="hcPrevia"
                 #altura="ngModel"
                 required
                 type="number"
@@ -46,7 +46,8 @@
             <label class="form-label">Peso*</label>
             <input
                 name="peso"
-                ngModel
+                [ngModel]="hcPrevia?.peso"
+                [disabled]="hcPrevia"
                 #peso="ngModel"
                 required
                 type="number"
@@ -63,7 +64,8 @@
             <label class="form-label">Temperatura*</label>
             <input
                 name="temperatura"
-                ngModel
+                [ngModel]="hcPrevia?.temperatura"
+                [disabled]="hcPrevia"
                 #temperatura="ngModel"
                 required
                 type="number"
@@ -80,7 +82,8 @@
             <label class="form-label">Presión*</label>
             <input
                 name="presion"
-                ngModel
+                [ngModel]="hcPrevia?.presion"
+                [disabled]="hcPrevia"
                 #presion="ngModel"
                 required
                 type="number"
@@ -95,12 +98,12 @@
         </div>
     </div>
 
-    <div *ngIf="this.hcPrevia">
+    <!-- <div *ngIf="this.hcPrevia">
         <div class="form-outline form-white mb-3">
             <label class="form-label">Altura</label>
             <input
                 class="form-control"
-                disabled
+                [disabled]="this.hcPrevia"
                 [value]="hcPrevia.altura"
             >
             <div class="aviso">
@@ -136,8 +139,7 @@
             <div class="aviso">
             </div>
         </div>
-    </div>
-
+    </div> -->
 
     <div class="form-outline form-white mb-3">   
         <label class="form-label">Glucemia</label>
