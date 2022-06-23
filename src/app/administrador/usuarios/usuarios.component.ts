@@ -12,6 +12,8 @@ export class UsuariosComponent implements OnInit {
   errorMsg:string = '';
   quieroAgregarUsuario:boolean = false;
   rolSeleccionado:string = 'paciente';
+  verHistoriaClinica: boolean = false;
+  pacienteSeleccionado: any;
   
   constructor(
     private registroService: RegistroService,
@@ -77,4 +79,17 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
+  verMiHistoriaClinicaHandler(paciente: any) {
+    this.pacienteSeleccionado = paciente;
+    this.verHistoriaClinica = false;
+
+    // Sin esto, no actualiza la historia clínica;
+    // pero sí los datos de usuario. Interesante.
+    setTimeout(() => {
+      this.verHistoriaClinica = true;
+    }, 5);
+  }
+  ocultarHandler() {
+    this.verHistoriaClinica = false;
+  }
 }

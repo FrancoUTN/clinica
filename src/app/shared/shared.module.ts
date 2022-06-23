@@ -49,7 +49,8 @@ import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.co
     SinVerificarComponent,
     MisTurnosComponent,
     MiPerfilComponent,
-    SolicitarTurnoComponent
+    SolicitarTurnoComponent,
+    HistoriaClinicaComponent
   ]
 })
 export class SharedModule { }

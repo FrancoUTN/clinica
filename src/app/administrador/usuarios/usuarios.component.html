@@ -16,6 +16,7 @@
                     <th>Imagen 1</th>
                     <th>Imagen 2</th>
                     <th>Habilitado</th>
+                    <th>Historia clínica</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,6 +70,17 @@
                         n/a
                     </td>
 
+                    <td *ngIf="item.rol !== 'paciente'">
+                        n/a
+                    </td>
+                    <td *ngIf="item.rol === 'paciente'">
+                        <button
+                        class="btn btn-primary m-auto"
+                        (click)="verMiHistoriaClinicaHandler(item)"
+                        >
+                        Ver</button>
+                    </td>
+
                 </tr>
             </tbody>
         </table>
@@ -78,6 +90,14 @@
         </div>
     </div>
 </div>
+
+<app-historia-clinica
+    class="contenedor-menor mb-5 fondo-oscuro"
+    *ngIf="verHistoriaClinica"
+    [paciente]="pacienteSeleccionado"
+    (volver)="ocultarHandler()"
+>
+</app-historia-clinica>
 
 <div
     class="d-flex justify-content-center align-items-center"
