@@ -1,10 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { logoEnBase64 } from 'src/app/others/logo-en-base-64';
+
 // import pdfMake from 'pdfmake/build/pdfmake';
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
 // pdfMake.vfs = pdfFonts.pdfMake.vfs;
 const pdfMake = require('pdfmake/build/pdfmake.js');
 const pdfFonts = require("pdfmake/build/vfs_fonts");
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 
 @Component({
   selector: 'app-historia-clinica',
@@ -58,7 +61,14 @@ export class HistoriaClinicaComponent implements OnInit {
           text: 'Datos médicos',
           style: 'subtitulo2'
         },
-        ...textos
+        ...textos,
+        {
+          image: logoEnBase64,
+          width: 200,
+          style: 'logo',
+          alignment: 'center',
+          opacity: 0.5
+        }
       ],
       styles: {
         titulo: {
@@ -77,6 +87,9 @@ export class HistoriaClinicaComponent implements OnInit {
           bold: true,
           margin: [0, 20, 10, 0]
         },
+        logo: {
+			    alignment: 'justify',
+        }
       }
     }
  
