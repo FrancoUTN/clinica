@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { TurnoService } from 'src/app/services/turno.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-pacientes',
@@ -11,23 +12,41 @@ export class PacientesComponent implements OnInit {
   verHistoriaClinica: boolean = false;
   pacienteSeleccionado: any;
 
-  constructor(private usuarioService:UsuarioService) {
+  constructor(
+    private turnoService: TurnoService,
+    private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.usuarioService.getUsuarios().subscribe(
-      dcas => {
-        this.usuarios = [];
+    this.authService.getUserID().subscribe(
+      uid => {
+        this.turnoService.getRef()
+        .where('idEsp', '==', uid)
+        .where('estado', '==', 'realizado')
+        .get()
+        .then(
+          qs => {
+            const auxUsuarios: Array<any> = [];
 
-        dcas.forEach(
-          dca => {
-            const obj:any = dca.payload.doc.data();
-            obj.id = dca.payload.doc.id;
-            this.usuarios.push(obj);
-          }
-        );
-      } 
-    )
+            qs.forEach(doc => {
+              const objeto: any = doc.data();
+              const idPaciente = objeto.idPac;
+              const paciente = objeto.paciente;
+
+              const some = auxUsuarios.some(
+                auxUsuario => auxUsuario.idPac == idPaciente
+              );
+
+              if (!some) {
+                auxUsuarios.push({idPac: idPaciente, paciente: paciente});
+              }
+            });
+
+            this.usuarios = auxUsuarios.map(
+              auxUsuario => auxUsuario.paciente
+            );
+      })
+    })
   }
 
   verHistoriaClinicaHandler(paciente: any) {
