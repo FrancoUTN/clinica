@@ -42,4 +42,13 @@ export class UsuarioService {
       });
   }
 
+  updatePaciente(id: string, historiaClinica: any) {
+    return this.angularFirestore
+      .collection("usuarios")
+      .doc(id)
+      .update({
+        historiaClinica: historiaClinica
+      });
+  }
+
 }

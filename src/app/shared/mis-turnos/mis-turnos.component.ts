@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OtroService } from 'src/app/services/otro.service';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { TurnoService } from 'src/app/services/turno.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-mis-turnos',
@@ -28,7 +29,8 @@ export class MisTurnosComponent implements OnInit {
   constructor(
     private turnoService: TurnoService,
     private reservaService: ReservaService,
-    private otroService: OtroService) { }
+    private otroService: OtroService,
+    private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
     this.otroService.getDocumentSnapshotDeUsuario().subscribe(
@@ -217,7 +219,29 @@ export class MisTurnosComponent implements OnInit {
     this.modoFinalizar = true;
   }
   finalizarConfirmarHandler(reviewEHistoriaClinica: any) {
-    console.log(reviewEHistoriaClinica);
+    this.usuarioService.updatePaciente(this.turnoSeleccionado.idPac, reviewEHistoriaClinica.historiaClinica)
+      .then(
+        () => {
+          const turnoActualizado = {
+            estado: 'realizado',
+            reviewEsp: reviewEHistoriaClinica.review,
+            paciente: {
+              ...this.turnoSeleccionado.paciente,
+              historiaClinica: reviewEHistoriaClinica.historiaClinica
+            }
+          };
+
+        this.turnoService.actualizar(this.turnoSeleccionado.id, turnoActualizado)
+          .then(
+            () => this.reservaService.eliminar(this.turnoSeleccionado.idEsp, this.turnoSeleccionado.fecha)        
+          )
+          .then(
+            () => {
+              this.modoNormal = true;
+              this.modoFinalizar = false;
+            }
+          )
+      });
   }
 
   // finalizarConfirmarHandler(review: string) {
