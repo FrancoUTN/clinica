@@ -16,6 +16,7 @@ import { RegistroComponent } from '../bienvenida/registro/registro.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { SolicitarTurnoComponent } from './solicitar-turno/solicitar-turno.component';
 import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.co
     RechazarTurnoComponent,
     MiPerfilComponent,
     SolicitarTurnoComponent,
-    HistoriaClinicaComponent
+    HistoriaClinicaComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.co
     MisTurnosComponent,
     MiPerfilComponent,
     SolicitarTurnoComponent,
-    HistoriaClinicaComponent
+    HistoriaClinicaComponent,
+    HomeComponent
   ]
 })
 export class SharedModule { }
