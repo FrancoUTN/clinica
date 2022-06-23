@@ -75,6 +75,7 @@
                     </td>
                     <td *ngIf="item.rol === 'paciente'">
                         <button
+                        *ngIf="!verHistoriaClinica"
                         class="btn btn-primary m-auto"
                         (click)="verMiHistoriaClinicaHandler(item)"
                         >

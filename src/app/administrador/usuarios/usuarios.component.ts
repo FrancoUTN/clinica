@@ -81,13 +81,15 @@ export class UsuariosComponent implements OnInit {
 
   verMiHistoriaClinicaHandler(paciente: any) {
     this.pacienteSeleccionado = paciente;
-    this.verHistoriaClinica = false;
+    // this.verHistoriaClinica = false;
 
-    // Sin esto, no actualiza la historia clínica;
-    // pero sí los datos de usuario. Interesante.
-    setTimeout(() => {
-      this.verHistoriaClinica = true;
-    }, 5);
+    // // Sin esto, no actualiza la historia clínica;
+    // // pero sí los datos de usuario. Interesante.
+    // setTimeout(() => {
+    //   this.verHistoriaClinica = true;
+    // }, 5);
+    
+    this.verHistoriaClinica = true;
   }
   ocultarHandler() {
     this.verHistoriaClinica = false;
