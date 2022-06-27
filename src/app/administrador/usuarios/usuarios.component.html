@@ -2,7 +2,7 @@
     class="contenedor-menor mb-5 fondo-oscuro"
 >
     <div class="container-fluid">
-        <!-- <table class="table text-white" style="text-align: center;">
+        <table class="table text-white" style="text-align: center;">
             <thead>
                 <tr>
                     <th>Rol</th>
@@ -55,7 +55,7 @@
                         <img [src]="item.fotos[1]" style="width: 100px; height: 100px" alt="">
                     </td>
 
-                    <td *ngIf="item.especialidades">
+                    <!-- <td *ngIf="item.especialidades">
                         <div class="form-check form-switch d-flex justify-content-center">
                             <input
                                 class="form-check-input"
@@ -65,7 +65,7 @@
                                 [checked]="item.habilitado"
                             >
                         </div>
-                    </td>
+                    </td> -->
                     <td *ngIf="!item.especialidades">
                         n/a
                     </td>
@@ -84,7 +84,7 @@
 
                 </tr>
             </tbody>
-        </table> -->
+        </table>
         <app-favbutton-usuarios
         [docsUsuario]="this.docsUsuario"
 

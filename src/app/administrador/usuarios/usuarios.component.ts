@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { RegistroService } from 'src/app/services/registro.service';
 import { DocUsuario } from 'src/app/models/DocUsuario';
+import { Usuario } from 'src/app/models/Usuario';
 
 @Component({
   selector: 'app-usuarios',
@@ -9,7 +10,7 @@ import { DocUsuario } from 'src/app/models/DocUsuario';
   styleUrls: ['./usuarios.component.scss']
 })
 export class UsuariosComponent implements OnInit {
-  // usuarios:Array<any> = [];
+  usuarios:Array<Usuario> = [];
   docsUsuario!: Array<DocUsuario>;
   errorMsg:string = '';
   quieroAgregarUsuario:boolean = false;
@@ -26,6 +27,7 @@ export class UsuariosComponent implements OnInit {
     this.usuarioService.getUsuarios().subscribe(
       dcas => {
         this.docsUsuario = [];
+        this.usuarios = [];
 
         dcas.forEach(
           dca => {
@@ -37,6 +39,7 @@ export class UsuariosComponent implements OnInit {
             }
 
             this.docsUsuario.push(docUsuario);
+            this.usuarios.push(data);
           }
         );
       } 
