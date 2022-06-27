@@ -1,4 +1,4 @@
-<table class="table text-white" style="text-align: center;">
+<!-- <table class="table text-white" style="text-align: center;">
     <thead>
         <tr>
             <th>Email</th>
@@ -36,9 +36,12 @@
             </td>
         </tr>
     </tbody>
-</table>
+</table> -->
 
-<app-favbutton-usuarios></app-favbutton-usuarios>
+<app-favbutton-usuarios
+    [docsUsuario]="this.docsUsuario"
+    (usuarioSeleccionado)="usuarioSeleccionadoHandler($event)"
+></app-favbutton-usuarios>
 
 <app-historia-clinica
     class="contenedor-menor"

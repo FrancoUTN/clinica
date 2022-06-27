@@ -1,1 +1,11 @@
-<p>favbutton-usuarios works!</p>
+<div class="row">
+    <div *ngFor="let item of docsUsuario" class="col-4 p-0" >
+        <img
+            *ngIf="item.usuario.fotos"
+            [src]="item.usuario.fotos[0]"
+            (click)="usuarioSeleccionado.emit(item)"
+            class="btn rounded-circle p-0 mx-5"
+            style="width: 100px; height: 100px"
+        >
+    </div>
+</div>
