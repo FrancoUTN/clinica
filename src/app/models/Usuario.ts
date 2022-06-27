@@ -1,3 +1,5 @@
+import { HistoriaClinica } from "./HistoriaClinica";
+
 export interface Usuario {
     'nombre': string;
     'apellido': string;
@@ -8,6 +10,7 @@ export interface Usuario {
 
     'obraSocial'?: string; // paciente
     'fotos'?: string[]; // paciente
+    'historiaClinica'?: HistoriaClinica; // paciente
     'especialidades'?: string[]; // especialista
     'habilitado'?: boolean; // especialista
     'foto'?: string; // especialista y administrador

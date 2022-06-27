@@ -3,6 +3,5 @@ export interface HistoriaClinica {
     peso: number;
     temperatura: number;
     presion: number;
-    glucemia?: number;
-    lesiones?: number;    
+    // [datoDinamico: string]: any;
 }

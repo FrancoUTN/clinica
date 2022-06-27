@@ -15,9 +15,6 @@ export class PacientesTurnosComponent implements OnInit {
   @Output() historiaClinicaSeleccionada = new EventEmitter();
 
   turnosOriginal!: Turno[];
-  // turnos: any[] = [];
-  turnoSeleccionado!: Turno;
-
   filtro: string = '';
 
   modoNormal: boolean = true;
@@ -26,10 +23,10 @@ export class PacientesTurnosComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.turnosOriginal = this.turnos;
   }
 
-  // filtrar() {
-  especialistaFiltrar() {
+  filtrar() {
     if (this.filtro === '') {
       this.turnos = this.turnosOriginal.slice();
     }
@@ -38,13 +35,24 @@ export class PacientesTurnosComponent implements OnInit {
 
       this.turnosOriginal.forEach(
         turno => {
-          if(
-            turno.especialidad.includes(this.filtro) ||
-            turno.paciente.nombre.includes(this.filtro) ||
-            turno.paciente.apellido.includes(this.filtro)
-            ) {
+          if(turno.especialidad.includes(this.filtro)) {
             filtrados.push(turno);
           }
+          // else if (turno.paciente.historiaClinica) {
+          //   const hc: Object = turno.paciente.historiaClinica;
+          //   let existe: boolean = false;
+
+          //   hc.forEach(
+          //     (dato: string) => {
+          //       if (dato.includes(this.filtro)) {
+          //         existe = true;
+          //       }
+          //     }
+          //   );
+          //   if (existe) {
+          //     filtrados.push(turno);
+          //   }
+          // }
         }
       )
 
@@ -58,11 +66,6 @@ export class PacientesTurnosComponent implements OnInit {
   }
 
   verReview(turno: Turno) {
-    // this.turnoSeleccionado = turno;
-
-    // this.modoNormal = false;
-    // this.modoReview = true;
-
     this.reviewSeleccionada.emit(turno);
   }
 

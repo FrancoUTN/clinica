@@ -88,11 +88,6 @@ export class PacientesComponent implements OnInit {
     this.modoNormal = true;
     this.modoReview= false;
   }
-
-  // verHistoriaClinicaHandler(paciente: any) {
-  //   this.pacienteSeleccionado = paciente;
-  //   this.verHistoriaClinica = true;
-  // }
   
   verHistoriaClinicaHandler(turno: Turno) {
     this.turnoSeleccionado = turno;
