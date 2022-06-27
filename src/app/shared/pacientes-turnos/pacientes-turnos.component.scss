@@ -1,0 +1,20 @@
+tr {
+    height: 3.5rem;
+}
+
+tr > * {
+    padding: .5rem 2rem .5rem 0;
+    // padding: .5rem 2rem;
+}
+
+.tdMotivo {
+    max-width: 20rem;
+}
+
+td > button {
+    min-width: 10rem;
+}
+
+// tr:last-child {
+//     padding-right: 0;
+// }

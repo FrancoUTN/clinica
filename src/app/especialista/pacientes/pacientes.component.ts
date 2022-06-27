@@ -18,6 +18,7 @@ export class PacientesComponent implements OnInit {
 
   miUid!: string;
   turnos!: Turno[];
+  verTurnos: boolean = false;
 
   constructor(
     private turnoService: TurnoService,
@@ -53,8 +54,6 @@ export class PacientesComponent implements OnInit {
   }
 
   usuarioSeleccionadoHandler(docUsuario: DocUsuario) {
-    console.log(docUsuario);
-
     this.turnoService.getRef()
       .where('idEsp', '==', this.miUid)
       .where('idPac', '==', docUsuario.id)
@@ -69,6 +68,7 @@ export class PacientesComponent implements OnInit {
               this.turnos.push(turno);
             }
           )
+          this.verTurnos = true;
         }
       )
   }

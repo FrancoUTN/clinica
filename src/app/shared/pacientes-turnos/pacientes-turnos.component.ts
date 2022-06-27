@@ -20,80 +20,12 @@ export class PacientesTurnosComponent implements OnInit {
   modoNormal: boolean = true;
   modoReview: boolean = false;
 
-  miRol: string = '';
-
-  constructor(
-    private turnoService: TurnoService,
-    private otroService: OtroService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.otroService.getDocumentSnapshotDeUsuario().subscribe(
-      ds => {
-        this.miRol = ds.data().rol;
-
-        if (this.miRol === 'administrador') {          
-          this.turnoService.getRef()
-            .onSnapshot(
-              qs => this.cargarTurnos(qs)
-            )
-        }
-        else {
-          const miUID = ds.id;
-          let idTipo = '';
-
-          if (this.miRol === 'paciente') {
-            idTipo = 'idPac';
-          }
-          else if (this.miRol === 'especialista') {
-            idTipo = 'idEsp';
-          }
-
-          this.turnoService.getRef()
-            .where(idTipo, '==', miUID)
-            .onSnapshot(
-              qs => this.cargarTurnos(qs)
-            )
-        }
-      }
-    );
-  }
-
-  cargarTurnos(qs: any) {
-    this.turnosOriginal = [];
-    
-    qs.forEach((doc:any) => {
-      const id: string = doc.id;
-      const data: any = doc.data();
-
-      this.turnosOriginal.push({...data, id});
-    });
-
-    this.turnos = this.turnosOriginal.slice();
   }
 
   // filtrar() {
-  pacienteFiltrar() {
-    if (this.filtro === '') {
-      this.turnos = this.turnosOriginal.slice();
-    }
-    else {
-      const filtrados: any[] = [];
-
-      this.turnosOriginal.forEach(
-        turno => {
-          if(
-            turno.especialidad.includes(this.filtro) ||
-            turno.especialista.nombre.includes(this.filtro) || // paciente.nombre
-            turno.especialista.apellido.includes(this.filtro) // paciente.apellido
-            ) {
-            filtrados.push(turno);
-          }
-        }
-      )
-
-      this.turnos = filtrados.slice();
-    }
-  }
   especialistaFiltrar() {
     if (this.filtro === '') {
       this.turnos = this.turnosOriginal.slice();
