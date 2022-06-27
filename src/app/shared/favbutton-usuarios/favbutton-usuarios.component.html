@@ -1,10 +1,17 @@
-<div class="row">
-    <div *ngFor="let item of docsUsuario" class="col-4 p-0" >
+<div class="row mb-5">
+    <div *ngFor="let item of docsUsuario" class="col-4 p-0 text-center">
         <img
             *ngIf="item.usuario.fotos"
             [src]="item.usuario.fotos[0]"
             (click)="usuarioSeleccionado.emit(item)"
-            class="btn rounded-circle p-0 mx-5"
+            class="btn rounded-circle p-0 mx-5 my-3"
+            style="width: 100px; height: 100px"
+        >        
+        <img
+            *ngIf="item.usuario.foto"
+            [src]="item.usuario.foto"
+            (click)="usuarioSeleccionado.emit(item)"
+            class="btn rounded-circle p-0 mx-5 my-3"
             style="width: 100px; height: 100px"
         >
     </div>

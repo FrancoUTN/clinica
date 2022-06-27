@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { RegistroService } from 'src/app/services/registro.service';
+import { DocUsuario } from 'src/app/models/DocUsuario';
 
 @Component({
   selector: 'app-usuarios',
@@ -8,7 +9,8 @@ import { RegistroService } from 'src/app/services/registro.service';
   styleUrls: ['./usuarios.component.scss']
 })
 export class UsuariosComponent implements OnInit {
-  usuarios:Array<any> = [];
+  // usuarios:Array<any> = [];
+  docsUsuario!: Array<DocUsuario>;
   errorMsg:string = '';
   quieroAgregarUsuario:boolean = false;
   rolSeleccionado:string = 'paciente';
@@ -23,18 +25,39 @@ export class UsuariosComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioService.getUsuarios().subscribe(
       dcas => {
-        this.usuarios = [];
+        this.docsUsuario = [];
 
         dcas.forEach(
           dca => {
-            const obj:any = dca.payload.doc.data();
-            obj.id = dca.payload.doc.id;
-            this.usuarios.push(obj);
+            const data: any = dca.payload.doc.data();
+            
+            const docUsuario: DocUsuario = {
+              id: dca.payload.doc.id,
+              usuario: data
+            }
+
+            this.docsUsuario.push(docUsuario);
           }
         );
       } 
     )
   }
+
+  // ngOnInit(): void {
+  //   this.usuarioService.getUsuarios().subscribe(
+  //     dcas => {
+  //       this.usuarios = [];
+
+  //       dcas.forEach(
+  //         dca => {
+  //           const obj:any = dca.payload.doc.data();
+  //           obj.id = dca.payload.doc.id;
+  //           this.usuarios.push(obj);
+  //         }
+  //       );
+  //     } 
+  //   )
+  // }
 
   onChangeHabilitado($event:any) {
     const chequeado = $event.target.checked;

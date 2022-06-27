@@ -2,7 +2,7 @@
     class="contenedor-menor mb-5 fondo-oscuro"
 >
     <div class="container-fluid">
-        <table class="table text-white" style="text-align: center;">
+        <!-- <table class="table text-white" style="text-align: center;">
             <thead>
                 <tr>
                     <th>Rol</th>
@@ -84,7 +84,12 @@
 
                 </tr>
             </tbody>
-        </table>
+        </table> -->
+        <app-favbutton-usuarios
+        [docsUsuario]="this.docsUsuario"
+
+        >
+        </app-favbutton-usuarios>
         <div class="d-flex justify-content-center">
             <button *ngIf="!quieroAgregarUsuario" class="btn btn-success" (click)="agregarUsuario()">Agregar usuario</button>
             <button *ngIf="quieroAgregarUsuario" class="btn btn-danger" (click)="noAgregarUsuario()">Cancelar</button>
