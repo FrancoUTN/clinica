@@ -11,7 +11,6 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./usuarios.component.scss']
 })
 export class UsuariosComponent implements OnInit {
-  usuarios:Array<Usuario> = [];
   docsUsuario!: Array<DocUsuario>;
   errorMsg:string = '';
   quieroAgregarUsuario:boolean = false;
@@ -28,7 +27,6 @@ export class UsuariosComponent implements OnInit {
     this.usuarioService.getUsuarios().subscribe(
       dcas => {
         this.docsUsuario = [];
-        this.usuarios = [];
 
         dcas.forEach(
           dca => {
@@ -40,7 +38,6 @@ export class UsuariosComponent implements OnInit {
             }
 
             this.docsUsuario.push(docUsuario);
-            this.usuarios.push(data);
           }
         );
       } 
@@ -62,8 +59,6 @@ export class UsuariosComponent implements OnInit {
   //     } 
   //   )
   // }
-
-  fileName= 'ExcelSheet.xlsx';
   
   exportexcel(): void
   {
@@ -76,7 +71,7 @@ export class UsuariosComponent implements OnInit {
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
  
     /* save to file */  
-    XLSX.writeFile(wb, this.fileName);
+    XLSX.writeFile(wb, 'usuarios.xlsx');
  
   }
 

@@ -1,4 +1,4 @@
-<div
+<!-- <div
     class="contenedor-menor mb-5 fondo-oscuro"
 >
     <div class="container-fluid">
@@ -41,7 +41,7 @@
                         n/a
                     </td>
 
-                    <!-- <td *ngIf="item.especialidades">
+                    <td *ngIf="item.especialidades">
                         <div class="form-check form-switch d-flex justify-content-center">
                             <input
                                 class="form-check-input"
@@ -54,7 +54,7 @@
                     </td>
                     <td *ngIf="!item.especialidades">
                         n/a
-                    </td> -->
+                    </td>
                     <td>
                         n/a
                     </td>
@@ -75,6 +75,97 @@
             </tbody>
         </table>
         <button class="btn btn-primary" (click)="exportexcel()">Exportar a Excel</button>
+        <app-favbutton-usuarios
+        [docsUsuario]="this.docsUsuario"
+
+        >
+        </app-favbutton-usuarios>
+        <div class="d-flex justify-content-center">
+            <button *ngIf="!quieroAgregarUsuario" class="btn btn-success" (click)="agregarUsuario()">Agregar usuario</button>
+            <button *ngIf="quieroAgregarUsuario" class="btn btn-danger" (click)="noAgregarUsuario()">Cancelar</button>
+        </div>
+    </div>
+</div> -->
+
+<div
+    class="contenedor-menor mb-5 fondo-oscuro"
+>
+    <div class="container-fluid">
+        <table class="table text-white" style="text-align: center;" id="excel-table">
+            <thead>
+                <tr>
+                    <th>Rol</th>
+                    <th>Email</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Edad</th>
+                    <th>DNI</th>
+                    <th>Obra Social</th>
+                    <th>Especialidades</th>
+                    <th>Habilitado</th>
+                    <th>Historia clínica</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of docsUsuario">
+                    <td>{{item.usuario.rol}}</td>
+                    <td>{{item.usuario.email}}</td>
+                    <td>{{item.usuario.nombre}}</td>
+                    <td>{{item.usuario.apellido}}</td>
+                    <td>{{item.usuario.edad}}</td>
+                    <td>{{item.usuario.dni}}</td>
+                    <td *ngIf="item.usuario.obraSocial">
+                        {{item.usuario.obraSocial}}
+                    </td>
+                    <td *ngIf="!item.usuario.obraSocial">
+                        n/a
+                    </td>
+                    <td *ngIf="item.usuario.especialidades">
+                        <span *ngFor="let especialidad of item.usuario.especialidades">
+                            {{especialidad}}
+                            <br>
+                        </span>
+                    </td>
+                    <td *ngIf="!item.usuario.especialidades">
+                        n/a
+                    </td>
+
+                    <td *ngIf="item.usuario.especialidades">
+                        <div class="form-check form-switch d-flex justify-content-center">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                [value]="item.id"
+                                (change)="onChangeHabilitado($event)"
+                                [checked]="item.usuario.habilitado"
+                            >
+                        </div>
+                    </td>
+                    <td *ngIf="!item.usuario.especialidades">
+                        n/a
+                    </td>
+                    <td>
+                        n/a
+                    </td>
+
+                    <td *ngIf="item.usuario.rol !== 'paciente'">
+                        n/a
+                    </td>
+                    <td *ngIf="item.usuario.rol === 'paciente'">
+                        <button
+                        *ngIf="!verHistoriaClinica"
+                        class="btn btn-primary m-auto"
+                        (click)="verHistoriaClinicaHandler(item.usuario)"
+                        >
+                        Ver</button>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center my-5">
+            <button class="btn btn-light" (click)="exportexcel()">Descargar Excel</button>
+        </div>
         <app-favbutton-usuarios
         [docsUsuario]="this.docsUsuario"
 
