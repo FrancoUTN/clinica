@@ -2,7 +2,7 @@
     class="contenedor-menor mb-5 fondo-oscuro"
 >
     <div class="container-fluid">
-        <table class="table text-white" style="text-align: center;">
+        <table class="table text-white" style="text-align: center;" id="excel-table">
             <thead>
                 <tr>
                     <th>Rol</th>
@@ -13,8 +13,6 @@
                     <th>DNI</th>
                     <th>Obra Social</th>
                     <th>Especialidades</th>
-                    <th>Imagen 1</th>
-                    <th>Imagen 2</th>
                     <th>Habilitado</th>
                     <th>Historia clínica</th>
                 </tr>
@@ -42,18 +40,6 @@
                     <td *ngIf="!item.especialidades">
                         n/a
                     </td>
-                    <td *ngIf="item.foto">
-                        <img [src]="item.foto" style="width: 100px; height: 100px" alt="">
-                    </td>
-                    <td *ngIf="!item.fotos">
-                        n/a
-                    </td>
-                    <td *ngIf="item.fotos">
-                        <img [src]="item.fotos[0]" style="width: 100px; height: 100px" alt="">
-                    </td>
-                    <td *ngIf="item.fotos">
-                        <img [src]="item.fotos[1]" style="width: 100px; height: 100px" alt="">
-                    </td>
 
                     <!-- <td *ngIf="item.especialidades">
                         <div class="form-check form-switch d-flex justify-content-center">
@@ -65,8 +51,11 @@
                                 [checked]="item.habilitado"
                             >
                         </div>
-                    </td> -->
+                    </td>
                     <td *ngIf="!item.especialidades">
+                        n/a
+                    </td> -->
+                    <td>
                         n/a
                     </td>
 
@@ -85,6 +74,7 @@
                 </tr>
             </tbody>
         </table>
+        <button class="btn btn-primary" (click)="exportexcel()">Exportar a Excel</button>
         <app-favbutton-usuarios
         [docsUsuario]="this.docsUsuario"
 

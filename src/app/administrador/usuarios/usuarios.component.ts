@@ -3,6 +3,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { RegistroService } from 'src/app/services/registro.service';
 import { DocUsuario } from 'src/app/models/DocUsuario';
 import { Usuario } from 'src/app/models/Usuario';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-usuarios',
@@ -61,6 +62,23 @@ export class UsuariosComponent implements OnInit {
   //     } 
   //   )
   // }
+
+  fileName= 'ExcelSheet.xlsx';
+  
+  exportexcel(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, this.fileName);
+ 
+  }
 
   onChangeHabilitado($event:any) {
     const chequeado = $event.target.checked;
