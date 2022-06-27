@@ -17,6 +17,7 @@ import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { SolicitarTurnoComponent } from './solicitar-turno/solicitar-turno.component';
 import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
 import { HomeComponent } from './home/home.component';
+import { FavbuttonUsuariosComponent } from './favbutton-usuarios/favbutton-usuarios.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { HomeComponent } from './home/home.component';
     MiPerfilComponent,
     SolicitarTurnoComponent,
     HistoriaClinicaComponent,
-    HomeComponent
+    HomeComponent,
+    FavbuttonUsuariosComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +55,8 @@ import { HomeComponent } from './home/home.component';
     MiPerfilComponent,
     SolicitarTurnoComponent,
     HistoriaClinicaComponent,
-    HomeComponent
+    HomeComponent,
+    FavbuttonUsuariosComponent
   ]
 })
 export class SharedModule { }
