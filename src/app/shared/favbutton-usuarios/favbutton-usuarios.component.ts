@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DocUsuario } from 'src/app/models/docUsuario';
+import { DocUsuario } from 'src/app/models/DocUsuario';
 
 @Component({
   selector: 'app-favbutton-usuarios',

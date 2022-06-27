@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TurnoService } from 'src/app/services/turno.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { DocUsuario } from 'src/app/models/docUsuario';
+import { DocUsuario } from 'src/app/models/DocUsuario';
 import { Usuario } from 'src/app/models/Usuario';
 import { Turno } from 'src/app/models/Turno';
 
