@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { OtroService } from 'src/app/services/otro.service';
 import { TurnoService } from 'src/app/services/turno.service';
 import { HistoriaClinica } from 'src/app/models/HistoriaClinica';
+import { Turno } from 'src/app/models/Turno';
 
 @Component({
   selector: 'app-pacientes-turnos',
@@ -9,9 +10,10 @@ import { HistoriaClinica } from 'src/app/models/HistoriaClinica';
   styleUrls: ['./pacientes-turnos.component.scss']
 })
 export class PacientesTurnosComponent implements OnInit {
-  turnosOriginal: any[] = [];
-  turnos: any[] = [];
-  turnoSeleccionado: any;
+  @Input() turnos!: Turno[];
+  turnosOriginal!: Turno[];
+  // turnos: any[] = [];
+  turnoSeleccionado!: Turno;
 
   filtro: string = '';
 
