@@ -59,7 +59,8 @@ import { PacientesTurnosComponent } from './pacientes-turnos/pacientes-turnos.co
     HistoriaClinicaComponent,
     HomeComponent,
     FavbuttonUsuariosComponent,
-    PacientesTurnosComponent
+    PacientesTurnosComponent,
+    ReviewComponent
   ]
 })
 export class SharedModule { }

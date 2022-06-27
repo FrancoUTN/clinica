@@ -1,58 +1,27 @@
-<!-- <table class="table text-white" style="text-align: center;">
-    <thead>
-        <tr>
-            <th>Email</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Edad</th>
-            <th>DNI</th>
-            <th>Obra Social</th>
-            <th>Imagen 1</th>
-            <th>Imagen 2</th>
-            <th>Historia clínica</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of usuarios">
-            <td>{{item.email}}</td>
-            <td>{{item.nombre}}</td>
-            <td>{{item.apellido}}</td>
-            <td>{{item.edad}}</td>
-            <td>{{item.dni}}</td>
-            <td>{{item.obraSocial}}</td>
-            <td>
-                <img [src]="item.fotos[0]" style="width: 100px; height: 100px" alt="">
-            </td>
-            <td>
-                <img [src]="item.fotos[1]" style="width: 100px; height: 100px" alt="">
-            </td>
-            <td>
-                <button
-                *ngIf="!verHistoriaClinica"
-                class="btn btn-primary m-auto"
-                (click)="verHistoriaClinicaHandler(item)"
-                >
-                Ver</button>
-            </td>
-        </tr>
-    </tbody>
-</table> -->
+<div *ngIf="modoNormal">
+    <app-favbutton-usuarios
+        [docsUsuario]="this.docsUsuario"
+        (usuarioSeleccionado)="this.usuarioSeleccionadoHandler($event)"
+    ></app-favbutton-usuarios>
 
-<app-favbutton-usuarios
-    [docsUsuario]="this.docsUsuario"
-    (usuarioSeleccionado)="usuarioSeleccionadoHandler($event)"
-></app-favbutton-usuarios>
+    <app-pacientes-turnos
+        *ngIf="this.verTurnos"
+        [turnos]="this.turnos"
+        (reviewSeleccionada)="this.reviewSeleccionadaHandler($event)"
+    ></app-pacientes-turnos>
 
-<app-pacientes-turnos
-    *ngIf="this.verTurnos"
-    [turnos]="this.turnos"
-
-></app-pacientes-turnos>
-
-<app-historia-clinica
-    class="contenedor-menor"
-    *ngIf="verHistoriaClinica"
-    [paciente]="pacienteSeleccionado"
-    (volver)="ocultarHandler()"
+    <app-historia-clinica
+        class="contenedor-menor"
+        *ngIf="verHistoriaClinica"
+        [paciente]="pacienteSeleccionado"
+        (volver)="this.ocultarHandler()"
+    >
+    </app-historia-clinica>
+</div>
+<app-review
+    *ngIf="modoReview"
+    [turno]="this.turnoSeleccionado"
+    rol="especialista"
+    (volver)="this.volverHandler()"
 >
-</app-historia-clinica>
+</app-review>

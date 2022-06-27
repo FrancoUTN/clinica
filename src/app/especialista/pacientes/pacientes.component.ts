@@ -19,6 +19,10 @@ export class PacientesComponent implements OnInit {
   miUid!: string;
   turnos!: Turno[];
   verTurnos: boolean = false;
+  turnoSeleccionado!: Turno;
+
+  modoNormal: boolean = true;
+  modoReview: boolean = false;
 
   constructor(
     private turnoService: TurnoService,
@@ -73,6 +77,18 @@ export class PacientesComponent implements OnInit {
       )
   }
 
+  reviewSeleccionadaHandler(turno: Turno) {
+    this.turnoSeleccionado = turno;
+
+    this.modoNormal = false;
+    this.modoReview = true;
+  }
+
+  volverHandler() {
+    this.modoNormal = true;
+    this.modoReview= false;
+  }
+  
   // ngOnInit(): void {
   //   this.authService.getUserID().subscribe(
   //     uid => {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { OtroService } from 'src/app/services/otro.service';
 import { TurnoService } from 'src/app/services/turno.service';
 import { HistoriaClinica } from 'src/app/models/HistoriaClinica';
@@ -11,6 +11,8 @@ import { Turno } from 'src/app/models/Turno';
 })
 export class PacientesTurnosComponent implements OnInit {
   @Input() turnos!: Turno[];
+  @Output() reviewSeleccionada = new EventEmitter();
+
   turnosOriginal!: Turno[];
   // turnos: any[] = [];
   turnoSeleccionado!: Turno;
@@ -54,11 +56,13 @@ export class PacientesTurnosComponent implements OnInit {
     this.modoReview= false;
   }
 
-  verReviewHandler(turno: any) {
-    this.turnoSeleccionado = turno;
+  verReviewHandler(turno: Turno) {
+    // this.turnoSeleccionado = turno;
 
-    this.modoNormal = false;
-    this.modoReview = true;
+    // this.modoNormal = false;
+    // this.modoReview = true;
+
+    this.reviewSeleccionada.emit(turno);
   }
 
 }
