@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TurnoService } from 'src/app/services/turno.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DocUsuario } from 'src/app/models/docUsuario';
+import { Usuario } from 'src/app/models/Usuario';
+import { Turno } from 'src/app/models/Turno';
 
 @Component({
   selector: 'app-pacientes',
@@ -12,7 +14,10 @@ export class PacientesComponent implements OnInit {
   // usuarios:Array<any> = [];
   docsUsuario: DocUsuario[] = [];
   verHistoriaClinica: boolean = false;
-  pacienteSeleccionado: any;
+  pacienteSeleccionado!: Usuario;
+
+  miUid!: string;
+  turnos!: Turno[];
 
   constructor(
     private turnoService: TurnoService,
@@ -22,8 +27,10 @@ export class PacientesComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getUserID().subscribe(
       uid => {
+        this.miUid = uid;
+
         this.turnoService.getRef()
-        .where('idEsp', '==', uid)
+        .where('idEsp', '==', this.miUid)
         .where('estado', '==', 'realizado')
         .get()
         .then(
@@ -47,6 +54,23 @@ export class PacientesComponent implements OnInit {
 
   usuarioSeleccionadoHandler(docUsuario: DocUsuario) {
     console.log(docUsuario);
+
+    this.turnoService.getRef()
+      .where('idEsp', '==', this.miUid)
+      .where('idPac', '==', docUsuario.id)
+      .where('estado', '==', 'realizado')
+      .get()
+      .then(
+        qs => {
+          this.turnos = [];
+          qs.forEach(
+            doc => {
+              const turno: any = doc.data();
+              this.turnos.push(turno);
+            }
+          )
+        }
+      )
   }
 
   // ngOnInit(): void {
