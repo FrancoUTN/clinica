@@ -1,97 +1,8 @@
-<!-- <div
-    class="contenedor-menor mb-5 fondo-oscuro"
->
-    <div class="container-fluid">
-        <table class="table text-white" style="text-align: center;" id="excel-table">
-            <thead>
-                <tr>
-                    <th>Rol</th>
-                    <th>Email</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Edad</th>
-                    <th>DNI</th>
-                    <th>Obra Social</th>
-                    <th>Especialidades</th>
-                    <th>Habilitado</th>
-                    <th>Historia clínica</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of usuarios">
-                    <td>{{item.rol}}</td>
-                    <td>{{item.email}}</td>
-                    <td>{{item.nombre}}</td>
-                    <td>{{item.apellido}}</td>
-                    <td>{{item.edad}}</td>
-                    <td>{{item.dni}}</td>
-                    <td *ngIf="item.obraSocial">
-                        {{item.obraSocial}}
-                    </td>
-                    <td *ngIf="!item.obraSocial">
-                        n/a
-                    </td>
-                    <td *ngIf="item.especialidades">
-                        <span *ngFor="let especialidad of item.especialidades">
-                            {{especialidad}}
-                            <br>
-                        </span>
-                    </td>
-                    <td *ngIf="!item.especialidades">
-                        n/a
-                    </td>
-
-                    <td *ngIf="item.especialidades">
-                        <div class="form-check form-switch d-flex justify-content-center">
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                [value]="item.id"
-                                (change)="onChangeHabilitado($event)"
-                                [checked]="item.habilitado"
-                            >
-                        </div>
-                    </td>
-                    <td *ngIf="!item.especialidades">
-                        n/a
-                    </td>
-                    <td>
-                        n/a
-                    </td>
-
-                    <td *ngIf="item.rol !== 'paciente'">
-                        n/a
-                    </td>
-                    <td *ngIf="item.rol === 'paciente'">
-                        <button
-                        *ngIf="!verHistoriaClinica"
-                        class="btn btn-primary m-auto"
-                        (click)="verHistoriaClinicaHandler(item)"
-                        >
-                        Ver</button>
-                    </td>
-
-                </tr>
-            </tbody>
-        </table>
-        <button class="btn btn-primary" (click)="exportexcel()">Exportar a Excel</button>
-        <app-favbutton-usuarios
-        [docsUsuario]="this.docsUsuario"
-
-        >
-        </app-favbutton-usuarios>
-        <div class="d-flex justify-content-center">
-            <button *ngIf="!quieroAgregarUsuario" class="btn btn-success" (click)="agregarUsuario()">Agregar usuario</button>
-            <button *ngIf="quieroAgregarUsuario" class="btn btn-danger" (click)="noAgregarUsuario()">Cancelar</button>
-        </div>
-    </div>
-</div> -->
-
 <div
     class="contenedor-menor mb-5 fondo-oscuro"
 >
     <div class="container-fluid">
-        <table class="table text-white" style="text-align: center;" id="excel-table">
+        <table class="table text-white" style="text-align: center;" id="usuarios-excel">
             <thead>
                 <tr>
                     <th>Rol</th>
@@ -164,19 +75,66 @@
             </tbody>
         </table>
         <div class="text-center my-5">
-            <button class="btn btn-light" (click)="exportexcel()">Descargar Excel</button>
+            <button
+                class="btn btn-light"
+                (click)="exportarExcel('usuarios-excel', 'usuarios')"
+            >Descargar usuarios</button>
         </div>
         <app-favbutton-usuarios
-        [docsUsuario]="this.docsUsuario"
-
+            [docsUsuario]="this.docsUsuario"
+            (usuarioSeleccionado)="this.usuarioSeleccionadoHandler($event)"
         >
         </app-favbutton-usuarios>
         <div class="d-flex justify-content-center">
-            <button *ngIf="!quieroAgregarUsuario" class="btn btn-success" (click)="agregarUsuario()">Agregar usuario</button>
-            <button *ngIf="quieroAgregarUsuario" class="btn btn-danger" (click)="noAgregarUsuario()">Cancelar</button>
+            <button
+                *ngIf="!quieroAgregarUsuario"
+                class="btn btn-success"
+                (click)="agregarUsuario()"
+            >Agregar usuario</button>
+            <button
+                *ngIf="quieroAgregarUsuario"
+                class="btn btn-danger"
+                (click)="noAgregarUsuario()"
+            >Cancelar</button>
         </div>
     </div>
 </div>
+
+<div class="contenedor-menor mb-5 fondo-oscuro" *ngIf="this.verTurnos">
+    <div class="container-fluid">
+        <table id="turnos-excel">
+            <tr>
+                <th>Horario</th>
+                <th>Especialista</th>
+                <th>Paciente</th>
+                <th>Especialidad</th>
+                <th>Estado</th>
+                <th>Motivo</th>
+            </tr>
+            <tr *ngFor="let turno of turnos; let i = index">
+                <td>{{turno.fecha.toDate() | date:'MM/dd HH:mm'}}</td>
+                <td>
+                    Dr. {{turno.especialista.apellido}},
+                    {{turno.especialista.nombre}}
+                </td>
+                <td>
+                    {{turno.paciente.nombre}}
+                    {{turno.paciente.apellido}}
+                </td>
+                <td>{{turno.especialidad}}</td>
+                <td>{{turno.estado | uppercase}}</td>
+                <td class="tdMotivo">{{turno.razon}}</td>
+            </tr>
+        </table>
+        <div class="text-center my-5">
+            <button
+                class="btn btn-light"
+                (click)="exportarExcel('turnos-excel', 'turnos')"
+            >Descargar turnos</button>
+        </div>
+    </div>
+</div>
+
 
 <app-historia-clinica
     class="contenedor-menor mb-5 fondo-oscuro"

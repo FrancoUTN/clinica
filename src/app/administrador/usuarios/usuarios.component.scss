@@ -3,5 +3,13 @@ a:hover {
 }
 
 tr {
-    height: 4rem;
+    height: 3.5rem;
+}
+
+tr > * {
+    padding: .5rem 2rem .5rem 0;
+}
+
+.tdMotivo {
+    max-width: 20rem;
 }
