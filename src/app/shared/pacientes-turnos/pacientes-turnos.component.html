@@ -1,0 +1,86 @@
+<div
+    [ngClass]="{'fondo-oscuro contenedor-menor': this.miRol === 'administrador'}"
+><!-- Chanchada -->
+    <div *ngIf="modoNormal">
+        <h1
+            class="text-center"
+            *ngIf="miRol === 'paciente' || miRol === 'especialista'"
+        >Mis turnos</h1>
+        <h1
+            class="text-center"
+            *ngIf="miRol === 'administrador'"
+        >Turnos</h1>
+        <div>
+            <div *ngIf="miRol === 'paciente' || miRol === 'administrador'" class="mb-4">
+                <label class="mb-2">
+                    Buscar por especialidad o especialista
+                </label>
+                <input
+                    [(ngModel)]="filtro"
+                    (ngModelChange)="pacienteFiltrar()"
+                    class="form-control w-25"
+                >
+            </div>
+            <div *ngIf="miRol === 'especialista'" class="mb-4">
+                <label class="mb-2">
+                    Buscar por especialidad o paciente
+                </label>
+                <input
+                    [(ngModel)]="filtro"
+                    (ngModelChange)="especialistaFiltrar()"
+                    class="form-control w-25"
+                >
+            </div>
+            <table>
+                <tr>
+                    <th>Horario</th>
+                    <th *ngIf="
+                        miRol === 'paciente' ||
+                        miRol === 'administrador'"
+                    >Especialista</th>
+                    <th *ngIf="
+                        miRol === 'especialista' ||
+                        miRol === 'administrador'"
+                    >Paciente</th>
+                    <th>Especialidad</th>
+                    <th>Estado</th>
+                    <th>Motivo</th>
+                </tr>
+                <tr *ngFor="let turno of turnos; let i = index">
+                    <td>{{turno.fecha.toDate() | date:'MM/dd HH:mm'}}</td>
+                    <td *ngIf="miRol === 'paciente' || miRol === 'administrador'">
+                        Dr. {{turno.especialista.apellido}},
+                        {{turno.especialista.nombre}}
+                    </td>
+                    <td *ngIf="miRol === 'especialista' || miRol === 'administrador'">
+                        {{turno.paciente.nombre}}
+                        {{turno.paciente.apellido}}
+                    </td>
+                    <td>{{turno.especialidad}}</td>
+                    <td>{{turno.estado | uppercase}}</td>
+                    <td class="tdMotivo">{{turno.razon}}</td>
+                    <td
+                    *ngIf="
+                        (miRol === 'paciente' && turno.reviewEsp) ||
+                        (miRol === 'especialista' && turno.reviewPac)"
+                    >
+                        <button
+                            class="btn btn-info"
+                            (click)="verReviewHandler(turno)"
+                        >
+                        Ver reseña</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <app-review
+        *ngIf="modoReview"
+        [turno]="turnoSeleccionado"
+        [rol]="miRol"
+        (volver)="volverHandler()"
+    >
+    </app-review>
+
+</div>

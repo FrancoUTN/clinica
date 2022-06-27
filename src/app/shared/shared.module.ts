@@ -18,6 +18,7 @@ import { SolicitarTurnoComponent } from './solicitar-turno/solicitar-turno.compo
 import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
 import { HomeComponent } from './home/home.component';
 import { FavbuttonUsuariosComponent } from './favbutton-usuarios/favbutton-usuarios.component';
+import { PacientesTurnosComponent } from './pacientes-turnos/pacientes-turnos.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { FavbuttonUsuariosComponent } from './favbutton-usuarios/favbutton-usuar
     SolicitarTurnoComponent,
     HistoriaClinicaComponent,
     HomeComponent,
-    FavbuttonUsuariosComponent
+    FavbuttonUsuariosComponent,
+    PacientesTurnosComponent
   ],
   imports: [
     CommonModule,
@@ -56,7 +58,8 @@ import { FavbuttonUsuariosComponent } from './favbutton-usuarios/favbutton-usuar
     SolicitarTurnoComponent,
     HistoriaClinicaComponent,
     HomeComponent,
-    FavbuttonUsuariosComponent
+    FavbuttonUsuariosComponent,
+    PacientesTurnosComponent
   ]
 })
 export class SharedModule { }
