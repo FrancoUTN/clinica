@@ -33,9 +33,16 @@
                 >
                     <button
                         class="btn btn-info"
-                        (click)="verReviewHandler(turno)"
+                        (click)="verReview(turno)"
                     >
                     Ver reseña</button>
+                </td>
+                <td>
+                    <button
+                        class="btn btn-primary"
+                        (click)="historiaClinicaSeleccionada.emit(turno)"
+                    >
+                    Ver historia clínica</button>
                 </td>
             </tr>
         </table>

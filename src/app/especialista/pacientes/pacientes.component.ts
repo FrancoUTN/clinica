@@ -88,43 +88,18 @@ export class PacientesComponent implements OnInit {
     this.modoNormal = true;
     this.modoReview= false;
   }
-  
-  // ngOnInit(): void {
-  //   this.authService.getUserID().subscribe(
-  //     uid => {
-  //       this.turnoService.getRef()
-  //       .where('idEsp', '==', uid)
-  //       .where('estado', '==', 'realizado')
-  //       .get()
-  //       .then(
-  //         qs => {
-  //           const auxUsuarios: Array<any> = [];
 
-  //           qs.forEach(doc => {
-  //             const objeto: any = doc.data();
-  //             const idPaciente = objeto.idPac;
-  //             const paciente = objeto.paciente;
-
-  //             const some = auxUsuarios.some(
-  //               auxUsuario => auxUsuario.idPac == idPaciente
-  //             );
-
-  //             if (!some) {
-  //               auxUsuarios.push({idPac: idPaciente, paciente: paciente});
-  //             }
-  //           });
-
-  //           this.usuarios = auxUsuarios.map(
-  //             auxUsuario => auxUsuario.paciente
-  //           );
-  //     })
-  //   })
+  // verHistoriaClinicaHandler(paciente: any) {
+  //   this.pacienteSeleccionado = paciente;
+  //   this.verHistoriaClinica = true;
   // }
-
-  verHistoriaClinicaHandler(paciente: any) {
-    this.pacienteSeleccionado = paciente;
+  
+  verHistoriaClinicaHandler(turno: Turno) {
+    this.turnoSeleccionado = turno;
+    this.pacienteSeleccionado = this.turnoSeleccionado.paciente;
     this.verHistoriaClinica = true;
   }
+
   ocultarHandler() {
     this.verHistoriaClinica = false;
   }

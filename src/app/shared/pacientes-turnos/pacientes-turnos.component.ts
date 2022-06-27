@@ -12,6 +12,7 @@ import { Turno } from 'src/app/models/Turno';
 export class PacientesTurnosComponent implements OnInit {
   @Input() turnos!: Turno[];
   @Output() reviewSeleccionada = new EventEmitter();
+  @Output() historiaClinicaSeleccionada = new EventEmitter();
 
   turnosOriginal!: Turno[];
   // turnos: any[] = [];
@@ -56,7 +57,7 @@ export class PacientesTurnosComponent implements OnInit {
     this.modoReview= false;
   }
 
-  verReviewHandler(turno: Turno) {
+  verReview(turno: Turno) {
     // this.turnoSeleccionado = turno;
 
     // this.modoNormal = false;

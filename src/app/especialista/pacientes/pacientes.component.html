@@ -8,6 +8,7 @@
         *ngIf="this.verTurnos"
         [turnos]="this.turnos"
         (reviewSeleccionada)="this.reviewSeleccionadaHandler($event)"
+        (historiaClinicaSeleccionada)="this.verHistoriaClinicaHandler($event)"
     ></app-pacientes-turnos>
 
     <app-historia-clinica
