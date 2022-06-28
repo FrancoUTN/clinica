@@ -9,19 +9,28 @@ ExportingModule(Highcharts);
 import { InformesComponent } from './informes.component';
 import { TurnosDiaComponent } from './turnos-dia/turnos-dia.component';
 import { TestComponent } from './test/test.component';
+import { TurnosSolicitadosComponent } from './turnos-solicitados/turnos-solicitados.component';
+import { TurnosFinalizadosComponent } from './turnos-finalizados/turnos-finalizados.component';
+import { TurnosEspecialidadComponent } from './turnos-especialidad/turnos-especialidad.component';
 
 
 const routes: Routes = [
   { path: '', component: InformesComponent, children: [
     { path: 'test', component: TestComponent },
-    { path: 'turnos-dia', component: TurnosDiaComponent }
+    { path: 'turnos-dia', component: TurnosDiaComponent },
+    { path: 'turnos-solicitados', component: TurnosSolicitadosComponent },
+    { path: 'turnos-finalizados', component: TurnosFinalizadosComponent },
+    { path: 'turnos-especialidad', component: TurnosEspecialidadComponent },
   ]}
 ];
 
 @NgModule({
   declarations: [
     TurnosDiaComponent,
-    TestComponent
+    TestComponent,
+    TurnosSolicitadosComponent,
+    TurnosFinalizadosComponent,
+    TurnosEspecialidadComponent
   ],
   imports: [
     CommonModule,
