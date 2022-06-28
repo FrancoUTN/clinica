@@ -106,7 +106,7 @@ export class TurnosDiaComponent implements OnInit {
      },
      series: [
         {
-           name: 'Fechas',
+           name: 'Turnos',
            type: 'column',
            data: this.cantidades
         }
