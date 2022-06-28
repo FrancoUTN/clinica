@@ -13,12 +13,6 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./solicitar-turno.component.scss']
 })
 export class SolicitarTurnoComponent implements OnInit {
-  // especialidades: string[] = [
-  //   "Nutrición",
-  //   "Dermatología",
-  //   "Traumatología",
-  //   "Cardiología"
-  // ]; // Revisar
   especialidades: Especialidad[] = [];
 
   especialistas: any[] = [];

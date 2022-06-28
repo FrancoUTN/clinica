@@ -9,9 +9,8 @@ import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '
 export class RegistroEspecialistaComponent implements OnInit {
   especialidades = [
     'Nutrición',
-    'Dermatología',
-    'Traumatología',
-    'Cardiología',
+    'Neumología',
+    'Traumatología'
   ];
   signupForm: FormGroup | any;
   // error:string = '';

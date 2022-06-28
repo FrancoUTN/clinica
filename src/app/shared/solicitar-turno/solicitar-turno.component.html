@@ -23,29 +23,24 @@
             </div>
         </div>
     </div>
-
-    <!-- <div *ngIf="paso1" >
-        <div *ngFor="let especialidad of especialidades">
-            <button
-                class="btn btn-outline-primary my-3 w-100"
-                (click)="onEspecialidadSeleccionadaHandler(especialidad)"
+    
+    <div *ngIf="paso1" class="d-flex flex-column">
+        <h2>Seleccione especialidad:</h2>
+        <div
+            *ngFor="let especialidad of especialidades"
+            class="btn btn-outline-secondary my-3 w-100"
+            (click)="onEspecialidadSeleccionadaHandler(especialidad)"
+        >
+            <img
+                *ngIf="especialidad.imagen"
+                [src]="especialidad.imagen"
+                style="height: 5rem"                    
             >
-                {{ especialidad }}
-            </button>
-        </div>
-    </div> -->
-    <div *ngIf="paso1" >
-        <div *ngFor="let especialidad of especialidades">
-            <div *ngIf="especialidad.imagen">
-                <img
-                    [src]="especialidad.imagen"
-                    type="button"
-                    (click)="onEspecialidadSeleccionadaHandler(especialidad)"
-                >
-            </div>
-            <button *ngIf="!especialidad.imagen">
-                {{ especialidad.nombre }}
-            </button>
+            <img
+                *ngIf="!especialidad.imagen"
+                src="../../../assets/stethoscope.png"
+                style="height: 5rem"
+            >
         </div>
     </div>
 
