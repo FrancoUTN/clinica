@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Especialidad } from 'src/app/models/Especialidad';
+import { EspecialidadService } from 'src/app/services/especialidad.service';
 import { OtroService } from 'src/app/services/otro.service';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { TurnoService } from 'src/app/services/turno.service';
@@ -11,12 +13,14 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./solicitar-turno.component.scss']
 })
 export class SolicitarTurnoComponent implements OnInit {
-  especialidades: string[] = [
-    "Nutrición",
-    "Dermatología",
-    "Traumatología",
-    "Cardiología"
-  ]; // Revisar
+  // especialidades: string[] = [
+  //   "Nutrición",
+  //   "Dermatología",
+  //   "Traumatología",
+  //   "Cardiología"
+  // ]; // Revisar
+  especialidades: Especialidad[] = [];
+
   especialistas: any[] = [];
   pacientes: any[] = [];
 
@@ -44,7 +48,8 @@ export class SolicitarTurnoComponent implements OnInit {
     private usuarioService: UsuarioService,
     private reservaService: ReservaService,
     private turnoService: TurnoService,
-    private otroService: OtroService) { }
+    private otroService: OtroService,
+    private especialidadService: EspecialidadService) { }
 
   ngOnInit(): void {
     this.otroService.getDocumentSnapshotDeUsuario().subscribe(
@@ -75,7 +80,16 @@ export class SolicitarTurnoComponent implements OnInit {
             )
         }
       }
-    )
+    );
+
+    this.especialidadService.getEspecialidades().subscribe(
+      qs => qs.forEach(
+        qds => {
+          const esp: any = qds.data();
+          this.especialidades.push(esp);
+        }
+      )
+    );
 
     for(let i = 8; i < 19; i++)
       this.franjaHoraria.push(i);
@@ -127,8 +141,8 @@ export class SolicitarTurnoComponent implements OnInit {
     this.idEsp = paciente.id;
   }
 
-  onEspecialidadSeleccionadaHandler(especialidad: string) {
-    this.especialidadElegida = especialidad;
+  onEspecialidadSeleccionadaHandler(especialidad: Especialidad) {
+    this.especialidadElegida = especialidad.nombre;
 
     this.usuarioService
       .getUsuariosRef()

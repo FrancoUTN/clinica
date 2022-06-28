@@ -24,13 +24,27 @@
         </div>
     </div>
 
-    <div *ngIf="paso1" >
+    <!-- <div *ngIf="paso1" >
         <div *ngFor="let especialidad of especialidades">
             <button
                 class="btn btn-outline-primary my-3 w-100"
                 (click)="onEspecialidadSeleccionadaHandler(especialidad)"
             >
                 {{ especialidad }}
+            </button>
+        </div>
+    </div> -->
+    <div *ngIf="paso1" >
+        <div *ngFor="let especialidad of especialidades">
+            <div *ngIf="especialidad.imagen">
+                <img
+                    [src]="especialidad.imagen"
+                    type="button"
+                    (click)="onEspecialidadSeleccionadaHandler(especialidad)"
+                >
+            </div>
+            <button *ngIf="!especialidad.imagen">
+                {{ especialidad.nombre }}
             </button>
         </div>
     </div>
