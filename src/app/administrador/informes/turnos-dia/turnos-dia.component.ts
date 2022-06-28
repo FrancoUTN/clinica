@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
+import { Turno } from 'src/app/models/Turno';
 import { TurnoService } from 'src/app/services/turno.service';
 
 @Component({
@@ -16,26 +17,53 @@ export class TurnosDiaComponent implements OnInit {
     day:"numeric"
   };
   renderizar: boolean = false;
+
+  turnos: Turno[] = [];
   
   constructor(private turnoService: TurnoService) { }
 
   ngOnInit(): void {
-    for(let i = 0; i < 5; i++) {
-      const fecha = new Date();
-      fecha.setDate(fecha.getDate() - i);
-      this.strFechas.push(fecha.toLocaleString('es-ES', this.strFechaOptions))
-    }
-    
-    this.renderizar = true;
+    this.turnoService.getRef().get().then(
+      qs => {
+        qs.forEach(
+          qds => {
+            const turno: any = qds.data();
+
+            this.turnos.push(turno);
+          }
+        );
+
+        // console.log(this.turnos);
+
+        this.turnos.forEach(
+          turno => {
+            // const fecha = new Date(turno.fecha);
+
+            console.log(turno.fecha.toDate());
+            console.log(new Date());
+          }
+        )
+      }
+    )
   }
 
-  turnos = [
-    4,
-    7,
-    5,
-    5,
-    0
-  ]
+  // ngOnInit(): void {
+  //   for(let i = 0; i < 5; i++) {
+  //     const fecha = new Date();
+  //     fecha.setDate(fecha.getDate() - i);
+  //     this.strFechas.push(fecha.toLocaleString('es-ES', this.strFechaOptions))
+  //   }
+    
+  //   this.renderizar = true;
+  // }
+
+  // turnos = [
+  //   4,
+  //   7,
+  //   5,
+  //   5,
+  //   0
+  // ]
 
   highcharts: typeof Highcharts = Highcharts;
   
@@ -58,7 +86,7 @@ export class TurnosDiaComponent implements OnInit {
         {
            name: 'Fechas',
            type: 'column',
-           data: this.turnos
+          //  data: this.turnos
         }
      ]
   };
