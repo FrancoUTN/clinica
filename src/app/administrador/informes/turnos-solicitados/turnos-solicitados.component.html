@@ -1,4 +1,4 @@
-<div class="contenedor-menor mb-5 fondo-oscuro">
+<div class="contenedor-menor mb-5 fondo-oscuro" *ngIf="!this.renderizar">
     <h2>Solicitados</h2>
     <form #f="ngForm" (ngSubmit)="confirmar(f.value)" novalidate>
         <label class="form-label">Fecha 1:</label>
@@ -27,4 +27,5 @@
         [options] = "chartOptions" 
         style = "width: 50rem; height: 400px; display: block;">
     </highcharts-chart>
+    <button class="btn btn-danger mt-5" routerLink="../">Volver</button>
 </div>

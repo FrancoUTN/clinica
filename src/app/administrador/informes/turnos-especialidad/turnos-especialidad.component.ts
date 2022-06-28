@@ -39,7 +39,7 @@ export class TurnosEspecialidadComponent implements OnInit {
      series: [
         {
            name: 'Turnos',
-           type: 'column',
+           type: 'bar',
            data: this.cantidades
         }
      ]
