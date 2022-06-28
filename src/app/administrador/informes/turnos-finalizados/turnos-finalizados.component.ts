@@ -29,7 +29,7 @@ export class TurnosFinalizadosComponent implements OnInit {
       enabled: false
     },
      title: {
-        text: "Cantidad de turnos finalizados por médico en un lapso de tiempo"
+        text: "Turnos finalizados por médico en un lapso de tiempo"
      },
      xAxis:{
         categories: this.strEspecialistas
