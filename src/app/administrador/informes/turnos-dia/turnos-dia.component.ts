@@ -9,21 +9,39 @@ import { TurnoService } from 'src/app/services/turno.service';
   styleUrls: ['./turnos-dia.component.scss']
 })
 export class TurnosDiaComponent implements OnInit {
-  strFechas: string[] = [];
-  strFechaOptions: any = {
-    weekday:"long",
-    year:"numeric",
-    month:"long",
-    day:"numeric"
-  };
   renderizar: boolean = false;
-
   turnos: Turno[] = [];
   fechasFirestore: string[] = [];
   fechasActuales: string[] = [];
   cantidades: number[] = [];
   diasPorDelante!: number;
   
+  highcharts: typeof Highcharts = Highcharts;
+
+  chartOptions: Highcharts.Options = {
+    accessibility: {
+      enabled: false
+    },
+     title: {
+        text: "Cantidad de turnos por día"
+     },
+     xAxis:{
+        categories: this.fechasActuales
+     },
+     yAxis: {
+        title: {
+           text:"Cantidad"
+        }
+     },
+     series: [
+        {
+           name: 'Turnos',
+           type: 'column',
+           data: this.cantidades
+        }
+     ]
+  };
+
   constructor(private turnoService: TurnoService) { }
 
   ngOnInit(): void {
@@ -84,32 +102,6 @@ export class TurnosDiaComponent implements OnInit {
         this.renderizar = true;
       }
     );
-
   }
 
-  highcharts: typeof Highcharts = Highcharts;
-  
-  chartOptions: Highcharts.Options = {
-    accessibility: {
-      enabled: false
-    },
-     title: {
-        text: "Cantidad de turnos por día"
-     },
-     xAxis:{
-        categories: this.fechasActuales
-     },
-     yAxis: {
-        title: {
-           text:"Cantidad"
-        }
-     },
-     series: [
-        {
-           name: 'Turnos',
-           type: 'column',
-           data: this.cantidades
-        }
-     ]
-  };
 }
