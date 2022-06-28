@@ -5,6 +5,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import * as Highcharts from 'highcharts';
 import ExportingModule from 'highcharts/modules/exporting';
 ExportingModule(Highcharts);
+import { FormsModule } from '@angular/forms';
 
 import { InformesComponent } from './informes.component';
 import { TurnosDiaComponent } from './turnos-dia/turnos-dia.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild(routes),
     HighchartsChartModule
   ]

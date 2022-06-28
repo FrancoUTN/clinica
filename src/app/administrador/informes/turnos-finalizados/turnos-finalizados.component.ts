@@ -3,6 +3,7 @@ import { DocUsuario } from 'src/app/models/DocUsuario';
 import { TurnoService } from 'src/app/services/turno.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import * as Highcharts from 'highcharts';
+import { Turno } from 'src/app/models/Turno';
 
 @Component({
   selector: 'app-turnos-finalizados',
@@ -10,8 +11,8 @@ import * as Highcharts from 'highcharts';
   styleUrls: ['./turnos-finalizados.component.scss']
 })
 export class TurnosFinalizadosComponent implements OnInit {
-  start = new Date('2022-06-30');
-  end = new Date('2022-07-01');
+  start = new Date();
+  end = new Date();
 
   especialistas: DocUsuario[] = [];
 
@@ -19,10 +20,7 @@ export class TurnosFinalizadosComponent implements OnInit {
   cantidades: number[] = [];
 
   renderizar: boolean = false;  
-  // turnos: Turno[] = [];
-  // fechasFirestore: string[] = [];
-  // fechasActuales: string[] = [];
-  // diasPorDelante!: number;
+  turnos: Turno[] = [];
   
   highcharts: typeof Highcharts = Highcharts;
 
@@ -68,44 +66,49 @@ export class TurnosFinalizadosComponent implements OnInit {
               this.especialistas.push({id: id, usuario: data});
             }
           );
-
-          this.especialistas.forEach(
-            (docUsuario, indice) => {
-              this.turnoService.getRef()
-              .where('estado', '==', 'realizado')
-              .where('idEsp', '==', docUsuario.id)
-              .where('fecha', '>', this.start)
-              .where('fecha', '<', this.end)
-              .onSnapshot(
-                qs => {
-                  qs.forEach(
-                    qds => {
-                      console.log(qds.data());
-                    }
-                  )
-                }
-              );
-            }
-          );
-
-          // this.turnoService.getRef()
-          // .where('fecha', '>', t)
-          // .where('fecha', '>', this.start)
-          // .where('fecha', '<', this.end)
-          // .onSnapshot(
-          //   qs => {
-          //     qs.forEach(
-          //       qds => {
-          //         console.log(qds.data());
-          //       }
-          //     )
-          //   }
-          // );
-
-          
-          this.renderizar = true;
         }
       );
   }
 
+  confirmar(valor: any) {
+    this.start = new Date(valor.inicio);
+    this.end = new Date(valor.fin);
+
+    this.turnoService.getRef()
+      .where('estado', '==', 'realizado')
+      .where('fecha', '>', this.start)
+      .where('fecha', '<', this.end)
+      .get()
+      .then(
+        qs => {
+          qs.forEach(
+            qds => {
+              const turno: any = qds.data();
+
+              this.turnos.push(turno);
+            }
+          );
+
+          this.especialistas.forEach(
+            (especialista) => {
+              let cantidad = 0;
+
+              this.turnos.forEach(
+                (turno) => {
+                  if (especialista.id === turno.idEsp) {
+                    cantidad++;
+                  }
+                }
+              );
+
+              this.strEspecialistas.push(especialista.usuario.apellido);
+              this.cantidades.push(cantidad);
+            }
+          );
+          
+          this.renderizar = true;
+        }
+      );
+    
+  }
 }

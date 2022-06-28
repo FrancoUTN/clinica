@@ -1,6 +1,27 @@
 <div class="contenedor-menor mb-5 fondo-oscuro">
-    <highcharts-chart
-        *ngIf="this.renderizar"
+    <form #f="ngForm" (ngSubmit)="confirmar(f.value)" novalidate>
+        <label class="form-label">Fecha 1:</label>
+        <input
+            type="date"
+            class="form-control mb-3"
+            name="inicio"
+            required
+            ngModel
+        >
+        <label class="form-label">Fecha 2:</label>
+        <input
+            type="date"
+            class="form-control mb-5"
+            name="fin"
+            required
+            ngModel
+        >
+        <button class="btn btn-outline-light px-5" type="submit">Confirmar</button>            
+    </form>
+</div>
+
+<div class="contenedor-menor mb-5 fondo-oscuro" *ngIf="this.renderizar">
+    <highcharts-chart        
         [Highcharts] = "highcharts" 
         [options] = "chartOptions" 
         style = "width: 50rem; height: 400px; display: block;">
