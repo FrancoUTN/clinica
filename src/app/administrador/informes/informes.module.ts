@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HighchartsChartModule } from 'highcharts-angular';
+import * as Highcharts from 'highcharts';
+import ExportingModule from 'highcharts/modules/exporting';
+ExportingModule(Highcharts);
 
 import { InformesComponent } from './informes.component';
 import { TurnosDiaComponent } from './turnos-dia/turnos-dia.component';
