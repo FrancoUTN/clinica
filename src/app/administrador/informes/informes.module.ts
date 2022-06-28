@@ -10,8 +10,8 @@ import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   { path: '', component: InformesComponent, children: [
-    { path: 'turnos-dia', component: TurnosDiaComponent },
-    { path: 'test', component: TestComponent }
+    { path: 'test', component: TestComponent },
+    { path: 'turnos-dia', component: TurnosDiaComponent }
   ]}
 ];
 

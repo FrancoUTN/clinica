@@ -19,10 +19,16 @@ export class TurnosDiaComponent implements OnInit {
   renderizar: boolean = false;
 
   turnos: Turno[] = [];
+  fechasFirestore: string[] = [];
+  fechasActuales: string[] = [];
+  cantidades: number[] = [];
+  diasPorDelante!: number;
   
   constructor(private turnoService: TurnoService) { }
 
   ngOnInit(): void {
+    this.diasPorDelante = 15; // Configurable
+
     this.turnoService.getRef().get().then(
       qs => {
         qs.forEach(
@@ -33,37 +39,53 @@ export class TurnosDiaComponent implements OnInit {
           }
         );
 
-        // console.log(this.turnos);
-
         this.turnos.forEach(
           turno => {
-            // const fecha = new Date(turno.fecha);
+            const diaFirestore: number = turno.fecha.toDate().getDate();
+            const mesFirestore: number = turno.fecha.toDate().getMonth() + 1;
+            const fechaFirestore: string = diaFirestore + '/' + mesFirestore;
 
-            console.log(turno.fecha.toDate());
-            console.log(new Date());
+            this.fechasFirestore.push(fechaFirestore);
+          }
+        );
+
+        for(let i = 0; i < this.diasPorDelante; i++) {
+          const fechaActual = new Date();
+          fechaActual.setDate(fechaActual.getDate() + i);
+          
+          const diaActual: number = fechaActual.getDate();
+          const mesActual: number = fechaActual.getMonth() + 1;
+          const strFechaActual: string = diaActual + '/' + mesActual;
+
+          this.fechasActuales.push(strFechaActual);
+        }
+
+        this.fechasActuales.forEach(
+          (fechaActual, indice) => {
+            let cantidad: number = 0;
+
+            this.fechasFirestore.forEach(
+              fechaFS => {
+                if (fechaActual === fechaFS) {
+                  cantidad++;
+                }
+              }
+            );
+
+            this.cantidades[indice] = cantidad;
+            indice++;
           }
         )
+        
+        // for(let i = 0; i < this.diasPorDelante; i++) {
+        //   console.log(this.fechasActuales[i] + ': ' + this.cantidades[i]);
+        // }
+
+        this.renderizar = true;
       }
-    )
+    );
+
   }
-
-  // ngOnInit(): void {
-  //   for(let i = 0; i < 5; i++) {
-  //     const fecha = new Date();
-  //     fecha.setDate(fecha.getDate() - i);
-  //     this.strFechas.push(fecha.toLocaleString('es-ES', this.strFechaOptions))
-  //   }
-    
-  //   this.renderizar = true;
-  // }
-
-  // turnos = [
-  //   4,
-  //   7,
-  //   5,
-  //   5,
-  //   0
-  // ]
 
   highcharts: typeof Highcharts = Highcharts;
   
@@ -75,7 +97,7 @@ export class TurnosDiaComponent implements OnInit {
         text: "Cantidad de turnos por día"
      },
      xAxis:{
-        categories: this.strFechas
+        categories: this.fechasActuales
      },
      yAxis: {
         title: {
@@ -86,7 +108,7 @@ export class TurnosDiaComponent implements OnInit {
         {
            name: 'Fechas',
            type: 'column',
-          //  data: this.turnos
+           data: this.cantidades
         }
      ]
   };
