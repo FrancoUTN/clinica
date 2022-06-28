@@ -11,6 +11,8 @@ import { MiPerfilComponent } from '../shared/mi-perfil/mi-perfil.component';
 import { MisTurnosComponent } from '../shared/mis-turnos/mis-turnos.component';
 import { SolicitarTurnoComponent } from '../shared/solicitar-turno/solicitar-turno.component';
 import { InformesComponent } from './informes/informes.component';
+import { TurnosDiaComponent } from './informes/turnos-dia/turnos-dia.component';
+import { TestComponent } from './informes/test/test.component';
 
 
 const routes: Routes = [
@@ -19,7 +21,10 @@ const routes: Routes = [
     { path: 'mi-perfil', component: MiPerfilComponent },
     { path: 'turnos', component: MisTurnosComponent },
     { path: 'solicitar-turno', component: SolicitarTurnoComponent },
-    { path: 'informes', component: InformesComponent }
+    {
+      path: 'informes',
+      loadChildren: () => import('./informes/informes.module').then(m => m.InformesModule)
+    }
   ]}
 ];
 
@@ -33,8 +38,7 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
-    SharedModule,    
-    HighchartsChartModule
+    SharedModule
   ]
 })
 export class AdministradorModule { }
