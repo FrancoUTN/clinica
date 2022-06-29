@@ -6,7 +6,7 @@ import { Ingreso } from '../models/Ingreso';
   providedIn: 'root'
 })
 export class IngresoService {
-  coleccion: AngularFirestoreCollection<Ingreso>
+  coleccion: AngularFirestoreCollection<Ingreso>;
 
   constructor(angularFirestore: AngularFirestore) {
     this.coleccion = angularFirestore.collection('ingresos');
