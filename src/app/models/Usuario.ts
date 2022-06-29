@@ -13,5 +13,6 @@ export interface Usuario {
     'historiaClinica'?: HistoriaClinica; // paciente
     'especialidades'?: string[]; // especialista
     'habilitado'?: boolean; // especialista
+    'agenda'?: boolean[]; // especialista
     'foto'?: string; // especialista y administrador
 }

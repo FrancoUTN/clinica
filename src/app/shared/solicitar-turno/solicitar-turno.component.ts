@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Especialidad } from 'src/app/models/Especialidad';
+import { Usuario } from 'src/app/models/Usuario';
 import { EspecialidadService } from 'src/app/services/especialidad.service';
 import { OtroService } from 'src/app/services/otro.service';
 import { ReservaService } from 'src/app/services/reserva.service';
@@ -32,7 +33,7 @@ export class SolicitarTurnoComponent implements OnInit {
 
   pacienteElegido: any;
   especialidadElegida: string = '';
-  especialistaElegido: any;
+  especialistaElegido!: Usuario;
   fechaElegida: Date | null = null;
 
   usuarioActual: any;
@@ -108,18 +109,20 @@ export class SolicitarTurnoComponent implements OnInit {
           const dia = fecha.getDay();
           const horas = dia !== 6 ? 19 : 14;
 
-          if(dia !== 0) {
-            for(let j = 8; j < horas; j++) {
-              const nuevaFecha = new Date(fecha);
-              nuevaFecha.setHours(j, 0, 0, 0);
+          if (this.especialistaElegido.agenda) {
+            if (this.especialistaElegido.agenda[dia]) {
+              for(let j = 8; j < horas; j++) {
+                const nuevaFecha = new Date(fecha);
+                nuevaFecha.setHours(j, 0, 0, 0);
 
-              if (reservas.indexOf(nuevaFecha.valueOf()) < 0) {
-                this.arrayDeArraysDeFechas[i].push(nuevaFecha);
-              }
-              else {
-                // Sirve para generar el <td> vacío,
-                // pero quizá sea mejor manejarlo en el template
-                this.arrayDeArraysDeFechas[i].push(null);
+                if (reservas.indexOf(nuevaFecha.valueOf()) < 0) {
+                  this.arrayDeArraysDeFechas[i].push(nuevaFecha);
+                }
+                else {
+                  // Sirve para generar el <td> vacío,
+                  // pero quizá sea mejor manejarlo en el template
+                  this.arrayDeArraysDeFechas[i].push(null);
+                }
               }
             }
           }
