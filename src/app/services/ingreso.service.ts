@@ -16,10 +16,10 @@ export class IngresoService {
     return this.coleccion.ref
   }
 
-  add(uid: string, fecha: Date) {
+  add(email: string, fecha: Date) {
     return this.coleccion
       .add({
-        uid: uid,
+        email: email,
         fecha: fecha,
       });
   }

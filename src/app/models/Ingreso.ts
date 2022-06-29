@@ -1,4 +1,4 @@
 export interface Ingreso {
-    "uid": string;
+    "email": string;
     "fecha": any;
 }

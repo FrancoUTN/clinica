@@ -1,22 +1,28 @@
 <div class="contenedor-menor mb-5 fondo-oscuro">
-    <table>
+    <table class="table table-primary">
         <thead>
             <tr>
                 <th>
                     Usuario
-                </th>                
+                </th>
                 <th>
-                    Fecha
+                    Día
+                </th>
+                <th>
+                    Horario
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let ingreso of this.ingresos">
                 <td>
-                    {{ingreso.uid}}
+                    {{ingreso.email}}
                 </td>
                 <td>
-                    {{ingreso.fecha.toDate() | date:'dd/MM/YY HH:mm:ss'}}
+                    {{ingreso.fecha.toDate() | date:'dd/MM/YY'}}
+                </td>
+                <td>
+                    {{ingreso.fecha.toDate() | date:'HH:mm:ss'}}
                 </td>
             </tr>
         </tbody>

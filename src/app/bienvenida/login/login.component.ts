@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   atrPassword: string = '';
   usuarios:Array<any> = [];
 
-  constructor(    
+  constructor(
     private router: Router,
     private authService: AuthService,
     private usuarioService: UsuarioService,
@@ -48,8 +48,8 @@ export class LoginComponent implements OnInit {
                 const obj:any = ds.data();
                 const rol = obj.rol;
 
-                if (u.user) {
-                  this.ingresoService.add(u.user.uid, new Date())
+                if (u.user?.email) {
+                  this.ingresoService.add(u.user.email, new Date())
                 }
 
                 switch(rol) {
