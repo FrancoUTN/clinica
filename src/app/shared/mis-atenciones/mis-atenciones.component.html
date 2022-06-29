@@ -4,3 +4,23 @@
     (usuarioSeleccionado)="this.usuarioSeleccionadoHandler($event)"
 >
 </app-favbutton-usuarios>
+
+<table *ngIf="this.verTurnos">
+    <tr>
+        <th>Horario</th>
+        <th>Especialista</th>
+        <th>Especialidad</th>
+        <th>Estado</th>
+        <th>Motivo</th>
+    </tr>
+    <tr *ngFor="let turno of turnos">
+        <td>{{turno.fecha.toDate() | date:'MM/dd HH:mm'}}</td>
+        <td>
+            Dr. {{turno.especialista.apellido}},
+            {{turno.especialista.nombre}}
+        </td>
+        <td>{{turno.especialidad}}</td>
+        <td>{{turno.estado | uppercase}}</td>
+        <td class="tdMotivo">{{turno.razon}}</td>
+    </tr>
+</table>

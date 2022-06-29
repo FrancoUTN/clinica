@@ -15,6 +15,8 @@ export class MisAtencionesComponent implements OnInit {
   miUid!: string;  
   docsEspecialista: DocUsuario[] = [];
   especialistaSeleccionado!: Usuario;
+  turnos: Turno[] = [];
+  verTurnos: boolean = false;
 
   constructor(
     private turnoService: TurnoService,
@@ -26,8 +28,10 @@ export class MisAtencionesComponent implements OnInit {
     this.authService.getUserID().pipe(
       map(
         (userID: string) => {
+          this.miUid = userID;
+
           return this.turnoService.getRef()
-            .where('idPac', '==', userID)
+            .where('idPac', '==', this.miUid)
             .where('estado', '==', 'realizado')
             .get()
         }
@@ -55,7 +59,25 @@ export class MisAtencionesComponent implements OnInit {
 
   }
 
-  usuarioSeleccionadoHandler(algo:any) {
+  usuarioSeleccionadoHandler(docUsuario: DocUsuario) {
+    this.turnoService.getRef()
+      .where('idPac', '==', this.miUid)
+      .where('estado', '==', 'realizado')
+      .where('idEsp', '==', docUsuario.id)
+      .get()
+      .then(
+        qs => {
+          this.turnos =[];
 
+          qs.forEach(
+            qds => {
+              const turno: any = qds.data()
+              this.turnos.push(turno);
+            }
+          );
+
+          this.verTurnos = true;
+        }
+      );
   }
 }
