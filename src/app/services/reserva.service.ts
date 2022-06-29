@@ -24,9 +24,7 @@ export class ReservaService {
   }
 
   async eliminar(uid: string, fecha: Date) {
-    const qs = await this.angularFirestore
-      .collection("reservas")
-      .ref
+    const qs = await this.getRef()
       .where("uid", "==", uid)
       .where("fecha", "==", fecha)
       .get();
