@@ -27,6 +27,7 @@ export class SolicitarTurnoComponent implements OnInit {
 
   arrayDeArraysDeFechas: Array<Array<Date|null>> = [];
   idEsp: string = '';
+  idPac: string = '';
   franjaHoraria: number[] = [];
 
   pacienteElegido: any;
@@ -132,7 +133,7 @@ export class SolicitarTurnoComponent implements OnInit {
     this.paso1 = true;
 
     this.pacienteElegido = paciente.data;
-    this.idEsp = paciente.id;
+    this.idPac = paciente.id;
   }
 
   onEspecialidadSeleccionadaHandler(especialidad: Especialidad) {
@@ -196,10 +197,11 @@ export class SolicitarTurnoComponent implements OnInit {
   agregarTurno() {
     if (this.usuarioActual.rol === 'paciente') {
       this.pacienteElegido = this.usuarioActual;
+      this.idPac = this.uid;
     }
 
     const turno = {
-      idPac: this.uid,
+      idPac: this.idPac,
       paciente: this.pacienteElegido,
       idEsp: this.idEsp,
       especialista: this.especialistaElegido,
