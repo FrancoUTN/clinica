@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Especialidad } from 'src/app/models/Especialidad';
 import { Usuario } from 'src/app/models/Usuario';
+import { animaciones } from 'src/app/others/animaciones';
 import { EspecialidadService } from 'src/app/services/especialidad.service';
 import { OtroService } from 'src/app/services/otro.service';
 import { ReservaService } from 'src/app/services/reserva.service';
@@ -11,7 +12,8 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 @Component({
   selector: 'app-solicitar-turno',
   templateUrl: './solicitar-turno.component.html',
-  styleUrls: ['./solicitar-turno.component.scss']
+  styleUrls: ['./solicitar-turno.component.scss'],
+  animations: animaciones
 })
 export class SolicitarTurnoComponent implements OnInit {
   especialidades: Especialidad[] = [];
