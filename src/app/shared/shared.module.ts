@@ -19,6 +19,7 @@ import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.co
 import { HomeComponent } from './home/home.component';
 import { FavbuttonUsuariosComponent } from './favbutton-usuarios/favbutton-usuarios.component';
 import { PacientesTurnosComponent } from './pacientes-turnos/pacientes-turnos.component';
+import { MisHorariosComponent } from './mis-horarios/mis-horarios.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { PacientesTurnosComponent } from './pacientes-turnos/pacientes-turnos.co
     HistoriaClinicaComponent,
     HomeComponent,
     FavbuttonUsuariosComponent,
-    PacientesTurnosComponent
+    PacientesTurnosComponent,
+    MisHorariosComponent
   ],
   imports: [
     CommonModule,

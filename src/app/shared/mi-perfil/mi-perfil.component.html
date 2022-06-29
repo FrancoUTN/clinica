@@ -44,17 +44,22 @@
                             {{especialidad}}
                         </li>
                     </ul>
-                    <!-- <button
+                    <button
                     class="btn btn-primary"
                     (click)="verMisHorariosHandler()"
                     >Ver mis horarios</button>        
-                    <button
+                    <!-- <button
                     class="btn btn-danger"
                     >Cancelar</button> -->
                 </div>
             </div>
         </div>
     </div>
+
+    <app-mis-horarios
+        *ngIf="verMisHorarios"
+    >
+    </app-mis-horarios>
 
     <div *ngIf="usuario.rol === 'administrador'">        
         <div class="card mb-3 text-dark" style="max-width: 1000px;">

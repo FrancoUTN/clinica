@@ -9,6 +9,7 @@ import { OtroService } from 'src/app/services/otro.service';
 export class MiPerfilComponent implements OnInit {
   usuario: any;
   verHistoriaClinica: boolean = false;
+  verMisHorarios: boolean = false;
 
   constructor(private otroService: OtroService) { }
 
@@ -19,8 +20,11 @@ export class MiPerfilComponent implements OnInit {
   }
 
   verMisHorariosHandler() {
-    console.log(this.usuario)
+    this.verMisHorarios = true;
   }
+  // ocultarHorariosHandler() {
+  //   this.verMisHorarios = false;
+  // }
 
   verMiHistoriaClinicaHandler() {
     this.verHistoriaClinica = true;
