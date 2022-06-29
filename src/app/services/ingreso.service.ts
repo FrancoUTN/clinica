@@ -5,7 +5,7 @@ import { Ingreso } from '../models/Ingreso';
 @Injectable({
   providedIn: 'root'
 })
-export class IngresosService {
+export class IngresoService {
   coleccion: AngularFirestoreCollection<Ingreso>
 
   constructor(angularFirestore: AngularFirestore) {
@@ -23,14 +23,4 @@ export class IngresosService {
         fecha: fecha,
       });
   }
-
-  // async eliminar(uid: string, fecha: Date) {
-  //   const qs = await this.getRef()
-  //     .where("uid", "==", uid)
-  //     .where("fecha", "==", fecha)
-  //     .get();
-  //   qs.forEach(
-  //     doc => doc.ref.delete()
-  //   );
-  // }
 }

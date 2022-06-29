@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from 'src/app/services/auth.service';
+import { IngresoService } from 'src/app/services/ingreso.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(    
     private router: Router,
     private authService: AuthService,
-    private usuarioService: UsuarioService) { }
+    private usuarioService: UsuarioService,
+    private ingresoService: IngresoService) { }
 
   ngOnInit(): void {
     this.usuarioService.getUsuarios().subscribe(
@@ -41,29 +43,28 @@ export class LoginComponent implements OnInit {
       .then(
         u => {
           if (u.user) {
-            // if (u.user.emailVerified) {
-              this.usuarioService.getUsuario(u.user.uid).subscribe(
-                ds => {
-                  const obj:any = ds.data();
-                  const rol = obj.rol;
+            this.usuarioService.getUsuario(u.user.uid).subscribe(
+              ds => {
+                const obj:any = ds.data();
+                const rol = obj.rol;
 
-                  switch(rol) {
-                    case 'paciente':
-                      this.router.navigateByUrl('paciente');
-                      break;
-                    case 'especialista':
-                      this.router.navigateByUrl('especialista');
-                      break;
-                    case 'administrador':
-                      this.router.navigateByUrl('administrador');
-                      break;
-                  }
+                if (u.user) {
+                  this.ingresoService.add(u.user.uid, new Date())
                 }
-              );
-            // }
-            // else {
-            //   throw {message: "Error en verificación."}
-            // }
+
+                switch(rol) {
+                  case 'paciente':
+                    this.router.navigateByUrl('paciente');
+                    break;
+                  case 'especialista':
+                    this.router.navigateByUrl('especialista');
+                    break;
+                  case 'administrador':
+                    this.router.navigateByUrl('administrador');
+                    break;
+                }
+              }
+            );
           }
         }
       )
@@ -74,20 +75,5 @@ export class LoginComponent implements OnInit {
     this.atrEmail = email;
     this.atrPassword = '123123';
   }
-
-  // rellenarConPaciente() {
-  //   this.atrEmail = 'reaccionarnativo@gmail.com';
-  //   this.atrPassword = '123123';
-  // }
-
-  // rellenarConEspecialista() {
-  //   this.atrEmail = 'cataniafrancodev@gmail.com';
-  //   this.atrPassword = '123123';
-  // }
   
-  // rellenarConAdministrador() {
-  //   this.atrEmail = 'maxiterrabusi@gmail.com';
-  //   this.atrPassword = '123123';
-  // }
-
 }
