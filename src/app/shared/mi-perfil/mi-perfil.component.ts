@@ -10,6 +10,7 @@ export class MiPerfilComponent implements OnInit {
   usuario: any;
   verHistoriaClinica: boolean = false;
   verMisHorarios: boolean = false;
+  verMisAtenciones: boolean = false;
 
   constructor(private otroService: OtroService) { }
 
@@ -17,6 +18,13 @@ export class MiPerfilComponent implements OnInit {
     this.otroService.getDataDeUsuario().subscribe(
       data => this.usuario = data
     );
+  }
+
+  verMisAtencionesHandler() {
+    this.verMisAtenciones = true;
+  }
+  ocultarMisAtencionesHandler() {
+    this.verMisAtenciones = false;
   }
 
   verMisHorariosHandler() {
@@ -29,7 +37,7 @@ export class MiPerfilComponent implements OnInit {
   verMiHistoriaClinicaHandler() {
     this.verHistoriaClinica = true;
   }
-  ocultarHandler() {
+  ocultarMiHistoriaClinicaHandler() {
     this.verHistoriaClinica = false;
   }
 }

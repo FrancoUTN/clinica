@@ -12,19 +12,30 @@
                     <p class="card-text">DNI: {{usuario.dni}}</p>
                     <p class="card-text">Obra Social: {{usuario.obraSocial}}</p>
                     <button
-                    *ngIf="!verHistoriaClinica"
-                    class="btn btn-primary"
-                    (click)="verMiHistoriaClinicaHandler()"
+                        *ngIf="!verHistoriaClinica"
+                        class="btn btn-primary mb-4"
+                        (click)="verMiHistoriaClinicaHandler()"
                     >Ver mi historia clínica</button>
+                    <button
+                        *ngIf="!verMisAtenciones"
+                        class="btn btn-primary"
+                        (click)="verMisAtencionesHandler()"
+                    >Ver mis atenciones</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <app-mis-atenciones
+        *ngIf="verMisAtenciones"
+        (volver)="ocultarMisAtencionesHandler()"
+    >
+    </app-mis-atenciones>
+
     <app-historia-clinica
         *ngIf="verHistoriaClinica"
         [paciente]="usuario"
-        (volver)="ocultarHandler()"
+        (volver)="ocultarMiHistoriaClinicaHandler()"
     >
     </app-historia-clinica>
 

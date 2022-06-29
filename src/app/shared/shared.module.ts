@@ -20,6 +20,7 @@ import { HomeComponent } from './home/home.component';
 import { FavbuttonUsuariosComponent } from './favbutton-usuarios/favbutton-usuarios.component';
 import { PacientesTurnosComponent } from './pacientes-turnos/pacientes-turnos.component';
 import { MisHorariosComponent } from './mis-horarios/mis-horarios.component';
+import { MisAtencionesComponent } from './mis-atenciones/mis-atenciones.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { MisHorariosComponent } from './mis-horarios/mis-horarios.component';
     HomeComponent,
     FavbuttonUsuariosComponent,
     PacientesTurnosComponent,
-    MisHorariosComponent
+    MisHorariosComponent,
+    MisAtencionesComponent
   ],
   imports: [
     CommonModule,
