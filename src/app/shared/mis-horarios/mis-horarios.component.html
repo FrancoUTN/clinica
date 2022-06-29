@@ -1,1 +1,60 @@
-<p>mis-horarios works!</p>
+<!-- <div>
+    <table>
+        <tr>
+            <th *ngFor="let item of this.agenda; index as i">
+                {{ this.semana[i] }}
+            </th>
+        </tr>
+        <tr>
+            <td *ngFor="let item of this.agenda">
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [value]="item"
+                    (change)="onChangeHabilitado()"
+                    [checked]="item"
+                >
+            </td>
+        </tr>
+    </table>
+</div> -->
+
+<!-- <div>
+    <table>
+        <tr>
+            <th *ngFor="let item of this.agenda; index as i">
+                {{ this.semana[i] }}
+            </th>
+        </tr>
+        <tr>
+            <td *ngFor="let item of this.agenda">
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [value]="item"
+                    (change)="onChangeHabilitado()"
+                    [checked]="item"
+                >
+            </td>
+        </tr>
+    </table>
+</div> -->
+
+<div class="d-flex justify-content-between mt-5">
+    <div *ngFor="let item of this.agenda; index as i">
+        <input
+            type="checkbox"
+            class="btn-check"
+            id="btn-check-outlined"
+            [id]="'btn-check-' + i"
+            autocomplete="off"
+            [value]="i"
+            [checked]="item"
+            [disabled]="i === 0"
+        >
+        <label
+            class="btn btn-outline-info"
+            [for]="'btn-check-' + i"
+        >{{ this.semana[i] }}</label><br>
+    </div>
+</div>
