@@ -9,8 +9,7 @@ import { IngresoService } from 'src/app/services/ingreso.service';
 })
 export class LogIngresosComponent implements OnInit {
   ingresos: Ingreso[] = [];
-  columnas: string[] = [];
-
+  
   constructor(private ingresoService: IngresoService) { }
 
   ngOnInit(): void {
@@ -23,8 +22,6 @@ export class LogIngresosComponent implements OnInit {
             this.ingresos.push(qds.data());
             }
         );
-
-        this.columnas = Object.keys(this.ingresos[0]);
       }
     );
   }

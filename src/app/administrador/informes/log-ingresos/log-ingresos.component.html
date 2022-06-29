@@ -1,41 +1,22 @@
-<!-- <div class="contenedor-menor mb-5 fondo-oscuro">
+<div class="contenedor-menor mb-5 fondo-oscuro">
     <table>
         <thead>
-            <tr *ngFor="let ingreso of this.ingresos | keyvalue">
-                <th>
-                    {{ingreso.key}}
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let ingreso of this.ingresos">
-                <td>
-                    {{ingreso.uid}}
-                </td>
-                <td>
-                    {{ingreso.fecha.toDate() | date:'dd/MM/YY HH:mm:ss'}}
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div> -->
-
-<div class="contenedor-menor mb-5 fondo-oscuro">
-    <table class="table table-primary table-striped table-hover">
-        <thead>
             <tr>
-                <th *ngFor="let columna of this.columnas">
-                    {{columna}}
+                <th>
+                    Usuario
+                </th>                
+                <th>
+                    Fecha
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let ingreso of this.ingresos">
                 <td>
-                    {{ingreso.fecha.toDate() | date:'dd/MM/YY HH:mm:ss'}}
+                    {{ingreso.uid}}
                 </td>
                 <td>
-                    {{ingreso.uid}}
+                    {{ingreso.fecha.toDate() | date:'dd/MM/YY HH:mm:ss'}}
                 </td>
             </tr>
         </tbody>
