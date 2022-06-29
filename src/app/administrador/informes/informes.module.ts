@@ -13,6 +13,7 @@ import { TestComponent } from './test/test.component';
 import { TurnosSolicitadosComponent } from './turnos-solicitados/turnos-solicitados.component';
 import { TurnosFinalizadosComponent } from './turnos-finalizados/turnos-finalizados.component';
 import { TurnosEspecialidadComponent } from './turnos-especialidad/turnos-especialidad.component';
+import { LogIngresosComponent } from './log-ingresos/log-ingresos.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'turnos-solicitados', component: TurnosSolicitadosComponent },
     { path: 'turnos-finalizados', component: TurnosFinalizadosComponent },
     { path: 'turnos-especialidad', component: TurnosEspecialidadComponent },
+    { path: 'log-ingresos', component: LogIngresosComponent },
   ]}
 ];
 
@@ -31,7 +33,8 @@ const routes: Routes = [
     TestComponent,
     TurnosSolicitadosComponent,
     TurnosFinalizadosComponent,
-    TurnosEspecialidadComponent
+    TurnosEspecialidadComponent,
+    LogIngresosComponent
   ],
   imports: [
     CommonModule,

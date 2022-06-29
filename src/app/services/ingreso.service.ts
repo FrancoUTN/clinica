@@ -23,4 +23,8 @@ export class IngresoService {
         fecha: fecha,
       });
   }
+
+  getAll() {
+    return this.coleccion.get();
+  }
 }
