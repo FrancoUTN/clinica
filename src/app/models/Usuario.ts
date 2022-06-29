@@ -10,7 +10,8 @@ export interface Usuario {
 
     'obraSocial'?: string; // paciente
     'fotos'?: string[]; // paciente
-    'historiaClinica'?: HistoriaClinica; // paciente
+    // 'historiaClinica'?: HistoriaClinica; // paciente
+    'historiaClinica'?: any; // paciente
     'especialidades'?: string[]; // especialista
     'habilitado'?: boolean; // especialista
     'agenda'?: boolean[]; // especialista
