@@ -45,12 +45,15 @@
                         </li>
                     </ul>
                     <button
-                    class="btn btn-primary"
-                    (click)="verMisHorariosHandler()"
+                        *ngIf="!this.verMisHorarios"
+                        class="btn btn-primary"
+                        (click)="verMisHorariosHandler()"
                     >Ver mis horarios</button>        
-                    <!-- <button
-                    class="btn btn-danger"
-                    >Cancelar</button> -->
+                    <button
+                        *ngIf="this.verMisHorarios"
+                        class="btn btn-danger"
+                        (click)="ocultarMisHorariosHandler()"
+                    >Cancelar</button>
                 </div>
             </div>
         </div>
@@ -58,6 +61,7 @@
 
     <app-mis-horarios
         *ngIf="verMisHorarios"
+        (volver)="ocultarMisHorariosHandler()"
     >
     </app-mis-horarios>
 

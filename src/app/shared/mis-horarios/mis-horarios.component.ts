@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { OtroService } from 'src/app/services/otro.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -8,8 +8,10 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./mis-horarios.component.scss']
 })
 export class MisHorariosComponent implements OnInit {
+  @Output() volver = new EventEmitter();
   miUid: string = '';
   agenda: boolean[] = [];
+  nuevaAgenda: boolean[] = [];
   mockAgenda: boolean[] = [
     false,
     false,
@@ -19,7 +21,6 @@ export class MisHorariosComponent implements OnInit {
     false,
     false
   ];
-
   semana: string[] = [
     'Domingos',
     'Lunes',
@@ -35,9 +36,26 @@ export class MisHorariosComponent implements OnInit {
     private otroService: OtroService) { }
 
   ngOnInit(): void {
-    this.otroService.getDataDeUsuario().subscribe(
-      data => this.agenda = data.agenda ? data.agenda : this.mockAgenda      
+    this.otroService.getDocumentSnapshotDeUsuario().subscribe(
+      ds => {
+        this.miUid = ds.id;
+
+        this.agenda = ds.data().agenda ? ds.data().agenda : this.mockAgenda;
+        this.nuevaAgenda = this.agenda.slice();
+      }
     );
   }
 
+  confirmar() {
+    this.usuarioService.getDoc(this.miUid).update({
+      agenda: this.nuevaAgenda
+    })
+    .then(
+      () => this.volver.emit()
+    );
+  }
+
+  onDiaClickeado(indice: number) {
+    this.nuevaAgenda[indice] = !this.nuevaAgenda[indice];
+  }
 }

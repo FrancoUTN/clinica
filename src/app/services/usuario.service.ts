@@ -51,4 +51,9 @@ export class UsuarioService {
       });
   }
 
+  getDoc(id: string) {
+    return this.angularFirestore
+      .collection("usuarios")
+      .doc(id);
+  }
 }

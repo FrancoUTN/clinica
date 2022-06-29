@@ -22,9 +22,9 @@ export class MiPerfilComponent implements OnInit {
   verMisHorariosHandler() {
     this.verMisHorarios = true;
   }
-  // ocultarHorariosHandler() {
-  //   this.verMisHorarios = false;
-  // }
+  ocultarMisHorariosHandler() {
+    this.verMisHorarios = false;
+  }
 
   verMiHistoriaClinicaHandler() {
     this.verHistoriaClinica = true;
