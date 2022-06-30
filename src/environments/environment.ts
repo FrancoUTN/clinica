@@ -11,6 +11,7 @@ export const environment = {
     authDomain: 'clinica-61d99.firebaseapp.com',
     messagingSenderId: '935628468088',
   },
+  siteKey: '6Ld3IbIgAAAAAPdSkfOD1qoXGeBj10XustWA2ynr',
   production: false
 };
 

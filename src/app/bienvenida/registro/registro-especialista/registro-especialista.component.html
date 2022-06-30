@@ -172,6 +172,8 @@
         </span>
     </div>
 
+    <re-captcha (resolved)="resolved($event)" [siteKey]="this.siteKey"></re-captcha>
+
     <div class="d-flex justify-content-center mt-3">
         <button
         class="btn btn-primary"

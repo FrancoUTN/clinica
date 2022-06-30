@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-registro-especialista',
@@ -7,6 +8,7 @@ import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '
   styleUrls: ['./registro-especialista.component.scss']
 })
 export class RegistroEspecialistaComponent implements OnInit {
+  siteKey: string = environment.siteKey;
   especialidades = [
     'Nutrición',
     'Neumología',
@@ -91,4 +93,9 @@ export class RegistroEspecialistaComponent implements OnInit {
 
     this.formularioEnviado.emit(obj);
   }
+
+  resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
+
 }

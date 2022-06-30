@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 import { SinVerificarComponent } from './sin-verificar/sin-verificar.component';
 import { CancelarTurnoComponent } from './cancelar-turno/cancelar-turno.component';
@@ -47,7 +48,9 @@ import { MisAtencionesComponent } from './mis-atenciones/mis-atenciones.componen
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   exports: [
     CommonModule,
