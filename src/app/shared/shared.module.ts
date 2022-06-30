@@ -23,6 +23,9 @@ import { PacientesTurnosComponent } from './pacientes-turnos/pacientes-turnos.co
 import { MisHorariosComponent } from './mis-horarios/mis-horarios.component';
 import { MisAtencionesComponent } from './mis-atenciones/mis-atenciones.component';
 import { DoctorPipe } from '../pipes/doctor.pipe';
+import { EjercicioADirective } from '../directives/ejercicio-a.directive';
+import { EjercicioBDirective } from '../directives/ejercicio-b.directive';
+import { EjercicioCDirective } from '../directives/ejercicio-c.directive';
 
 
 @NgModule({
@@ -45,7 +48,10 @@ import { DoctorPipe } from '../pipes/doctor.pipe';
     PacientesTurnosComponent,
     MisHorariosComponent,
     MisAtencionesComponent,
-    DoctorPipe
+    DoctorPipe,
+    EjercicioADirective,
+    EjercicioBDirective,
+    EjercicioCDirective
   ],
   imports: [
     CommonModule,
@@ -70,7 +76,10 @@ import { DoctorPipe } from '../pipes/doctor.pipe';
     FavbuttonUsuariosComponent,
     PacientesTurnosComponent,
     ReviewComponent,
-    DoctorPipe
+    DoctorPipe,
+    EjercicioADirective,
+    EjercicioBDirective,
+    EjercicioCDirective
   ]
 })
 export class SharedModule { }

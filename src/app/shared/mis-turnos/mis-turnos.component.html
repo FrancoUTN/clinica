@@ -18,7 +18,8 @@
                 <input
                     [(ngModel)]="filtro"
                     (ngModelChange)="pacienteFiltrar()"
-                    class="form-control w-25"
+                    class="form-control w-50"
+                    appEjercicioC
                 >
             </div>
             <div *ngIf="miRol === 'especialista'" class="mb-4">
@@ -29,6 +30,7 @@
                     [(ngModel)]="filtro"
                     (ngModelChange)="especialistaFiltrar()"
                     class="form-control w-25"
+                    appEjercicioC
                 >
             </div>
             <table>
