@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-registro-paciente',
@@ -7,6 +8,7 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
   styleUrls: ['./registro-paciente.component.scss']
 })
 export class RegistroPacienteComponent implements OnInit {
+  siteKey: string = environment.siteKey;
   signupForm: FormGroup | any;
   fotos: File[] | any;
   @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
@@ -31,7 +33,8 @@ export class RegistroPacienteComponent implements OnInit {
       'dni': new FormControl(null, [Validators.required, Validators.min(999999), Validators.max(99999999)]),
       'obraSocial': new FormControl(null, [Validators.required, this.emptyValidator]),
       'email': new FormControl(null, [Validators.required, this.emptyValidator]),
-      'clave': new FormControl(null, [Validators.required, this.emptyValidator])
+      'clave': new FormControl(null, [Validators.required, this.emptyValidator]),
+      'recaptchaReactive': new FormControl(null, Validators.required)
     });
   }
 
