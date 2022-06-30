@@ -172,7 +172,12 @@
         </span>
     </div>
 
-    <re-captcha (resolved)="resolved($event)" [siteKey]="this.siteKey"></re-captcha>
+    <div class="d-flex justify-content-center mb-5">
+        <re-captcha
+            [siteKey]="this.siteKey"
+            formControlName="recaptchaReactive"
+        ></re-captcha>
+    </div>
 
     <div class="d-flex justify-content-center mt-3">
         <button
