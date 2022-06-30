@@ -4,8 +4,7 @@
     <div *ngIf="rol === 'paciente' || rol === 'administrador'">
         <span>Especialista: </span>
         <span style="width: 14rem;">
-            Dr. {{turno.especialista.apellido}},
-            {{turno.especialista.nombre}}
+            {{turno.especialista | doctor}}
         </span>
     </div>
     <div *ngIf="rol === 'especialista' || rol === 'administrador'">

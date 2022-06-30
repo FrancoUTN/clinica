@@ -114,8 +114,7 @@
             <tr *ngFor="let turno of turnos; let i = index">
                 <td>{{turno.fecha.toDate() | date:'MM/dd HH:mm'}}</td>
                 <td>
-                    Dr. {{turno.especialista.apellido}},
-                    {{turno.especialista.nombre}}
+                    {{turno.especialista | doctor}}
                 </td>
                 <td>
                     {{turno.paciente.nombre}}

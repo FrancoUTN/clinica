@@ -22,6 +22,7 @@ import { FavbuttonUsuariosComponent } from './favbutton-usuarios/favbutton-usuar
 import { PacientesTurnosComponent } from './pacientes-turnos/pacientes-turnos.component';
 import { MisHorariosComponent } from './mis-horarios/mis-horarios.component';
 import { MisAtencionesComponent } from './mis-atenciones/mis-atenciones.component';
+import { DoctorPipe } from '../pipes/doctor.pipe';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { MisAtencionesComponent } from './mis-atenciones/mis-atenciones.componen
     FavbuttonUsuariosComponent,
     PacientesTurnosComponent,
     MisHorariosComponent,
-    MisAtencionesComponent
+    MisAtencionesComponent,
+    DoctorPipe
   ],
   imports: [
     CommonModule,
@@ -67,7 +69,8 @@ import { MisAtencionesComponent } from './mis-atenciones/mis-atenciones.componen
     HomeComponent,
     FavbuttonUsuariosComponent,
     PacientesTurnosComponent,
-    ReviewComponent
+    ReviewComponent,
+    DoctorPipe
   ]
 })
 export class SharedModule { }
