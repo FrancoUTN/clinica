@@ -18,7 +18,8 @@
                 <input
                     [(ngModel)]="filtro"
                     (ngModelChange)="pacienteFiltrar()"
-                    class="form-control w-25"
+                    class="form-control w-50"
+                    appEjercicioC
                 >
             </div>
             <div *ngIf="miRol === 'especialista'" class="mb-4">
@@ -29,6 +30,7 @@
                     [(ngModel)]="filtro"
                     (ngModelChange)="especialistaFiltrar()"
                     class="form-control w-25"
+                    appEjercicioC
                 >
             </div>
             <table>
@@ -49,8 +51,7 @@
                 <tr *ngFor="let turno of turnos; let i = index">
                     <td>{{turno.fecha.toDate() | date:'MM/dd HH:mm'}}</td>
                     <td *ngIf="miRol === 'paciente' || miRol === 'administrador'">
-                        Dr. {{turno.especialista.apellido}},
-                        {{turno.especialista.nombre}}
+                        {{turno.especialista | doctor}}
                     </td>
                     <td *ngIf="miRol === 'especialista' || miRol === 'administrador'">
                         {{turno.paciente.nombre}}

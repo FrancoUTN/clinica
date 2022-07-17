@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-registro-especialista',
@@ -7,6 +8,7 @@ import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '
   styleUrls: ['./registro-especialista.component.scss']
 })
 export class RegistroEspecialistaComponent implements OnInit {
+  siteKey: string = environment.siteKey;
   especialidades = [
     'Nutrición',
     'Neumología',
@@ -36,7 +38,8 @@ export class RegistroEspecialistaComponent implements OnInit {
       'dni': new FormControl(null, [Validators.required, Validators.min(999999), Validators.max(99999999)]),
       'especialidades': new FormArray([]),
       'email': new FormControl(null, [Validators.required, this.emptyValidator]),
-      'clave': new FormControl(null, [Validators.required, this.emptyValidator])
+      'clave': new FormControl(null, [Validators.required, this.emptyValidator]),
+      'recaptchaReactive': new FormControl(null, Validators.required)
     });
   }
   onAddEspecialidad() {
@@ -91,4 +94,5 @@ export class RegistroEspecialistaComponent implements OnInit {
 
     this.formularioEnviado.emit(obj);
   }
+
 }

@@ -46,7 +46,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h3 class="card-title mb-3">Dr. {{usuario.apellido + ', ' + usuario.nombre}}</h3>
+                    <h3 class="card-title mb-3">{{usuario | doctor}}</h3>
                     <p class="card-text">Edad: {{usuario.edad}}</p>
                     <p class="card-text">DNI: {{usuario.dni}}</p>
                     <span class="card-text">Especialidades:</span>

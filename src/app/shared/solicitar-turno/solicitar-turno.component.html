@@ -55,7 +55,7 @@
             >
                 <div class="card-body">
                     <h5 class="card-title text-dark text-center">
-                        Dr. {{ especialista.data.apellido }}, {{ especialista.data.nombre }}
+                        {{ especialista.data | doctor }}
                     </h5>
                 </div>
                 <img
@@ -97,7 +97,7 @@
 
     <div *ngIf="paso4" [@animado]>
         <h2>Verifique los datos de su reserva</h2>
-        <div class="my-5">
+        <div class="my-5" appEjercicioB>
             <h4>Detalles:</h4>
             <p *ngIf="this.usuarioActual.rol === 'administrador'">
                 Paciente: {{pacienteElegido.nombre + " " + pacienteElegido.apellido}}
