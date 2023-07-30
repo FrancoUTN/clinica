@@ -30,12 +30,21 @@
             </div>
             <button class="btn btn-outline-light btn-lg px-5" type="submit">Ingresar</button>            
         </form>
-        <div style="height: 6rem; margin-top: 1rem;">
-            <span
-            *ngIf="error"
-            class="help-block text-danger">
-                {{error}}
-            </span>
+        <div class="d-flex flex-column align-items-center mt-4" style="height: 5rem;">
+            <div>
+                <span
+                *ngIf="error"
+                class="help-block text-danger">
+                    {{error}}
+                </span>
+            </div>
+            <div
+                *ngIf="authIsLoading"
+                class="spinner-border text-light"
+                role="status"
+            >
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
         <div>
             <p class="mb-0">
@@ -62,13 +71,13 @@
 >
     <h4>Usuarios de prueba</h4>
     <div
-        *ngIf="this.isLoading"
+        *ngIf="this.usersAreLoading"
         class="text-center"
     >
         Cargando...
     </div>
     <ng-container
-        *ngIf="!this.isLoading"
+        *ngIf="!this.usersAreLoading"
     >
         <div
             *ngFor="let item of usuarios"

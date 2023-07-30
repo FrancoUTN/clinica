@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorsService } from 'src/app/services/errors.service';
 import { IngresoService } from 'src/app/services/ingreso.service';
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   atrEmail: string = '';
   atrPassword: string = '';
   usuarios:Array<any> = [];
-  isLoading: boolean = true;
+  usersAreLoading: boolean = true;
+  authIsLoading: boolean = false;
 
   constructor(
     private router: Router,
@@ -42,13 +44,14 @@ export class LoginComponent implements OnInit {
             }
           }
         );
-        this.isLoading = false;
+        this.usersAreLoading = false;
       }
     );
   }
   
   signIn(value: any) {
-
+    this.error = "";
+    this.authIsLoading = true;
     this.authService.SignIn(value.email, value.password)
       .then(
         u => {
@@ -57,11 +60,9 @@ export class LoginComponent implements OnInit {
               ds => {
                 const obj:any = ds.data();
                 const rol = obj.rol;
-
                 if (u.user?.email) {
                   this.ingresoService.add(u.user.email, new Date())
                 }
-
                 switch(rol) {
                   case 'paciente':
                     this.router.navigateByUrl('paciente');
@@ -78,12 +79,14 @@ export class LoginComponent implements OnInit {
           }
         }
       )
-      .catch(e => this.error = this.errorsService.getFirebaseErrorMsg(e));
+      .catch(e => {
+        this.authIsLoading = false;
+        this.error = this.errorsService.getFirebaseErrorMsg(e);
+      });
   }
   
   rellenar(email: string) {
     this.atrEmail = email;
     this.atrPassword = '123123';
-  }
-  
+  }  
 }

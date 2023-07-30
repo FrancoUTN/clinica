@@ -8,7 +8,7 @@ export class ErrorsService {
     authErrors: {
       authInvalidEmail: 'El correo electrónico ingresado tiene un formato inválido.',
       authWrongPassword: 'La contraseña ingresada es inválida.',
-      authUserNotFound: 'No se encontró ningún usuario con este correo electrónico.',
+      authUserNotFound: 'No se encontró ningún usuario con ese correo electrónico.',
       authEmailAlreadyInUse: 'El correo electrónico ingresado ya está en uso.',
       authWeakPassword: 'La contraseña elegida no es segura: mínimo 6 caracteres.',
       authTooManyRequests: `El acceso a esta cuenta está temporalmente
