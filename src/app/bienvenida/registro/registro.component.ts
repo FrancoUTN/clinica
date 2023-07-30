@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RegistroService } from 'src/app/services/registro.service';
 import { Router } from "@angular/router";
+
+import { RegistroService } from 'src/app/services/registro.service';
+import { ErrorsService } from 'src/app/services/errors.service';
 
 @Component({
   selector: 'app-registro',
@@ -15,7 +17,8 @@ export class RegistroComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private registroService: RegistroService) { }
+    private registroService: RegistroService,
+    private errorsService: ErrorsService) { }
 
   ngOnInit(): void {
   }
@@ -43,7 +46,9 @@ export class RegistroComponent implements OnInit {
       () => this.router.navigateByUrl('registro-exitoso')
     )
     .catch(
-      err => this.errorMsg = err.message
+      err => {
+        this.errorMsg = this.errorsService.getFirebaseErrorMsg(err)
+      }
     )
     .finally(
       () => this.isLoading = false
@@ -56,7 +61,9 @@ export class RegistroComponent implements OnInit {
       () => this.router.navigateByUrl('verificar')
     )
     .catch(
-      err => this.errorMsg = err.message
+      err => {
+        this.errorMsg = this.errorsService.getFirebaseErrorMsg(err)
+      }
     )
     .finally(
       () => this.isLoading = false

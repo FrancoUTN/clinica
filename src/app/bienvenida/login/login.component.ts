@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from 'src/app/services/auth.service';
+import { ErrorsService } from 'src/app/services/errors.service';
 import { IngresoService } from 'src/app/services/ingreso.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private usuarioService: UsuarioService,
-    private ingresoService: IngresoService) { }
+    private ingresoService: IngresoService,
+    private errorsService: ErrorsService) { }
 
   ngOnInit(): void {
     this.usuarioService.getUsuarios().get().subscribe(
@@ -76,7 +78,7 @@ export class LoginComponent implements OnInit {
           }
         }
       )
-      .catch(razon => this.error = razon.message);
+      .catch(e => this.error = this.errorsService.getFirebaseErrorMsg(e));
   }
   
   rellenar(email: string) {
