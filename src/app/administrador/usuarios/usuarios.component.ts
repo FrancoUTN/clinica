@@ -28,7 +28,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usuarioService.getUsuarios().subscribe(
+    this.usuarioService.getUsuarios().snapshotChanges().subscribe(
       dcas => {
         this.docsUsuario = [];
 

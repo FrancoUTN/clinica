@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   atrEmail: string = '';
   atrPassword: string = '';
   usuarios:Array<any> = [];
+  isLoading: boolean = true;
 
   constructor(
     private router: Router,
@@ -22,19 +23,26 @@ export class LoginComponent implements OnInit {
     private ingresoService: IngresoService) { }
 
   ngOnInit(): void {
-    this.usuarioService.getUsuarios().subscribe(
-      dcas => {
+    this.usuarioService.getUsuarios().get().subscribe(
+      qs => {
         this.usuarios = [];
-
-        dcas.forEach(
-          dca => {
-            const obj:any = dca.payload.doc.data();
-            obj.id = dca.payload.doc.id;
-            this.usuarios.push(obj);
+        const demoUsersIds = [
+          'M6yZAmWqoWYbZuq5TVZeD44QDkG3',
+          'UVh5fxjSOlRZlSsVnancPON2Oat1',
+          'PJ3O4mlP3Nfty6knT3nRHWELmA12'
+        ];
+        qs.forEach(
+          qds => {
+            if (demoUsersIds.includes(qds.id)) {
+              const obj:any = qds.data();
+              obj.id = qds.id;
+              this.usuarios.push(obj)
+            }
           }
         );
-      } 
-    )
+        this.isLoading = false;
+      }
+    );
   }
   
   signIn(value: any) {

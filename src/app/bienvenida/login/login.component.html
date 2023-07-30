@@ -49,27 +49,54 @@
         >Volver</button>
     </div>
 </div>
-<div style="
-    position: absolute;
-    bottom: 40px;
-    right: 40px;
-    background: rgba(10, 10, 10, .3);
-    border-radius: .6rem;"
+<div
+    style="
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
+        background: rgba(10, 10, 10, .5);
+        border-radius: .6rem;
+        color: white;
+        padding: 1rem;
+    "
 >
-    <div *ngFor="let item of usuarios" class="p-0">
-        <img
-            *ngIf="item.foto"
-            [src]="item.foto"
+    <h4>Usuarios de prueba</h4>
+    <div
+        *ngIf="this.isLoading"
+        class="text-center"
+    >
+        Cargando...
+    </div>
+    <ng-container
+        *ngIf="!this.isLoading"
+    >
+        <div
+            *ngFor="let item of usuarios"
+            class="p-0 btn"
+            style="
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                color: white;
+                margin-top: 1rem;
+                "
             (click)="rellenar(item.email)"
-            class="btn rounded-circle p-0 m-2"
-            style="width: 60px; height: 60px"
-        >
-        <img
+            >
+            <span>
+                {{item.rol.charAt(0).toUpperCase() + item.rol.slice(1)}}
+            </span>
+            <img
+            *ngIf="item.foto"
+                [src]="item.foto"
+                class="btn rounded-circle p-0 m-2"
+                style="width: 60px; height: 60px"
+            >
+            <img
             *ngIf="item.fotos"
             [src]="item.fotos[0]"
-            (click)="rellenar(item.email)"
             class="btn rounded-circle p-0 m-2"
             style="width: 60px; height: 60px"
-        >
-    </div>
+            >
+        </div>
+    </ng-container>
 </div>
