@@ -19,6 +19,7 @@ export class RegistroEspecialistaComponent implements OnInit {
   foto:File|any;
   @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
   @Input() error: string = '';
+  @Input() isLoading: boolean = false;
 
   get nombre() { return this.signupForm.get('nombre'); }
   get apellido() { return this.signupForm.get('apellido'); }

@@ -13,6 +13,7 @@ export class RegistroPacienteComponent implements OnInit {
   fotos: File[] | any;
   @Output() formularioEnviado: EventEmitter<any> = new EventEmitter<any>();
   @Input() error: string = '';
+  @Input() isLoading: boolean = false;
 
   get nombre() { return this.signupForm.get('nombre'); }
   get apellido() { return this.signupForm.get('apellido'); }
@@ -60,6 +61,6 @@ export class RegistroPacienteComponent implements OnInit {
   onSubmit() {
     const obj = this.signupForm.value;
     obj.fotos = this.fotos;
-    this.formularioEnviado.emit(obj);    
+    this.formularioEnviado.emit(obj);
   }
 }

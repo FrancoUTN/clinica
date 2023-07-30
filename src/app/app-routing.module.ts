@@ -5,6 +5,7 @@ import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 import { LoginComponent } from './bienvenida/login/login.component';
 import { RegistroComponent } from './bienvenida/registro/registro.component';
 import { VerificarComponent } from './bienvenida/registro/verificar/verificar.component';
+import { RegistroExitosoComponent } from './bienvenida/registro/registro-exitoso/registro-exitoso.component';
 
 import { VerifiedGuard } from './auth/verified.guard';
 import { AdministradorGuard } from './auth/administrador.guard';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'verificar', component: VerificarComponent },
+  { path: 'registro-exitoso', component: RegistroExitosoComponent },
   {
     path: 'paciente',
     canActivate: [VerifiedGuard, PacienteGuard],

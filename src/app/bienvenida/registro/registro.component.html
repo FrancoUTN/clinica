@@ -20,11 +20,19 @@
         </div>
         <div *ngIf="this.elegi">
             <div style="width: 30rem; padding: 2rem 3rem" *ngIf="this.esPaciente">
-                <app-registro-paciente (formularioEnviado)="pacienteEnviadoHandler($event)" [error]="errorMsg">
+                <app-registro-paciente
+                    (formularioEnviado)="pacienteEnviadoHandler($event)"
+                    [error]="errorMsg"
+                    [isLoading]="isLoading"
+                >
                 </app-registro-paciente>
             </div>
             <div style="width: 30rem; padding: 1rem 3rem" *ngIf="!this.esPaciente">
-                <app-registro-especialista (formularioEnviado)="especialistaEnviadoHandler($event)" [error]="errorMsg">                
+                <app-registro-especialista
+                    (formularioEnviado)="especialistaEnviadoHandler($event)"
+                    [error]="errorMsg"
+                    [isLoading]="isLoading"
+                >                
                 </app-registro-especialista>
             </div>
             <button class="btn btn-danger d-block mx-auto mt-3 mb-5" (click)="clickCancelarHandler()">Cancelar</button>

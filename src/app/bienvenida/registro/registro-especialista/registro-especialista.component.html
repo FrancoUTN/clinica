@@ -1,4 +1,3 @@
-
 <div class="d-flex justify-content-center mb-2">
     <h2>Registro de especialistas</h2>
 </div>
@@ -85,7 +84,6 @@
             </div>
         </div>
     </div>
-
     <div class="d-flex">
         <div style="margin-right: 2rem; width: 50%;">
             <h5>Especialidades</h5>
@@ -119,7 +117,6 @@
             </div>
         </div>
     </div>
-    
     <div style="margin-top: 1rem;">
         <label for="email" class="form-label">
         Email
@@ -164,21 +161,28 @@
         <label class="form-label">Foto</label>
         <input type="file" class="form-control" (change)="uploadFile($event)"/>
     </div>
-    <div style="height: 2.5rem; margin-top: 1rem;">
-        <span
-        *ngIf="error"
-        class="help-block text-danger">
-            {{error}}
-        </span>
-    </div>
-
-    <div class="d-flex justify-content-center mb-5">
+    <div class="d-flex justify-content-center my-5">
         <re-captcha
             [siteKey]="this.siteKey"
             formControlName="recaptchaReactive"
         ></re-captcha>
     </div>
-
+    <div class="d-flex flex-column align-items-center mb-4" style="height: 3rem;">
+        <div>
+            <span
+            *ngIf="error"
+            class="help-block text-danger">
+                {{error}}
+            </span>
+        </div>
+        <div
+            *ngIf="isLoading"
+            class="spinner-border text-light"
+            role="status"
+        >
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     <div class="d-flex justify-content-center mt-3">
         <button
         class="btn btn-primary"

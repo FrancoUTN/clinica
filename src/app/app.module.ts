@@ -14,6 +14,7 @@ import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 import { LoginComponent } from './bienvenida/login/login.component';
 import { VerificarComponent } from './bienvenida/registro/verificar/verificar.component';
 import { InhabilitadoComponent } from './especialista/inhabilitado/inhabilitado.component';
+import { RegistroExitosoComponent } from './bienvenida/registro/registro-exitoso/registro-exitoso.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { InhabilitadoComponent } from './especialista/inhabilitado/inhabilitado.
     BienvenidaComponent,
     LoginComponent,
     VerificarComponent,
-    InhabilitadoComponent
+    InhabilitadoComponent,
+    RegistroExitosoComponent
   ],
   imports: [
     BrowserModule,
