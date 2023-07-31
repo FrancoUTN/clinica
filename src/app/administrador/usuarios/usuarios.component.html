@@ -15,6 +15,7 @@
                     <th>Especialidades</th>
                     <th>Habilitado</th>
                     <th>Historia clínica</th>
+                    <!-- <th>Opciones</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -40,7 +41,6 @@
                     <td *ngIf="!item.usuario.especialidades">
                         n/a
                     </td>
-
                     <td *ngIf="item.usuario.especialidades">
                         <div class="form-check form-switch d-flex justify-content-center">
                             <input
@@ -55,10 +55,6 @@
                     <td *ngIf="!item.usuario.especialidades">
                         n/a
                     </td>
-                    <td>
-                        n/a
-                    </td>
-
                     <td *ngIf="item.usuario.rol !== 'paciente'">
                         n/a
                     </td>
@@ -70,7 +66,13 @@
                         >
                         Ver</button>
                     </td>
-
+                    <!-- <td>
+                        <button
+                            class="btn btn-danger m-auto"
+                            (click)="eliminarUsuarioHandler(item)"
+                        >
+                        Eliminar</button>
+                    </td> -->
                 </tr>
             </tbody>
         </table>

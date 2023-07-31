@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import * as XLSX from 'xlsx';
+
+import { Turno } from 'src/app/models/Turno';
+import { DocUsuario } from 'src/app/models/DocUsuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { RegistroService } from 'src/app/services/registro.service';
-import { DocUsuario } from 'src/app/models/DocUsuario';
-import * as XLSX from 'xlsx';
 import { TurnoService } from 'src/app/services/turno.service';
-import { Turno } from 'src/app/models/Turno';
 
 @Component({
   selector: 'app-usuarios',
@@ -133,5 +134,9 @@ export class UsuariosComponent implements OnInit {
   }
   ocultarHandler() {
     this.verHistoriaClinica = false;
+  }
+
+  eliminarUsuarioHandler(item: DocUsuario) {
+    this.usuarioService.deleteUserData(item.id, item.usuario.rol)
   }
 }
