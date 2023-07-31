@@ -25,6 +25,6 @@ export class IngresoService {
   }
 
   getAll() {
-    return this.coleccion.get();
+    return this.coleccion.ref.orderBy('fecha', 'desc');
   }
 }

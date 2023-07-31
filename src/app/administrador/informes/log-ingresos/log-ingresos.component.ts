@@ -14,7 +14,7 @@ export class LogIngresosComponent implements OnInit {
   constructor(private ingresoService: IngresoService) { }
 
   ngOnInit(): void {
-    this.ingresoService.getAll().subscribe(
+    this.ingresoService.getAll().onSnapshot(
       qs => {
         this.ingresos = [];
     
